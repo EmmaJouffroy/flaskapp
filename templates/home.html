@@ -1,0 +1,56 @@
+{% extends 'layout.html' %} {% block title %} Home {% endblock %} {% block
+content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      Home page {% if session['email'] %} Welcome {{ session["email"] }}
+
+      {% else %} Not login
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3">
+            <form action="/forward/" method="post">
+              <div class="form-group">
+                <label>Titre:</label>
+                <input type="text" class="form-control" name="title" />
+              </div>
+              <div class="form-group">
+                <label>Résumé:</label>
+                <input type="text" class="form-control" name="resume" />
+              </div>
+              <div class="form-group">
+                <label>Formations:</label>
+                <input type="text" class="form-control" name="formations" />
+              </div>
+              <div class="form-group">
+                <label>Compétences:</label>
+                <input type="text" class="form-control" name="skills" />
+              </div>
+              <div class="form-group">
+                <label>Expériences professionnelles:</label>
+                <input type="text" class="form-control" name="experiences" />
+              </div>
+              <div class="form-group">
+                <label>langues parlées:</label>
+                <input type="text" class="form-control" name="language" />
+              </div>
+              <div class="form-group">
+                <label>Hobbies:</label>
+                <input type="text" class="form-control" name="hobbies" />
+              </div>
+              <div class="form-group">
+                <button name="forwardBtn" class="btn btn-primary" type="submit">
+                  Générer le CV
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}
