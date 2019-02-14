@@ -96,6 +96,11 @@ def logout():
     return render_template("home.html")
 
 
+@app.route('/cvgenerator', methods=["GET", "POST"])
+def generateCV():
+    return render_template("cvgenerator.html")
+
+
 @app.route('/register', methods=["GET", "POST"])
 def register():
     if request.method == 'GET':
