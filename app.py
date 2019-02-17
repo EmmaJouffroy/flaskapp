@@ -69,18 +69,23 @@ def login():
         email = request.form['email']
         password = request.form['password'].encode('utf-8')
         hashed = bcrypt.hashpw(password, bcrypt.gensalt())
-
         with connection.cursor() as cursor:
             sql = "SELECT `IDusers`, `password` FROM `users` WHERE `email`=%s"
             cursor.execute(sql, email)
-            user = cursor.fetchall()
+            users = cursor.fetchall()
             cursor.close()
 
-        if len(user) > 0:
+        if len(users) > 0:
             if bcrypt.checkpw(password, hashed):
-                session['email'] = email
-                return render_template("home.html")
-                connection.close()
+                with connection.cursor() as cursor:
+                    sql = "SELECT * FROM `users` WHERE `email`=%s"
+                    cursor.execute(sql, email)
+                    user = cursor.fetchone()
+                    session['status'] = str(user['status'])
+                    print("Statut de l'utilisateur")
+                    print(session['status'])
+                    cursor.close()
+                    return render_template("home.html")
             else:
                 return "Error password and email not match"
         else:
@@ -101,6 +106,16 @@ def generateCV():
     return render_template("cvgenerator.html")
 
 
+@app.route('/candidatesAllCv', methods=["GET", "POST"])
+def candidatesAllCv():
+    return render_template("candidatesAllCv.html")
+
+
+@app.route('/recruitersAllCv', methods=["GET", "POST"])
+def recruitersAllCv():
+    return render_template("recruitersAllCv.html")
+
+
 @app.route('/register', methods=["GET", "POST"])
 def register():
     if request.method == 'GET':
@@ -108,15 +123,15 @@ def register():
     else:
         email = request.form['email']
         password = request.form['password'].encode('utf-8')
-        status = 1
+        status = request.form['status']
         hash_password = bcrypt.hashpw(password, bcrypt.gensalt())
 
         with connection.cursor() as cursor:
             sql = "INSERT INTO users (email, password, status) VALUES (%s,%s,%s)"
             cursor.execute(sql,  (email, hash_password, status))
             connection.commit()
-            session['name'] = request.form['name']
             session['email'] = request.form['email']
+            session['status'] = request.form['status']
             cursor.close()
             return redirect(url_for('home'))
 

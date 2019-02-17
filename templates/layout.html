@@ -19,7 +19,6 @@
     <link href="static/css/bootstrap.min.css" rel="stylesheet" />
     <link href="static/css/gsdk-bootstrap-wizard.css" rel="stylesheet" />
 
-    <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="static/css/demo.css" rel="stylesheet" />
   </head>
 
@@ -53,7 +52,22 @@
               <a href="/">Home</a>
             </li>
 
-            {% if session['name'] %}
+            {% if (session['status']=="1") %}
+
+            <li>
+              <a href="/cvgenerator">Generate CV</a>
+            </li>
+            <li>
+              <a href="/candidatesAllCv">All CVs</a>
+            </li>
+            <li>
+              <a href="/logout">Logout</a>
+            </li>
+
+            {% elif (session['status']=="0") %}
+            <li>
+              <a href="/recruitersAllCv">All CVs</a>
+            </li>
 
             <li>
               <a href="/logout">Logout</a>
@@ -64,16 +78,10 @@
             <li>
               <a href="/login">Login</a>
             </li>
-
             <li>
               <a href="/register">Register</a>
+              {% endif %}
             </li>
-
-            <li>
-              <a href="/cvgenerator">Générer CV</a>
-            </li>
-
-            {% endif %}
           </ul>
         </div>
       </div>
@@ -91,10 +99,9 @@
       type="text/javascript"
     ></script>
 
-    <!--  Plugin for the Wizard -->
     <script src="static/js/gsdk-bootstrap-wizard.js"></script>
 
-    <!--  More information about jquery.validate here: http://jqueryvalidation.org/	 -->
     <script src="static/js/jquery.validate.min.js"></script>
+    <script src="static/js/jquery.js"></script>
   </body>
 </html>
