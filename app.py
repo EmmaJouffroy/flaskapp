@@ -28,12 +28,41 @@ def home():
 
 @app.route("/forward/", methods=['POST'])
 def move_forward():
+    img = request.form['img']
+    firstname = request.form['firstname']
+    lastname = request.form['lastname']
     title = request.form['title']
     resume = request.form['resume']
-    formations = request.form['formations']
-    skills = request.form['skills']
-    experiences = request.form['experiences']
-    language = request.form['language']
+    form1Title = request.form['form1Title']
+    form1Text = request.form['form1Text']
+    form2Title = request.form['form2Title']
+    form2Text = request.form['form2Text']
+    form3Title = request.form['form3Title']
+    form3Text = request.form['form3Text']
+    exp1Title = request.form['exp1Title']
+    exp1Text = request.form['exp1Resume']
+    exp2Title = request.form['exp2Title']
+    exp2Text = request.form['exp2Resume']
+    exp3Title = request.form['exp3Title']
+    exp3Text = request.form['exp3Resume']
+    language1 = request.form['language1']
+    language2 = request.form['language2']
+    language3 = request.form['language3']
+    choicesskills = request.values.getlist('skills[]')
+    choiceshobbies = request.values.getlist('hobbies[]')
+    phoneNumber = request.form['phoneNumber']
+    email = request.form['email']
+    websiteTitle = request.form['websiteTitle']
+    websiteLink = request.form['websiteLink']
+    sm1Title = request.form['sm1Title']
+    sm1Link = request.form['sm1Link']
+    sm2Title = request.form['sm2Title']
+    sm2Link = request.form['sm2Link']
+    status = request.form['status']
+
+    print(choicesskills)
+
+    print(choiceshobbies)
 
     output = cStringIO.StringIO()
     doc = SimpleDocTemplate("test.pdf", pagesize=letter)
@@ -43,9 +72,9 @@ def move_forward():
     styles.add(ParagraphStyle(name='Justify', alignment=TA_JUSTIFY))
     ptext = """<font size=12>%s</font>""" % (title)
     p1text = """<font size=15>%s</font>""" % (resume)
-    p2text = """<font size=10>%s</font>""" % (formations)
-    p3text = """<font size=9>%s</font>""" % (skills)
-    p4text = """<font size=6>%s</font>""" % (experiences)
+    p2text = """<font size=10>%s</font>""" % (email)
+    p3text = """<font size=9>%s</font>""" % (sm2Title)
+    p4text = """<font size=6>%s</font>""" % (status)
 
     Story.append(Paragraph(ptext, styles["Justify"]))
     Story.append(Paragraph(p1text, styles["Justify"]))
@@ -82,8 +111,6 @@ def login():
                     cursor.execute(sql, email)
                     user = cursor.fetchone()
                     session['status'] = str(user['status'])
-                    print("Statut de l'utilisateur")
-                    print(session['status'])
                     cursor.close()
                     return render_template("home.html")
             else:
@@ -97,7 +124,6 @@ def login():
 @app.route('/logout', methods=["GET", "POST"])
 def logout():
     session.clear()
-    print(session)
     return render_template("home.html")
 
 
