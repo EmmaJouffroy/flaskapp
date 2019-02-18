@@ -60,9 +60,7 @@ def move_forward():
     sm2Link = request.form['sm2Link']
     status = request.form['status']
 
-    print(choicesskills)
-
-    print(choiceshobbies)
+    print(img)
 
     output = cStringIO.StringIO()
     doc = SimpleDocTemplate("test.pdf", pagesize=letter)
