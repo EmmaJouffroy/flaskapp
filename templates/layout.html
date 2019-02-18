@@ -18,6 +18,10 @@
     />
     <link href="static/css/bootstrap.min.css" rel="stylesheet" />
     <link href="static/css/gsdk-bootstrap-wizard.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"
+    />
 
     <link href="static/css/demo.css" rel="stylesheet" />
   </head>
@@ -100,8 +104,50 @@
     ></script>
 
     <script src="static/js/gsdk-bootstrap-wizard.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"
+    ></script>
 
     <script src="static/js/jquery.validate.min.js"></script>
     <script src="static/js/jquery.js"></script>
+    <script>
+      $(document).ready(function() {
+        var container =
+          $(".bootstrap-iso form").length > 0
+            ? $(".bootstrap-iso form").parent()
+            : "body";
+        var options = {
+          format: "mm/dd/yyyy",
+          container: container,
+          todayHighlight: true,
+          autoclose: true
+        };
+        var exp1Debut = $('input[name="exp1Debut"]'); //our date input has the name "date"
+        exp1Debut.datepicker(options);
+        var exp1Fin = $('input[name="exp1Fin"]'); //our date input has the name "date"
+        exp1Fin.datepicker(options);
+        var exp2Debut = $('input[name="exp2Debut"]'); //our date input has the name "date"
+        exp2Debut.datepicker(options);
+        var exp2Fin = $('input[name="exp2Fin"]'); //our date input has the name "date"
+        exp2Fin.datepicker(options);
+        var exp3Debut = $('input[name="exp3Debut"]'); //our date input has the name "date"
+        exp3Debut.datepicker(options);
+        var exp3Fin = $('input[name="exp3Fin"]'); //our date input has the name "date"
+        exp3Fin.datepicker(options);
+        var form1Debut = $('input[name="form1Debut"]'); //our date input has the name "date"
+        form1Debut.datepicker(options);
+        var form1Fin = $('input[name="form1Fin"]'); //our date input has the name "date"
+        form1Fin.datepicker(options);
+        var form2Debut = $('input[name="form2Debut"]'); //our date input has the name "date"
+        form2Debut.datepicker(options);
+        var form2Fin = $('input[name="form2Fin"]'); //our date input has the name "date"
+        form2Fin.datepicker(options);
+        var form3Debut = $('input[name="form3Debut"]'); //our date input has the name "date"
+        form3Debut.datepicker(options);
+        var form3Fin = $('input[name="form3Fin"]'); //our date input has the name "date"
+        form3Fin.datepicker(options);
+      });
+    </script>
   </body>
 </html>
