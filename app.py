@@ -1,6 +1,6 @@
 from flask import Flask, request, render_template, make_response, send_file, url_for, session, redirect
 import pymysql
-import cStringIO
+from io import StringIO
 from reportlab.lib.enums import TA_JUSTIFY
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Paragraph
@@ -141,7 +141,7 @@ def move_forward():
         connection.commit()
         cursor.close()
 
-    output = cStringIO.StringIO()
+    output = StringIO.StringIO()
     doc = SimpleDocTemplate("test.pdf", pagesize=letter)
     Story = []
 
@@ -249,3 +249,5 @@ def page_not_found(error):
 if __name__ == '__main__':
     app.secret_key = os.urandom(12)
     app.run(debug=True)
+
+print('JE TAIME MON AMOUR t')
