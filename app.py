@@ -81,6 +81,35 @@ def move_forward():
 
     emailUser = session['email']
 
+    output = StringIO()
+    doc = SimpleDocTemplate("test.pdf", pagesize=letter)
+    Story = []
+
+    styles = getSampleStyleSheet()
+    styles.add(ParagraphStyle(name='Justify', alignment=TA_JUSTIFY))
+    ptext = """<font size=12>%s</font>""" % (title)
+    p1text = """<font size=15>%s</font>""" % (resume)
+    p2text = """<font size=10>%s</font>""" % (email)
+    p3text = """<font size=9>%s</font>""" % (sm2Title)
+    p4text = """<font size=6>%s</font>""" % (sm2Link)
+
+    Story.append(Paragraph(ptext, styles["Justify"]))
+    Story.append(Paragraph(p1text, styles["Justify"]))
+    Story.append(Paragraph(p2text, styles["Justify"]))
+    Story.append(Paragraph(p3text, styles["Justify"]))
+    Story.append(Paragraph(p4text, styles["Justify"]))
+
+    doc.build(Story)
+    pdf_out = output.getvalue()
+    output.close()
+
+    response = make_response(pdf_out)
+    response.headers['Content-Disposition'] = "attachment; filename='test.pdf"
+    response.mimetype = 'application/pdf'
+
+    with open('test.pdf', 'rb') as file:
+        binaryData = file.read()
+
     with connection.cursor() as cursor:
         sql = 'SELECT `IDusers` FROM `users` WHERE `email`=%s'
         cursor.execute(sql, emailUser)
@@ -89,9 +118,9 @@ def move_forward():
         cursor.close()
 
     with connection.cursor() as cursor:
-        sql = 'INSERT INTO cv(IDusers, firstname, lastname, img, resume, title) VALUES (%s,%s,%s,%s,%s,%s)'
+        sql = 'INSERT INTO cv(IDusers, firstname, lastname, img, resume, title, contentPdf) VALUES (%s,%s,%s,%s,%s,%s,%s)'
         cursor.execute(sql, (SessionID, firstname,
-                             lastname, img, resume, title))
+                             lastname, img, resume, title, binaryData))
         connection.commit()
         cursor.close()
 
@@ -141,33 +170,10 @@ def move_forward():
         connection.commit()
         cursor.close()
 
-    output = StringIO.StringIO()
-    doc = SimpleDocTemplate("test.pdf", pagesize=letter)
-    Story = []
+    print("Image and file inserted successfully as a BLOB into python_employee table")
 
-    styles = getSampleStyleSheet()
-    styles.add(ParagraphStyle(name='Justify', alignment=TA_JUSTIFY))
-    ptext = """<font size=12>%s</font>""" % (title)
-    p1text = """<font size=15>%s</font>""" % (resume)
-    p2text = """<font size=10>%s</font>""" % (email)
-    p3text = """<font size=9>%s</font>""" % (sm2Title)
-    p4text = """<font size=6>%s</font>""" % (sm2Link)
-
-    Story.append(Paragraph(ptext, styles["Justify"]))
-    Story.append(Paragraph(p1text, styles["Justify"]))
-    Story.append(Paragraph(p2text, styles["Justify"]))
-    Story.append(Paragraph(p3text, styles["Justify"]))
-    Story.append(Paragraph(p4text, styles["Justify"]))
-
-    doc.build(Story)
-    pdf_out = output.getvalue()
-    output.close()
-
-    response = make_response(pdf_out)
-    response.headers['Content-Disposition'] = "attachment; filename='test.pdf"
-    response.mimetype = 'application/pdf'
-
-    return send_file('test.pdf', as_attachment=True)
+    # return send_file('test.pdf', as_attachment=True)
+    return render_template("home.html")
 
 
 @app.route('/login', methods=["GET", "POST"])
@@ -249,5 +255,3 @@ def page_not_found(error):
 if __name__ == '__main__':
     app.secret_key = os.urandom(12)
     app.run(debug=True)
-
-print('JE TAIME MON AMOUR t')
