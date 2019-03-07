@@ -9,6 +9,9 @@ from reportlab.pdfgen import canvas
 import mysql.connector
 import os
 import bcrypt
+from pdf2image import convert_from_path, convert_from_bytes
+import tempfile
+
 
 connection = pymysql.connect(host='localhost',
                              user='root',
@@ -28,7 +31,7 @@ def home():
 
 @app.route("/forward/", methods=['POST'])
 def move_forward():
-    img = request.form['img']
+    #img = request.form['img']
     firstname = request.form['firstname']
     lastname = request.form['lastname']
     title = request.form['title']
@@ -80,7 +83,7 @@ def move_forward():
     form3Fin = request.form['form3Fin']
 
     emailUser = session['email']
-
+    #emailUser = 'email'
     output = StringIO()
     doc = SimpleDocTemplate("test.pdf", pagesize=letter)
     Story = []
@@ -109,6 +112,13 @@ def move_forward():
 
     with open('test.pdf', 'rb') as file:
         binaryData = file.read()
+
+    filename = 'test.pdf'
+    with tempfile.TemporaryDirectory() as path:
+        images_from_path = convert_from_path(
+            filename, output_folder=path, last_page=1, first_page=0)
+
+    img = os.path.splitext(os.path.basename(filename))[0] + '.jpg'
 
     with connection.cursor() as cursor:
         sql = 'SELECT `IDusers` FROM `users` WHERE `email`=%s'
@@ -170,10 +180,9 @@ def move_forward():
         connection.commit()
         cursor.close()
 
-    print("Image and file inserted successfully as a BLOB into python_employee table")
+    return render_template("home.html")
 
     # return send_file('test.pdf', as_attachment=True)
-    return render_template("home.html")
 
 
 @app.route('/login', methods=["GET", "POST"])
