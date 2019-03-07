@@ -1,6 +1,6 @@
 from flask import Flask, request, render_template, make_response, send_file, url_for, session, redirect
 import pymysql
-from io import StringIO
+from io import StringIO, BytesIO
 from reportlab.lib.enums import TA_JUSTIFY
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Paragraph
@@ -26,12 +26,17 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
+    if 'email' in session:
+        print(session['email'])
     return render_template("home.html")
 
 
 @app.route("/forward/", methods=['POST'])
 def move_forward():
-    #img = request.form['img']
+    if 'email' in session:
+        print(session['email'])
+    else:
+        print('pas de sessions')
     firstname = request.form['firstname']
     lastname = request.form['lastname']
     title = request.form['title']
@@ -81,9 +86,8 @@ def move_forward():
     form2Fin = request.form['form2Fin']
     form3Debut = request.form['form3Debut']
     form3Fin = request.form['form3Fin']
-
     emailUser = session['email']
-    #emailUser = 'email'
+
     output = StringIO()
     doc = SimpleDocTemplate("test.pdf", pagesize=letter)
     Story = []
@@ -223,12 +227,28 @@ def logout():
 
 @app.route('/cvgenerator', methods=["GET", "POST"])
 def generateCV():
+    if 'email' in session:
+        print(session['email'])
     return render_template("cvgenerator.html")
+
+
+def write_file(data, filename):
+    # Convert binary data to proper format and write it on Hard Disk
+    with open(filename, 'wb') as file:
+        file.write(data)
 
 
 @app.route('/candidatesAllCv', methods=["GET", "POST"])
 def candidatesAllCv():
-    return render_template("candidatesAllCv.html")
+    with connection.cursor() as cursor:
+        sql = "SELECT contentPdf FROM `cv` WHERE `IDcv`=%s"
+        cursor.execute(sql, 26)
+        contentPdf = cursor.fetchone()
+        cursor.close()
+        fileData = contentPdf['contentPdf']
+    print(contentPdf)
+    return send_file(BytesIO(fileData), attachment_filename="test.pdf", as_attachment=True)
+    # return render_template("candidatesAllCv.html")
 
 
 @app.route('/recruitersAllCv', methods=["GET", "POST"])
