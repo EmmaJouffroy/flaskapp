@@ -11,6 +11,9 @@ import os
 import bcrypt
 from pdf2image import convert_from_path, convert_from_bytes
 import tempfile
+import io
+from PIL import Image
+import base64
 
 
 connection = pymysql.connect(host='localhost',
@@ -26,17 +29,12 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    if 'email' in session:
-        print(session['email'])
     return render_template("home.html")
 
 
 @app.route("/forward/", methods=['POST'])
 def move_forward():
-    if 'email' in session:
-        print(session['email'])
-    else:
-        print('pas de sessions')
+    # img = request.form['img']
     firstname = request.form['firstname']
     lastname = request.form['lastname']
     title = request.form['title']
@@ -122,13 +120,18 @@ def move_forward():
         images_from_path = convert_from_path(
             filename, output_folder=path, last_page=1, first_page=0)
 
-    img = os.path.splitext(os.path.basename(filename))[0] + '.jpg'
+    base_filename = os.path.splitext(os.path.basename(filename))[0] + '.jpg'
+    save_dir = 'templates'
+
+    for page in images_from_path:
+        img = page.save(os.path.join(save_dir, base_filename), 'JPEG')
 
     with connection.cursor() as cursor:
         sql = 'SELECT `IDusers` FROM `users` WHERE `email`=%s'
         cursor.execute(sql, emailUser)
         idUser = cursor.fetchone()
         SessionID = str(idUser['IDusers'])
+        session['idUser'] = SessionID
         cursor.close()
 
     with connection.cursor() as cursor:
@@ -184,9 +187,13 @@ def move_forward():
         connection.commit()
         cursor.close()
 
-    return render_template("home.html")
+    with connection.cursor() as cursor:
+        sql = 'INSERT INTO pdfGenerated (contentPdf,idUser) VALUES (%s,%s)'
+        cursor.execute(sql, (binaryData, SessionID))
+        connection.commit()
+        cursor.close()
 
-    # return send_file('test.pdf', as_attachment=True)
+    return render_template("home.html")
 
 
 @app.route('/login', methods=["GET", "POST"])
@@ -209,6 +216,7 @@ def login():
                     user = cursor.fetchone()
                     session['email'] = user['email']
                     session['status'] = str(user['status'])
+                    session['idUser'] = user['IDusers']
                     cursor.close()
                     return render_template("home.html")
             else:
@@ -227,13 +235,10 @@ def logout():
 
 @app.route('/cvgenerator', methods=["GET", "POST"])
 def generateCV():
-    if 'email' in session:
-        print(session['email'])
     return render_template("cvgenerator.html")
 
 
 def write_file(data, filename):
-    # Convert binary data to proper format and write it on Hard Disk
     with open(filename, 'wb') as file:
         file.write(data)
 
@@ -241,14 +246,32 @@ def write_file(data, filename):
 @app.route('/candidatesAllCv', methods=["GET", "POST"])
 def candidatesAllCv():
     with connection.cursor() as cursor:
-        sql = "SELECT contentPdf FROM `cv` WHERE `IDcv`=%s"
-        cursor.execute(sql, 26)
-        contentPdf = cursor.fetchone()
+        sql = "SELECT contentPdf FROM `pdfGenerated` WHERE `IdUser`=%s"
+        cursor.execute(sql, session['idUser'])
+        allPdfBlob = cursor.fetchall()
         cursor.close()
-        fileData = contentPdf['contentPdf']
-    print(contentPdf)
-    return send_file(BytesIO(fileData), attachment_filename="test.pdf", as_attachment=True)
-    # return render_template("candidatesAllCv.html")
+        fileData = allPdfBlob[0]
+        fileData = fileData['contentPdf']
+
+    with open('test.pdf', 'rb') as file:
+        fileData = file.read()
+
+    filename = 'test.pdf'
+
+    with tempfile.TemporaryDirectory() as path:
+        images_from_path = convert_from_path(
+            filename, output_folder=path, last_page=1, first_page=0)
+
+    base_filename = os.path.splitext(os.path.basename(filename))[0] + '.jpeg'
+    save_dir = io.BytesIO()
+
+    for page in images_from_path:
+        #page.save(os.path.join('templates', base_filename), 'jpeg')
+        page.save(save_dir, 'jpeg', filename=base_filename)
+        save_dir.seek(0)
+        page = base64.b64encode(save_dir.getvalue())
+
+    return render_template('candidatesAllCv.html', page=page.decode('ascii'))
 
 
 @app.route('/recruitersAllCv', methods=["GET", "POST"])
