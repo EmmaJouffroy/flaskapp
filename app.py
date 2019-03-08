@@ -116,15 +116,6 @@ def move_forward():
         binaryData = file.read()
 
     filename = 'test.pdf'
-    with tempfile.TemporaryDirectory() as path:
-        images_from_path = convert_from_path(
-            filename, output_folder=path, last_page=1, first_page=0)
-
-    base_filename = os.path.splitext(os.path.basename(filename))[0] + '.jpg'
-    save_dir = 'templates'
-
-    for page in images_from_path:
-        img = page.save(os.path.join(save_dir, base_filename), 'JPEG')
 
     with connection.cursor() as cursor:
         sql = 'SELECT `IDusers` FROM `users` WHERE `email`=%s'
@@ -266,7 +257,6 @@ def candidatesAllCv():
     save_dir = io.BytesIO()
 
     for page in images_from_path:
-        #page.save(os.path.join('templates', base_filename), 'jpeg')
         page.save(save_dir, 'jpeg', filename=base_filename)
         save_dir.seek(0)
         page = base64.b64encode(save_dir.getvalue())
