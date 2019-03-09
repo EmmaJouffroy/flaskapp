@@ -230,6 +230,11 @@ def generateCV():
     return render_template("cvgenerator.html")
 
 
+@app.route('/myAction', methods=["GET", "POST"])
+def candidatePrediction():
+    return render_template("candidatePrediction.html")
+
+
 def write_file(data, filename):
     with open(filename, 'wb') as file:
         file.write(data)
@@ -267,12 +272,14 @@ def candidatesAllCv():
                 page = base64.b64encode(save_dir.getvalue())
                 page = page.decode('ascii')
                 tabImg.append(page)
-                # print(len(tabImg))
             i += 1
     return render_template('candidatesAllCv.html', len=len(tabImg), images=tabImg)
 
 
 @app.route('/recruitersAllCv', methods=["GET", "POST"])
+# ICI IL FAUT QUE DANS MES REQUETES JE RECUPERE L'ID DE CHAQUE PDF GENERE, PUIS QUE JE LES RENTRE DANS UN TABLEAU.
+# ENSUITE DANS MON RENDER_TEMPLATE, JE RECUPERE LE TABLEAU, PUIS DANS LE LIEN JE L'ENVOIE GRACE A UN POINT DINTERROGATION
+# DANS MON URL, QUE JE RECUPERE POUR POUVOIR AFFICHER LA BONNE IMAGE, AINSI QUE LE BON PROFIL DE PERSONNALITE :)
 def recruitersAllCv():
     with connection.cursor() as cursor:
         sql = "SELECT contentPdf FROM `pdfGenerated`"

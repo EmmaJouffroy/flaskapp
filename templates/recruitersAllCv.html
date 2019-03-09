@@ -1,10 +1,6 @@
 {% extends 'layout.html' %} {% block title %} Register {% endblock %} {% block
 content %} {%for i in range(0, len)%}
-<a
-  download="custom-filename.jpg"
-  href="data:image/jpeg;base64,{{ images[i] | safe }}"
-  title="ImageName"
->
+<a href="/myAction">
   <img
     src="data:image/jpeg;base64,{{ images[i] | safe }}"
     alt="Smiley face"
