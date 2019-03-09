@@ -14,6 +14,7 @@ import tempfile
 import io
 from PIL import Image
 import base64
+import collections
 
 
 connection = pymysql.connect(host='localhost',
@@ -241,32 +242,70 @@ def candidatesAllCv():
         cursor.execute(sql, session['idUser'])
         allPdfBlob = cursor.fetchall()
         cursor.close()
-        fileData = allPdfBlob[0]
-        fileData = fileData['contentPdf']
+        fileData = []
+        i = 0
+        tabImg = []
 
-    with open('test.pdf', 'rb') as file:
-        fileData = file.read()
+        while i < len(allPdfBlob):
+            fileData = allPdfBlob[i]['contentPdf']
 
-    filename = 'test.pdf'
+            with open('test.pdf', 'rb') as file:
+                fileData = file.read()
 
-    with tempfile.TemporaryDirectory() as path:
-        images_from_path = convert_from_path(
-            filename, output_folder=path, last_page=1, first_page=0)
+            filename = 'test.pdf'
+            with tempfile.TemporaryDirectory() as path:
+                images_from_path = convert_from_path(
+                    filename, output_folder=path, last_page=1, first_page=0)
 
-    base_filename = os.path.splitext(os.path.basename(filename))[0] + '.jpeg'
-    save_dir = io.BytesIO()
+            base_filename = os.path.splitext(
+                os.path.basename(filename))[0] + '.jpeg'
+            save_dir = io.BytesIO()
 
-    for page in images_from_path:
-        page.save(save_dir, 'jpeg', filename=base_filename)
-        save_dir.seek(0)
-        page = base64.b64encode(save_dir.getvalue())
-
-    return render_template('candidatesAllCv.html', page=page.decode('ascii'))
+            for page in images_from_path:
+                page.save(save_dir, 'jpeg', filename=base_filename)
+                save_dir.seek(0)
+                page = base64.b64encode(save_dir.getvalue())
+                page = page.decode('ascii')
+                tabImg.append(page)
+                # print(len(tabImg))
+            i += 1
+    return render_template('candidatesAllCv.html', len=len(tabImg), images=tabImg)
 
 
 @app.route('/recruitersAllCv', methods=["GET", "POST"])
 def recruitersAllCv():
-    return render_template("recruitersAllCv.html")
+    with connection.cursor() as cursor:
+        sql = "SELECT contentPdf FROM `pdfGenerated`"
+        cursor.execute(sql)
+        allPdfBlob = cursor.fetchall()
+        fileData = []
+        i = 0
+        tabImg = []
+
+        while i < len(allPdfBlob):
+            fileData = allPdfBlob[i]['contentPdf']
+
+            with open('test.pdf', 'rb') as file:
+                fileData = file.read()
+
+            filename = 'test.pdf'
+            with tempfile.TemporaryDirectory() as path:
+                images_from_path = convert_from_path(
+                    filename, output_folder=path, last_page=1, first_page=0)
+
+            base_filename = os.path.splitext(
+                os.path.basename(filename))[0] + '.jpeg'
+            save_dir = io.BytesIO()
+
+            for page in images_from_path:
+                page.save(save_dir, 'jpeg', filename=base_filename)
+                save_dir.seek(0)
+                page = base64.b64encode(save_dir.getvalue())
+                page = page.decode('ascii')
+                tabImg.append(page)
+                # print(len(tabImg))
+            i += 1
+    return render_template('recruitersAllCv.html', len=len(tabImg), images=tabImg)
 
 
 @app.route('/register', methods=["GET", "POST"])
