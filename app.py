@@ -35,7 +35,6 @@ def home():
 
 @app.route("/forward/", methods=['POST'])
 def move_forward():
-    # img = request.form['img']
     firstname = request.form['firstname']
     lastname = request.form['lastname']
     title = request.form['title']
@@ -230,9 +229,37 @@ def generateCV():
     return render_template("cvgenerator.html")
 
 
-@app.route('/myAction', methods=["GET", "POST"])
+@app.route('/myAction/', methods=["GET", "POST"])
 def candidatePrediction():
-    return render_template("candidatePrediction.html")
+    idPdf = request.args.get('idPdf')
+    # print(idPdf)
+    with connection.cursor() as cursor:
+        sql = "SELECT contentPdf FROM `pdfGenerated` WHERE `id`=%s"
+        cursor.execute(sql, idPdf)
+        allPdfBlob = cursor.fetchone()
+        cursor.close()
+
+    #fileData = allPdfBlob[0]
+    fileData = allPdfBlob['contentPdf']
+    print(fileData)
+    with open('test.pdf', 'rb') as file:
+        fileData = file.read()
+
+    filename = 'test.pdf'
+
+    with tempfile.TemporaryDirectory() as path:
+        images_from_path = convert_from_path(
+            filename, output_folder=path, last_page=1, first_page=0)
+
+    base_filename = os.path.splitext(os.path.basename(filename))[0] + '.jpeg'
+    save_dir = io.BytesIO()
+
+    for page in images_from_path:
+        page.save(save_dir, 'jpeg', filename=base_filename)
+        save_dir.seek(0)
+        page = base64.b64encode(save_dir.getvalue())
+
+    return render_template("candidatePrediction.html", page=page.decode('ascii'))
 
 
 def write_file(data, filename):
@@ -277,20 +304,19 @@ def candidatesAllCv():
 
 
 @app.route('/recruitersAllCv', methods=["GET", "POST"])
-# ICI IL FAUT QUE DANS MES REQUETES JE RECUPERE L'ID DE CHAQUE PDF GENERE, PUIS QUE JE LES RENTRE DANS UN TABLEAU.
-# ENSUITE DANS MON RENDER_TEMPLATE, JE RECUPERE LE TABLEAU, PUIS DANS LE LIEN JE L'ENVOIE GRACE A UN POINT DINTERROGATION
-# DANS MON URL, QUE JE RECUPERE POUR POUVOIR AFFICHER LA BONNE IMAGE, AINSI QUE LE BON PROFIL DE PERSONNALITE :)
 def recruitersAllCv():
     with connection.cursor() as cursor:
-        sql = "SELECT contentPdf FROM `pdfGenerated`"
+        sql = "SELECT id, contentPdf FROM `pdfGenerated`"
         cursor.execute(sql)
         allPdfBlob = cursor.fetchall()
         fileData = []
         i = 0
         tabImg = []
+        idPdf = []
 
         while i < len(allPdfBlob):
             fileData = allPdfBlob[i]['contentPdf']
+            idUnique = allPdfBlob[i]['id']
 
             with open('test.pdf', 'rb') as file:
                 fileData = file.read()
@@ -310,9 +336,9 @@ def recruitersAllCv():
                 page = base64.b64encode(save_dir.getvalue())
                 page = page.decode('ascii')
                 tabImg.append(page)
-                # print(len(tabImg))
+                idPdf.append(idUnique)
             i += 1
-    return render_template('recruitersAllCv.html', len=len(tabImg), images=tabImg)
+    return render_template('recruitersAllCv.html', len=len(tabImg), images=tabImg, idPdf=idPdf)
 
 
 @app.route('/register', methods=["GET", "POST"])

@@ -1,6 +1,6 @@
 {% extends 'layout.html' %} {% block title %} Register {% endblock %} {% block
 content %} {%for i in range(0, len)%}
-<a href="/myAction">
+<a href="/myAction?idPdf={{ idPdf[i] }}">
   <img
     src="data:image/jpeg;base64,{{ images[i] | safe }}"
     alt="Smiley face"
