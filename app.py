@@ -15,6 +15,12 @@ import io
 from PIL import Image
 import base64
 import collections
+from sklearn.preprocessing import LabelEncoder, OneHotEncoder
+import pandas as pd
+from numpy import array
+from numpy import argmax
+import numpy as np
+import pickle
 
 
 connection = pymysql.connect(host='localhost',
@@ -28,6 +34,14 @@ connection = pymysql.connect(host='localhost',
 app = Flask(__name__)
 
 
+def write_file(data, filename):
+    with open(filename, 'wb') as file:
+        file.write(data)
+
+# Ici, c'est la fonction que l'on va utiliser pour voir le résultat de notre prédiction.
+# on va l'appeler lorque l'on voudra afficher les prédictions, et renvoyer le résultat quand on va render le template
+
+
 @app.route('/')
 def home():
     return render_template("home.html")
@@ -35,6 +49,7 @@ def home():
 
 @app.route("/forward/", methods=['POST'])
 def move_forward():
+    img = request.form['img']
     firstname = request.form['firstname']
     lastname = request.form['lastname']
     title = request.form['title']
@@ -179,8 +194,8 @@ def move_forward():
         cursor.close()
 
     with connection.cursor() as cursor:
-        sql = 'INSERT INTO pdfGenerated (contentPdf,idUser) VALUES (%s,%s)'
-        cursor.execute(sql, (binaryData, SessionID))
+        sql = 'INSERT INTO pdfGenerated (contentPdf,idUser, idCv) VALUES (%s,%s,%s)'
+        cursor.execute(sql, (binaryData, SessionID, lastIdCV))
         connection.commit()
         cursor.close()
 
@@ -229,19 +244,25 @@ def generateCV():
     return render_template("cvgenerator.html")
 
 
+def ValuePredictor(to_predict_list):
+    #to_predict = np.array(to_predict_list).reshape(1, 12)
+    loaded_model = pickle.load(open("model.pkl", "rb"))
+    result = loaded_model.predict(to_predict_list)
+    return result[0]
+
+
 @app.route('/myAction/', methods=["GET", "POST"])
 def candidatePrediction():
     idPdf = request.args.get('idPdf')
-    # print(idPdf)
+
     with connection.cursor() as cursor:
         sql = "SELECT contentPdf FROM `pdfGenerated` WHERE `id`=%s"
         cursor.execute(sql, idPdf)
         allPdfBlob = cursor.fetchone()
         cursor.close()
 
-    #fileData = allPdfBlob[0]
     fileData = allPdfBlob['contentPdf']
-    print(fileData)
+
     with open('test.pdf', 'rb') as file:
         fileData = file.read()
 
@@ -259,12 +280,98 @@ def candidatePrediction():
         save_dir.seek(0)
         page = base64.b64encode(save_dir.getvalue())
 
-    return render_template("candidatePrediction.html", page=page.decode('ascii'))
+    x = []
 
+    # Ici on récupère tout ce dont on a besoin ( competences et skills )
+    with connection.cursor() as cursor:
+        sql = "SELECT `idCv` FROM `pdfGenerated` WHERE `id`=%s"
+        cursor.execute(sql, idPdf)
+        idCv = cursor.fetchone()
+        cursor.close()
 
-def write_file(data, filename):
-    with open(filename, 'wb') as file:
-        file.write(data)
+    idCv = idCv['idCv']
+
+    with connection.cursor() as cursor:
+        sql = "SELECT `skill1` FROM `skills` WHERE `IDcv`=%s"
+        cursor.execute(sql, idCv)
+        skill1 = cursor.fetchone()
+        cursor.close()
+
+    with connection.cursor() as cursor:
+        sql = "SELECT `skill2` FROM `skills` WHERE `IDcv`=%s"
+        cursor.execute(sql, idCv)
+        skill2 = cursor.fetchone()
+        cursor.close()
+
+    with connection.cursor() as cursor:
+        sql = "SELECT `skill3` FROM `skills` WHERE `IDcv`=%s"
+        cursor.execute(sql, idCv)
+        skill3 = cursor.fetchone()
+        cursor.close()
+
+    with connection.cursor() as cursor:
+        sql = "SELECT `skill4` FROM `skills` WHERE `IDcv`=%s"
+        cursor.execute(sql, idCv)
+        skill4 = cursor.fetchone()
+        cursor.close()
+
+    with connection.cursor() as cursor:
+        sql = "SELECT `skill5` FROM `skills` WHERE `IDcv`=%s"
+        cursor.execute(sql, idCv)
+        skill5 = cursor.fetchone()
+        cursor.close()
+
+    # skill1 = np.array(skill1)
+    # skill2 = np.array(skill2)
+    # skill3 = np.array(skill3)
+    # skill4 = np.array(skill4)
+    # skill5 = np.array(skill5)
+
+    # x = np.concatenate((skill1, skill2, skill3, skill4, skill5))
+
+    x.append(skill1['skill1'])
+    x.append(skill2['skill2'])
+    x.append(skill3['skill3'])
+    x.append(skill4['skill4'])
+    x.append(skill5['skill5'])
+
+    with connection.cursor() as cursor:
+        sql = "SELECT `hobby1` FROM `hobbies` WHERE `IDcv`=%s"
+        cursor.execute(sql, idCv)
+        hobby1 = cursor.fetchone()
+        cursor.close()
+
+    with connection.cursor() as cursor:
+        sql = "SELECT `hobby2` FROM `hobbies` WHERE `IDcv`=%s"
+        cursor.execute(sql, idCv)
+        hobby2 = cursor.fetchone()
+        cursor.close()
+
+    with connection.cursor() as cursor:
+        sql = "SELECT `hobby3` FROM `hobbies` WHERE `IDcv`=%s"
+        cursor.execute(sql, idCv)
+        hobby3 = cursor.fetchone()
+        cursor.close()
+
+    x.append(hobby1['hobby1'])
+    x.append(hobby2['hobby2'])
+    x.append(hobby3['hobby3'])
+
+    x = {'skill1': x[0], 'skill2': x[1], 'skill3': x[2], 'skill4': x[3],
+         'skill5': x[4], 'hobby1': x[5], 'hobby2': x[6], 'hobby3': x[7]}
+
+    # On transforme les données, vérifier que les bibliothèques soient bien importées
+    x = pd.DataFrame(data=x, index=[0])
+    onehotencoder = OneHotEncoder()
+    X = onehotencoder.fit_transform(x).toarray()
+    x = pd.DataFrame(X)
+
+    print(x)
+    result = ValuePredictor(x)
+
+    # on renvoie le tableau dans la fonction render
+
+    return render_template("candidatePrediction.html", page=page.decode('ascii'), predictions=result)
 
 
 @app.route('/candidatesAllCv', methods=["GET", "POST"])
