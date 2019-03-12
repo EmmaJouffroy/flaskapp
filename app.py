@@ -262,11 +262,12 @@ def candidatePrediction():
         cursor.close()
 
     fileData = allPdfBlob['contentPdf']
+    write_file(fileData, 'cv.pdf')
 
-    with open('test.pdf', 'rb') as file:
+    with open('cv.pdf', 'rb') as file:
         fileData = file.read()
 
-    filename = 'test.pdf'
+    filename = 'cv.pdf'
 
     with tempfile.TemporaryDirectory() as path:
         images_from_path = convert_from_path(
@@ -321,12 +322,6 @@ def candidatePrediction():
         skill5 = cursor.fetchone()
         cursor.close()
 
-    # skill1 = np.array(skill1)
-    # skill2 = np.array(skill2)
-    # skill3 = np.array(skill3)
-    # skill4 = np.array(skill4)
-    # skill5 = np.array(skill5)
-
     # x = np.concatenate((skill1, skill2, skill3, skill4, skill5))
 
     x.append(skill1['skill1'])
@@ -357,11 +352,12 @@ def candidatePrediction():
     x.append(hobby2['hobby2'])
     x.append(hobby3['hobby3'])
 
-    x = {'skill1': x[0], 'skill2': x[1], 'skill3': x[2], 'skill4': x[3],
-         'skill5': x[4], 'hobby1': x[5], 'hobby2': x[6], 'hobby3': x[7]}
+    #x = {'skill1': x[0], 'skill2': x[1], 'skill3': x[2], 'skill4': x[3],
+         #'skill5': x[4], 'hobby1': x[5], 'hobby2': x[6], 'hobby3': x[7]}
 
     # On transforme les données, vérifier que les bibliothèques soient bien importées
-    x = pd.DataFrame(data=x, index=[0])
+    #x = pd.DataFrame(data=x, index=[0])
+    x = [x[0],x[1],x[2],x[3],x[4],x[5],x[6],x[7]]
     onehotencoder = OneHotEncoder()
     X = onehotencoder.fit_transform(x).toarray()
     x = pd.DataFrame(X)
@@ -387,11 +383,11 @@ def candidatesAllCv():
 
         while i < len(allPdfBlob):
             fileData = allPdfBlob[i]['contentPdf']
-
-            with open('test.pdf', 'rb') as file:
+            write_file(fileData, 'cv{{i}}.pdf')
+            with open('cv{{i}}.pdf', 'rb') as file:
                 fileData = file.read()
 
-            filename = 'test.pdf'
+            filename = 'cv{{i}}.pdf'
             with tempfile.TemporaryDirectory() as path:
                 images_from_path = convert_from_path(
                     filename, output_folder=path, last_page=1, first_page=0)
@@ -407,6 +403,8 @@ def candidatesAllCv():
                 page = page.decode('ascii')
                 tabImg.append(page)
             i += 1
+            os.remove("cv{{i}}.pdf")
+
     return render_template('candidatesAllCv.html', len=len(tabImg), images=tabImg)
 
 
@@ -422,13 +420,18 @@ def recruitersAllCv():
         idPdf = []
 
         while i < len(allPdfBlob):
+
+
             fileData = allPdfBlob[i]['contentPdf']
             idUnique = allPdfBlob[i]['id']
 
-            with open('test.pdf', 'rb') as file:
+            write_file(fileData, 'cv{{i}}.pdf')
+
+
+            with open('cv{{i}}.pdf', 'rb') as file:
                 fileData = file.read()
 
-            filename = 'test.pdf'
+            filename = 'cv{{i}}.pdf'
             with tempfile.TemporaryDirectory() as path:
                 images_from_path = convert_from_path(
                     filename, output_folder=path, last_page=1, first_page=0)
@@ -445,6 +448,7 @@ def recruitersAllCv():
                 tabImg.append(page)
                 idPdf.append(idUnique)
             i += 1
+            os.remove("cv{{i}}.pdf")
     return render_template('recruitersAllCv.html', len=len(tabImg), images=tabImg, idPdf=idPdf)
 
 
