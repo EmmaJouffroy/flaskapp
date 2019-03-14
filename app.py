@@ -352,20 +352,21 @@ def candidatePrediction():
     x.append(hobby2['hobby2'])
     x.append(hobby3['hobby3'])
 
-    #x = {'skill1': x[0], 'skill2': x[1], 'skill3': x[2], 'skill4': x[3],
-         #'skill5': x[4], 'hobby1': x[5], 'hobby2': x[6], 'hobby3': x[7]}
+    x = array([[x[0],x[1],x[2],x[3],x[4],x[5],x[6],x[7]]])
+    query_df = pd.DataFrame(x) 
+    query = pd.get_dummies(query_df)
+    model_columns = pickle.load(open("model_columns.pkl", "rb"))
 
-    # On transforme les données, vérifier que les bibliothèques soient bien importées
-    #x = pd.DataFrame(data=x, index=[0])
-    x = [x[0],x[1],x[2],x[3],x[4],x[5],x[6],x[7]]
-    onehotencoder = OneHotEncoder()
-    X = onehotencoder.fit_transform(x).toarray()
-    x = pd.DataFrame(X)
+     
+    for col in model_columns:
+        if col not in query.columns:
+            query[col] = 0
 
-    print(x)
-    result = ValuePredictor(x)
+    print(query)
+    result = ValuePredictor(query)
+    print(result)
+    os.remove("cv.pdf")
 
-    # on renvoie le tableau dans la fonction render
 
     return render_template("candidatePrediction.html", page=page.decode('ascii'), predictions=result)
 
