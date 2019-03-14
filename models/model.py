@@ -13,7 +13,6 @@ import pickle
 dataset = pd.read_csv('datas/datas.csv')
 
 categoricals = []
-#X = dataset.iloc[:, :-1].values
 y = dataset.iloc[:, 8].values
 dependent_variable = 'Personnalite'
 
@@ -25,6 +24,7 @@ for col, col_type in dataset.dtypes.iteritems():
 df_ohe = pd.get_dummies(dataset, columns=categoricals, dummy_na=True)
 
 x = df_ohe[df_ohe.columns.difference([dependent_variable])]
+
 labelencoder_y = LabelEncoder()
 y = labelencoder_y.fit_transform(y)
 y = to_categorical(y)
@@ -33,7 +33,7 @@ y = pd.DataFrame(y)
 X_train, X_test, y_train, y_test = train_test_split(
     x, y, test_size=0.2, random_state=0)
 
-classifier = Sequential()  # On initialise notre modèle comme une qéquence de layers
+classifier = Sequential()
 classifier.add(Dense(activation="relu", input_dim=123,
                      units=51, kernel_initializer="uniform"))
 classifier.add(Dense(activation="relu", units=51,
@@ -49,6 +49,3 @@ test_loss, test_acc = classifier.evaluate(X_test, y_test)
 pickle.dump(classifier, open('model.pkl', 'wb'))
 model_columns = list(x.columns)
 pickle.dump(model_columns, open('model_columns.pkl', 'wb'))
-# Essayer d'optimiser au maximum la précision
-# Transfert learning, une fois l'apprentisssage fait le modèle a bien appris, donc il y a potentiellement moyen de transférer tous les poids voulu
-# Sinon, changer de méthodes

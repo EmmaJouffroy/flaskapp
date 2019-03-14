@@ -21,6 +21,10 @@ from numpy import array
 from numpy import argmax
 import numpy as np
 import pickle
+import pdfkit
+#config = pdfkit.configuration(wkhtmltopdf="C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe")
+#pdfkit.from_string(html, 'MyPDF.pdf', configuration=config)
+#pdfkit.from_url('http://google.com', 'out.pdf')
 
 
 connection = pymysql.connect(host='localhost',
@@ -101,31 +105,40 @@ def move_forward():
     form3Fin = request.form['form3Fin']
     emailUser = session['email']
 
-    output = StringIO()
-    doc = SimpleDocTemplate("test.pdf", pagesize=letter)
-    Story = []
+    #output = StringIO()
+    #doc = SimpleDocTemplate("test.pdf", pagesize=letter)
+    #Story = []
 
-    styles = getSampleStyleSheet()
-    styles.add(ParagraphStyle(name='Justify', alignment=TA_JUSTIFY))
-    ptext = """<font size=12>%s</font>""" % (title)
-    p1text = """<font size=15>%s</font>""" % (resume)
-    p2text = """<font size=10>%s</font>""" % (email)
-    p3text = """<font size=9>%s</font>""" % (sm2Title)
-    p4text = """<font size=6>%s</font>""" % (sm2Link)
+    #styles = getSampleStyleSheet()
+    #styles.add(ParagraphStyle(name='Justify', alignment=TA_JUSTIFY))
+    #ptext = """<font size=12>%s</font>""" % (title)
+    #p1text = """<font size=15>%s</font>""" % (resume)
+    #p2text = """<font size=10>%s</font>""" % (email)
+    #p3text = """<font size=9>%s</font>""" % (sm2Title)
+    #p4text = """<font size=6>%s</font>""" % (sm2Link)
 
-    Story.append(Paragraph(ptext, styles["Justify"]))
-    Story.append(Paragraph(p1text, styles["Justify"]))
-    Story.append(Paragraph(p2text, styles["Justify"]))
-    Story.append(Paragraph(p3text, styles["Justify"]))
-    Story.append(Paragraph(p4text, styles["Justify"]))
+    #Story.append(Paragraph(ptext, styles["Justify"]))
+    #Story.append(Paragraph(p1text, styles["Justify"]))
+    #Story.append(Paragraph(p2text, styles["Justify"]))
+    #Story.append(Paragraph(p3text, styles["Justify"]))
+    #Story.append(Paragraph(p4text, styles["Justify"]))
 
-    doc.build(Story)
-    pdf_out = output.getvalue()
-    output.close()
+    #doc.build(Story)
+    #pdf_out = output.getvalue()
+    #output.close()
 
-    response = make_response(pdf_out)
-    response.headers['Content-Disposition'] = "attachment; filename='test.pdf"
-    response.mimetype = 'application/pdf'
+    #response = make_response(pdf_out)
+    #response.headers['Content-Disposition'] = "attachment; filename='test.pdf"
+    #response.mimetype = 'application/pdf'
+
+    rendered = render_template('pdf_template.html')
+    css = ['main.css']
+    pdf = pdfkit.from_string(rendered, 'test.pdf', css=css)
+    #response = make_response(pdf)
+    #response.headers['Content-Disposition'] = "attachment; filename='test.pdf"
+    #response.mimetype = 'application/pdf'
+
+
 
     with open('test.pdf', 'rb') as file:
         binaryData = file.read()
