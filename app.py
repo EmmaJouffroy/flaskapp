@@ -16,6 +16,8 @@ import numpy as np
 from numpy import array, argmax
 import pickle
 import pdfkit
+from keras import backend as K
+
 
 
 connection = pymysql.connect(host='localhost',
@@ -323,7 +325,7 @@ def candidatePrediction():
     query_df = pd.DataFrame(x) 
     print("Res query : ")
     print(query_df)
-    query = pd.get_dummies(query_df, prefix=['Compétence1', 'Compétence2','Compétence3','Compétence4','Hobby1','Hobby2','hobby3'])
+    query = pd.get_dummies(query_df, prefix=['compétence1', 'compétence2','compétence3','compétence4','hobby1','hobby2','hobby3'])
     print("res query2:")
     print(query)
     model_columns = pickle.load(open("model_columns.pkl", "rb"))
@@ -332,7 +334,9 @@ def candidatePrediction():
     for col in model_columns:
         if col not in query.columns:
             query[col] = 0
-
+    
+    K.clear_session()
+    print(query)
     result = ValuePredictor(query)
     print(result)
     os.remove("cv.pdf")
