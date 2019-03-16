@@ -1,30 +1,21 @@
 from flask import Flask, request, render_template, make_response, send_file, url_for, session, redirect
 import pymysql
+import io
 from io import StringIO, BytesIO
-from reportlab.lib.enums import TA_JUSTIFY
-from reportlab.lib.pagesizes import letter
-from reportlab.platypus import SimpleDocTemplate, Paragraph
-from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-from reportlab.pdfgen import canvas
 import mysql.connector
 import os
 import bcrypt
 from pdf2image import convert_from_path, convert_from_bytes
 import tempfile
-import io
 from PIL import Image
 import base64
 import collections
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 import pandas as pd
-from numpy import array
-from numpy import argmax
 import numpy as np
+from numpy import array, argmax
 import pickle
 import pdfkit
-#config = pdfkit.configuration(wkhtmltopdf="C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe")
-#pdfkit.from_string(html, 'MyPDF.pdf', configuration=config)
-#pdfkit.from_url('http://google.com', 'out.pdf')
 
 
 connection = pymysql.connect(host='localhost',
@@ -78,7 +69,6 @@ def move_forward():
     skill2 = choicesskills[1]
     skill3 = choicesskills[2]
     skill4 = choicesskills[3]
-    skill5 = choicesskills[4]
     choiceshobbies = request.values.getlist('hobbies[]')
     hobby1 = choiceshobbies[0]
     hobby2 = choiceshobbies[1]
@@ -105,40 +95,9 @@ def move_forward():
     form3Fin = request.form['form3Fin']
     emailUser = session['email']
 
-    #output = StringIO()
-    #doc = SimpleDocTemplate("test.pdf", pagesize=letter)
-    #Story = []
-
-    #styles = getSampleStyleSheet()
-    #styles.add(ParagraphStyle(name='Justify', alignment=TA_JUSTIFY))
-    #ptext = """<font size=12>%s</font>""" % (title)
-    #p1text = """<font size=15>%s</font>""" % (resume)
-    #p2text = """<font size=10>%s</font>""" % (email)
-    #p3text = """<font size=9>%s</font>""" % (sm2Title)
-    #p4text = """<font size=6>%s</font>""" % (sm2Link)
-
-    #Story.append(Paragraph(ptext, styles["Justify"]))
-    #Story.append(Paragraph(p1text, styles["Justify"]))
-    #Story.append(Paragraph(p2text, styles["Justify"]))
-    #Story.append(Paragraph(p3text, styles["Justify"]))
-    #Story.append(Paragraph(p4text, styles["Justify"]))
-
-    #doc.build(Story)
-    #pdf_out = output.getvalue()
-    #output.close()
-
-    #response = make_response(pdf_out)
-    #response.headers['Content-Disposition'] = "attachment; filename='test.pdf"
-    #response.mimetype = 'application/pdf'
-
     rendered = render_template('pdf_template.html')
     css = ['main.css']
     pdf = pdfkit.from_string(rendered, 'test.pdf', css=css)
-    #response = make_response(pdf)
-    #response.headers['Content-Disposition'] = "attachment; filename='test.pdf"
-    #response.mimetype = 'application/pdf'
-
-
 
     with open('test.pdf', 'rb') as file:
         binaryData = file.read()
@@ -194,8 +153,8 @@ def move_forward():
         cursor.close()
 
     with connection.cursor() as cursor:
-        sql = 'INSERT INTO skills (IDcv,skill1,skill2,skill3,skill4,skill5) VALUES (%s,%s,%s,%s,%s,%s)'
-        cursor.execute(sql, (lastIdCV, skill1, skill2, skill3, skill4, skill5))
+        sql = 'INSERT INTO skills (IDcv,skill1,skill2,skill3,skill4) VALUES (%s,%s,%s,%s,%s)'
+        cursor.execute(sql, (lastIdCV, skill1, skill2, skill3, skill4))
         connection.commit()
         cursor.close()
 
@@ -211,7 +170,8 @@ def move_forward():
         cursor.execute(sql, (binaryData, SessionID, lastIdCV))
         connection.commit()
         cursor.close()
-
+    
+    os.remove("test.pdf")
     return render_template("home.html")
 
 
@@ -258,7 +218,6 @@ def generateCV():
 
 
 def ValuePredictor(to_predict_list):
-    #to_predict = np.array(to_predict_list).reshape(1, 12)
     loaded_model = pickle.load(open("model.pkl", "rb"))
     result = loaded_model.predict(to_predict_list)
     return result[0]
@@ -329,19 +288,12 @@ def candidatePrediction():
         skill4 = cursor.fetchone()
         cursor.close()
 
-    with connection.cursor() as cursor:
-        sql = "SELECT `skill5` FROM `skills` WHERE `IDcv`=%s"
-        cursor.execute(sql, idCv)
-        skill5 = cursor.fetchone()
-        cursor.close()
-
     # x = np.concatenate((skill1, skill2, skill3, skill4, skill5))
 
     x.append(skill1['skill1'])
     x.append(skill2['skill2'])
     x.append(skill3['skill3'])
     x.append(skill4['skill4'])
-    x.append(skill5['skill5'])
 
     with connection.cursor() as cursor:
         sql = "SELECT `hobby1` FROM `hobbies` WHERE `IDcv`=%s"
@@ -365,21 +317,25 @@ def candidatePrediction():
     x.append(hobby2['hobby2'])
     x.append(hobby3['hobby3'])
 
-    x = array([[x[0],x[1],x[2],x[3],x[4],x[5],x[6],x[7]]])
+    x = array([[x[0],x[1],x[2],x[3],x[4],x[5],x[6]]])
+    print("Le résultat de x : ")
+    print(x)
     query_df = pd.DataFrame(x) 
-    query = pd.get_dummies(query_df)
+    print("Res query : ")
+    print(query_df)
+    query = pd.get_dummies(query_df, prefix=['Compétence1', 'Compétence2','Compétence3','Compétence4','Hobby1','Hobby2','hobby3'])
+    print("res query2:")
+    print(query)
     model_columns = pickle.load(open("model_columns.pkl", "rb"))
 
-     
+    print(query.columns)
     for col in model_columns:
         if col not in query.columns:
             query[col] = 0
 
-    print(query)
     result = ValuePredictor(query)
     print(result)
     os.remove("cv.pdf")
-
 
     return render_template("candidatePrediction.html", page=page.decode('ascii'), predictions=result)
 

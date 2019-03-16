@@ -13,7 +13,7 @@ import pickle
 dataset = pd.read_csv('datas/datas.csv')
 
 categoricals = []
-y = dataset.iloc[:, 8].values
+y = dataset.iloc[:, 7].values
 dependent_variable = 'Personnalite'
 
 
@@ -34,7 +34,7 @@ X_train, X_test, y_train, y_test = train_test_split(
     x, y, test_size=0.2, random_state=0)
 
 classifier = Sequential()
-classifier.add(Dense(activation="relu", input_dim=123,
+classifier.add(Dense(activation="relu", input_dim=109,
                      units=51, kernel_initializer="uniform"))
 classifier.add(Dense(activation="relu", units=51,
                      kernel_initializer="uniform"))
