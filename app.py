@@ -19,7 +19,6 @@ import pdfkit
 from keras import backend as K
 
 
-
 connection = pymysql.connect(host='localhost',
                              user='root',
                              password='root',
@@ -172,7 +171,44 @@ def move_forward():
         cursor.execute(sql, (binaryData, SessionID, lastIdCV))
         connection.commit()
         cursor.close()
+
+    x = []
+    x.append(skill1)
+    x.append(skill2)
+    x.append(skill3)
+    x.append(skill4)
+    x.append(hobby1)
+    x.append(hobby2)
+    x.append(hobby3)
+
+    x = array([[x[0],x[1],x[2],x[3],x[4],x[5],x[6]]])
+    query_df = pd.DataFrame(x) 
+    query = pd.get_dummies(query_df, prefix=['compétence1', 'compétence2','compétence3','compétence4','hobby1','hobby2','hobby3'])
+    model_columns = pickle.load(open("model_columns.pkl", "rb"))
+
+    print(query.columns)
+    for col in model_columns:
+        if col not in query.columns:
+            query[col] = 0
     
+    K.clear_session()
+    result = ValuePredictor(query)
+    pred1=result[0]
+    pred1=float(pred1)
+    pred2=result[1]
+    pred2=float(pred2)
+    pred3=result[2]
+    pred3=float(pred3)
+    pred4=result[3]
+    pred4=float(pred4)
+    print(pred1,pred2,pred3,pred4)
+
+    with connection.cursor() as cursor:
+        sql = 'INSERT INTO predictions (pers1,pers2,pers3,pers4,idCv) VALUES (%s,%s,%s,%s,%s)'
+        cursor.execute(sql, (pred1,pred2,pred3,pred4,lastIdCV))
+        connection.commit()
+        cursor.close()
+
     os.remove("test.pdf")
     return render_template("home.html")
 
@@ -255,89 +291,17 @@ def candidatePrediction():
         save_dir.seek(0)
         page = base64.b64encode(save_dir.getvalue())
 
-    x = []
-
-    # Ici on récupère tout ce dont on a besoin ( competences et skills )
     with connection.cursor() as cursor:
         sql = "SELECT `idCv` FROM `pdfGenerated` WHERE `id`=%s"
         cursor.execute(sql, idPdf)
         idCv = cursor.fetchone()
         cursor.close()
 
-    idCv = idCv['idCv']
-
     with connection.cursor() as cursor:
-        sql = "SELECT `skill1` FROM `skills` WHERE `IDcv`=%s"
-        cursor.execute(sql, idCv)
-        skill1 = cursor.fetchone()
+        sql = "SELECT `*` FROM `predictions` WHERE `idCv`=%s"
+        cursor.execute(sql, idPdf)
+        result = cursor.fetchall()
         cursor.close()
-
-    with connection.cursor() as cursor:
-        sql = "SELECT `skill2` FROM `skills` WHERE `IDcv`=%s"
-        cursor.execute(sql, idCv)
-        skill2 = cursor.fetchone()
-        cursor.close()
-
-    with connection.cursor() as cursor:
-        sql = "SELECT `skill3` FROM `skills` WHERE `IDcv`=%s"
-        cursor.execute(sql, idCv)
-        skill3 = cursor.fetchone()
-        cursor.close()
-
-    with connection.cursor() as cursor:
-        sql = "SELECT `skill4` FROM `skills` WHERE `IDcv`=%s"
-        cursor.execute(sql, idCv)
-        skill4 = cursor.fetchone()
-        cursor.close()
-
-    # x = np.concatenate((skill1, skill2, skill3, skill4, skill5))
-
-    x.append(skill1['skill1'])
-    x.append(skill2['skill2'])
-    x.append(skill3['skill3'])
-    x.append(skill4['skill4'])
-
-    with connection.cursor() as cursor:
-        sql = "SELECT `hobby1` FROM `hobbies` WHERE `IDcv`=%s"
-        cursor.execute(sql, idCv)
-        hobby1 = cursor.fetchone()
-        cursor.close()
-
-    with connection.cursor() as cursor:
-        sql = "SELECT `hobby2` FROM `hobbies` WHERE `IDcv`=%s"
-        cursor.execute(sql, idCv)
-        hobby2 = cursor.fetchone()
-        cursor.close()
-
-    with connection.cursor() as cursor:
-        sql = "SELECT `hobby3` FROM `hobbies` WHERE `IDcv`=%s"
-        cursor.execute(sql, idCv)
-        hobby3 = cursor.fetchone()
-        cursor.close()
-
-    x.append(hobby1['hobby1'])
-    x.append(hobby2['hobby2'])
-    x.append(hobby3['hobby3'])
-
-    x = array([[x[0],x[1],x[2],x[3],x[4],x[5],x[6]]])
-    print("Le résultat de x : ")
-    print(x)
-    query_df = pd.DataFrame(x) 
-    print("Res query : ")
-    print(query_df)
-    query = pd.get_dummies(query_df, prefix=['compétence1', 'compétence2','compétence3','compétence4','hobby1','hobby2','hobby3'])
-    print("res query2:")
-    print(query)
-    model_columns = pickle.load(open("model_columns.pkl", "rb"))
-
-    print(query.columns)
-    for col in model_columns:
-        if col not in query.columns:
-            query[col] = 0
-    
-    K.clear_session()
-    print(query)
-    result = ValuePredictor(query)
     print(result)
     os.remove("cv.pdf")
 
@@ -395,12 +359,10 @@ def recruitersAllCv():
 
         while i < len(allPdfBlob):
 
-
             fileData = allPdfBlob[i]['contentPdf']
             idUnique = allPdfBlob[i]['id']
 
             write_file(fileData, 'cv{{i}}.pdf')
-
 
             with open('cv{{i}}.pdf', 'rb') as file:
                 fileData = file.read()
