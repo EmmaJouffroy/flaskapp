@@ -201,6 +201,7 @@ def move_forward():
     pred3=float(pred3)
     pred4=result[3]
     pred4=float(pred4)
+    
     print(pred1,pred2,pred3,pred4)
 
     with connection.cursor() as cursor:
@@ -296,16 +297,20 @@ def candidatePrediction():
         cursor.execute(sql, idPdf)
         idCv = cursor.fetchone()
         cursor.close()
+    print(idCv)
+    idCv = idCv['idCv']
 
     with connection.cursor() as cursor:
         sql = "SELECT `*` FROM `predictions` WHERE `idCv`=%s"
-        cursor.execute(sql, idPdf)
-        result = cursor.fetchall()
+        cursor.execute(sql, idCv)
+        results = cursor.fetchall()
         cursor.close()
-    print(result)
+
+    print("Tous mes résultats : ")
+    print(results)
     os.remove("cv.pdf")
 
-    return render_template("candidatePrediction.html", page=page.decode('ascii'), predictions=result)
+    return render_template("candidatePrediction.html", page=page.decode('ascii'), predictions=results)
 
 
 @app.route('/candidatesAllCv', methods=["GET", "POST"])
