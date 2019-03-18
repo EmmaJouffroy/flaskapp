@@ -64,6 +64,13 @@ def ShowImg(allPdfBlob, i):
     return page
 
 
+def Enquiry(lis1):
+    if len(lis1) == 0:
+        return 0
+    else:
+        return 1
+
+
 @app.route('/')
 def home():
     return render_template("home.html")
@@ -101,8 +108,17 @@ def register():
             cursor.execute(sqlUsers,  (email, hash_password, status))
             connection.commit()
             session['email'] = request.form['email']
+            email = session['email']
             session['status'] = request.form['status']
             cursor.close()
+
+        with connection.cursor() as cursor:
+            sqlUsers = "SELECT `IDusers` FROM `users` WHERE `email`=%s"
+            cursor.execute(sqlUsers, email)
+            idUser = cursor.fetchone()
+            cursor.close()
+
+            session['idUser'] = idUser['IDusers']
 
             return redirect(url_for('home'))
 
@@ -293,17 +309,19 @@ def candidatesAllCv():
         allPdfBlob = cursor.fetchall()
         cursor.close()
 
-        tabImg = []
-        fileData = []
-        i = 0
+        if Enquiry(allPdfBlob):
+            tabImg = []
+            fileData = []
+            i = 0
 
-        while i < len(allPdfBlob):
-            page = ShowImg(allPdfBlob, i)
-            tabImg.append(page)
-            i += 1
-        os.remove("cv{{i}}.pdf")
-
-    return render_template('candidatesAllCv.html', len=len(tabImg), images=tabImg)
+            while i < len(allPdfBlob):
+                page = ShowImg(allPdfBlob, i)
+                tabImg.append(page)
+                i += 1
+            os.remove("cv{{i}}.pdf")
+            return render_template('candidatesAllCv.html', len=len(tabImg), images=tabImg)
+        else:
+            return render_template('home.html')
 
 
 @app.route('/recruitersAllCv', methods=["GET", "POST"])
@@ -312,6 +330,8 @@ def recruitersAllCv():
         sql = "SELECT id, contentPdf FROM `pdfGenerated`"
         cursor.execute(sql)
         allPdfBlob = cursor.fetchall()
+
+    if Enquiry(allPdfBlob):
         fileData = []
         i = 0
         tabImg = []
@@ -324,7 +344,10 @@ def recruitersAllCv():
             idPdf.append(idUnique)
             i += 1
             os.remove("cv{{i}}.pdf")
-    return render_template('recruitersAllCv.html', len=len(tabImg), images=tabImg, idPdf=idPdf)
+         return render_template('recruitersAllCv.html', len=len(tabImg), images=tabImg, idPdf=idPdf)
+    else:
+        return render_template('home.html')
+
 
 
 if __name__ == '__main__':
