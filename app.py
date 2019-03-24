@@ -344,10 +344,9 @@ def recruitersAllCv():
             idPdf.append(idUnique)
             i += 1
             os.remove("cv{{i}}.pdf")
-         return render_template('recruitersAllCv.html', len=len(tabImg), images=tabImg, idPdf=idPdf)
+        return render_template('recruitersAllCv.html', len=len(tabImg), images=tabImg, idPdf=idPdf)
     else:
         return render_template('home.html')
-
 
 
 if __name__ == '__main__':

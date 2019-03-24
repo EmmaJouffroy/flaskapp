@@ -10,7 +10,7 @@ from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 from sklearn.model_selection import train_test_split
 import pickle
 
-dataset = pd.read_csv('datas/donnees.csv')
+dataset = pd.read_csv('datas/datas.csv')
 
 categoricals = []
 y = dataset.iloc[:, 7].values
@@ -34,7 +34,7 @@ X_train, X_test, y_train, y_test = train_test_split(
     x, y, test_size=0.2, random_state=0)
 
 classifier = Sequential()
-classifier.add(Dense(activation="relu", input_dim=113,
+classifier.add(Dense(activation="relu", input_dim=116,
                      units=51, kernel_initializer="uniform"))
 classifier.add(Dense(activation="relu", units=51,
                      kernel_initializer="uniform"))

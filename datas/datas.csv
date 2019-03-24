@@ -13,7 +13,7 @@ informatique,programmation,vide,vide,sports d'équipe,musique,art,Ambitieux & De
 programmation,développement web,ia,vide,voyages,volontariat,art,Dévoué & Amical & Honnête
 imagerie numérique,développement web,gestion de base de données,programmation,musique,philosophie,vide,Dévoué & Amical & Honnête
 informatique,bureautique,ccu,programmation,volontariat,sports extrêmes,voyages,Ambitieux & Determiné & Responsable
-gestion base de données,informatique,programmation,développement web,volontariat,arts-martiaux,vide,Aventureux & Imaginatif & Intuitif
+gestion de base de données,informatique,programmation,développement web,volontariat,arts-martiaux,vide,Aventureux & Imaginatif & Intuitif
 cognitique,développement web,ia,bureautique,sports extrêmes,voyages,volontariat,Calme & Charismatique & Coopératif
 travail d'équipe,ia,ccu,informatique,voyages,sports d'équipes,vide,Aventureux & Imaginatif & Intuitif
 travail d'équipe,tests utilisateurs,développement web,bureautique,lecture,musique,sports d'équipe,Dévoué & Amical & Honnête
@@ -28,13 +28,13 @@ ccu,facteur humain,développement web,vide,musique,lecture,sports extrêmes,Aven
 tests utilisateurs,ccu,travail d'équipe,vide,lecture,audiovisuel,vide,Aventureux & Imaginatif & Intuitif
 développement web,ccu,facteur humain,vide,art,voyages,volontariat,Ambitieux & Determiné & Responsable
 informatique,ccu,facteur humain,travail d'équipe,voyages,sports extrêmes,volontariat,Calme & Charismatique & Coopératif
-informatique,programmation,gestion de base de données,ccu,volontariat,audiovisuel,lecture,Ambitieux & Determiné & Responsable
+informatique,programmation,gestion de base de données,ccu,audiovisuel,volontariat,lecture,Ambitieux & Determiné & Responsable
 bureautique,programmation,facteur humain,gestion de base de données,volontariat,lecture,photographie,Dévoué & Amical & Honnête
 programmation,facteur humain,ia,vide,sports extrêmes,sports d'équipe,voyages,Calme & Charismatique & Coopératif
 informatique,communication,imagerie numérique,vide,art,lecture,sports extrêmes,Calme & Charismatique & Coopératif
-facteur humains,ccu,ia,imagerie numérique,voyages,sports d'équipes,vide,Dévoué & Amical & Honnête
-facteur humains,ccu,tests utilisateurs,vide,musique,sports extrêmes,vide,Aventureux & Imaginatif & Intuitif
+facteur humain,ccu,ia,imagerie numérique,voyages,sports d'équipes,vide,Dévoué & Amical & Honnête
+facteur humain,ccu,tests utilisateurs,vide,musique,sports extrêmes,vide,Aventureux & Imaginatif & Intuitif
 développement web,travail d'équipe,facteur humain,communication,voyages,jeux-vidéo,arts matiaux,Dévoué & Amical & Honnête
-ia,travail d'équipe,vide,vide,art,sports d'équipes,vide,Calme & Charismatique & Coopératif
-gestion base de données,tests utilisateurs,travail d'équipe,développement web,lecture,sports d'équipe,arts-martiaux,Ambitieux & Determiné & Responsable
+ia,travail d'équipe,vide,vide,art,jeux-vidéo,sports d'équipes,Calme & Charismatique & Coopératif
+gestion de base de données,développement web,travail d'équipe,tests utilisateurs,lecture,sports d'équipe,arts-martiaux,Ambitieux & Determiné & Responsable
 travail d'équipe,programmation,communication,facteur humain,sports d'équipes,théâtre,vide,Aventureux & Imaginatif & Intuitif
