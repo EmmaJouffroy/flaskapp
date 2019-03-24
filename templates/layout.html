@@ -93,6 +93,8 @@
     </nav>
 
     {% block content %} {% endblock %}
+    <script src="../static/js/gsdk-bootstrap-wizard.js"></script>
+
     <script src="../static/js/jquery.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
@@ -108,7 +110,6 @@
       type="text/javascript"
     ></script>
 
-    <script src="../static/js/gsdk-bootstrap-wizard.js"></script>
     <script
       type="text/javascript"
       src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"
@@ -151,7 +152,6 @@
         form3Debut.datepicker(options);
         var form3Fin = $('input[name="form3Fin"]'); //our date input has the name "date"
         form3Fin.datepicker(options);
-        console.log(exp1Debut);
       });
     </script>
   </body>

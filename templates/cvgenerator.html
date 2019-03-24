@@ -14,7 +14,6 @@ block content %}
         alert("Votre CV est entrain d'être généré");
       }
     }
-    // register event on form, not submit button
   </script>
 <div
   class="image-container set-full-height"
@@ -76,6 +75,7 @@ block content %}
                           type="text"
                           class="form-control"
                           placeholder="Andrew..."
+                          required
                         />
                       </div>
                       <div class="form-group">
@@ -85,6 +85,7 @@ block content %}
                           type="text"
                           class="form-control"
                           placeholder="Smith..."
+                          required
                         />
                       </div>
                     </div>
@@ -96,6 +97,7 @@ block content %}
                           type="text"
                           class="form-control"
                           placeholder="Title of your cv"
+                          required
                         />
                       </div>
                     </div>
@@ -107,6 +109,8 @@ block content %}
                           type="text"
                           class="form-control"
                           placeholder="Resume of your cv"
+                          aria-required="true"
+                          required
                         />
                       </div>
                     </div>
@@ -131,6 +135,7 @@ block content %}
                               type="text"
                               class="form-control"
                               placeholder="Andrew..."
+                              required
                             />
                           </div>
                           <div class="form-group">
@@ -143,15 +148,16 @@ block content %}
                               type="text"
                               class="form-control"
                               placeholder="Smith..."
+                              required
                             />
                           </div>
                           <div class="form-group"> <!-- Date input -->
                             <label class="control-label" for="date">Date</label>
-                            <input class="form-control" id="date" name="exp1Debut" placeholder="MM/DD/YYY" type="text"/>
+                            <input class="form-control" id="date" name="exp1Debut" placeholder="MM/DD/YYY" type="text" required/>
                           </div>
                           <div class="form-group"> <!-- Date input -->
                             <label class="control-label" for="date">Date</label>
-                            <input class="form-control" id="date" name="exp1Fin" placeholder="MM/DD/YYY" type="text"/>
+                            <input class="form-control" id="date" name="exp1Fin" placeholder="MM/DD/YYY" type="text" required/>
                           </div>
                         </div>
                       </div>
@@ -160,7 +166,7 @@ block content %}
                           <div class="form-group">
                             <label
                               >Title of your second formation
-                              <small>(required)</small></label
+                              </label
                             >
                             <input
                               name="form2Title"
@@ -172,7 +178,7 @@ block content %}
                           <div class="form-group">
                             <label
                               >Resume of your second formation
-                              <small>(required)</small></label
+                              </label
                             >
                             <input
                               name="form2Text"
@@ -198,7 +204,7 @@ block content %}
                       <div class="form-group">
                         <label
                           >Title of your third formation
-                          <small>(required)</small></label
+                          </label
                         >
                         <input
                           name="form3Title"
@@ -210,7 +216,7 @@ block content %}
                       <div class="form-group">
                         <label
                           >Resume of your third formation
-                          <small>(required)</small></label
+                          </label
                         >
                         <input
                           name="form3Text"
@@ -249,6 +255,7 @@ block content %}
                               type="text"
                               class="form-control"
                               placeholder="Andrew..."
+                              required
                             />
                           </div>
                           <div class="form-group">
@@ -261,15 +268,16 @@ block content %}
                               type="text"
                               class="form-control"
                               placeholder="Smith..."
+                              required
                             />
                           </div>
                           <div class="form-group"> <!-- Date input -->
                             <label class="control-label" for="date">Date</label>
-                            <input class="form-control" id="date" name="form1Debut" placeholder="MM/DD/YYY" type="text"/>
+                            <input class="form-control" id="date" name="form1Debut" placeholder="MM/DD/YYY" type="text" required/>
                           </div>
                           <div class="form-group"> <!-- Date input -->
                             <label class="control-label" for="date">Date</label>
-                            <input class="form-control" id="date" name="form1Fin" placeholder="MM/DD/YYY" type="text"/>
+                            <input class="form-control" id="date" name="form1Fin" placeholder="MM/DD/YYY" type="text" required/>
                           </div>
                         </div>
                       </div>
@@ -278,7 +286,7 @@ block content %}
                           <div class="form-group">
                             <label
                               >Title of your second experience
-                              <small>(required)</small></label
+                              </label
                             >
                             <input
                               name="exp2Title"
@@ -290,7 +298,7 @@ block content %}
                           <div class="form-group">
                             <label
                               >Resume of your second experience
-                              <small>(required)</small></label
+                              </label
                             >
                             <input
                               name="exp2Resume"
@@ -316,7 +324,7 @@ block content %}
                       <div class="form-group">
                         <label
                           >Title of your third experience
-                          <small>(required)</small></label
+                          </label
                         >
                         <input
                           name="exp3Title"
@@ -328,7 +336,7 @@ block content %}
                       <div class="form-group">
                         <label
                           >Resume of your third experience
-                          <small>(required)</small></label
+                          </label
                         >
                         <input
                           name="exp3Resume"
@@ -396,7 +404,7 @@ block content %}
                   </div>
                 </div>
                 <div class="tab-pane" id="skills">
-                  <h4 class="info-text">What are your skills? (checkboxes)</h4>
+                  <h4 class="info-text">What are your skills? (choose exactly 4)</h4>
                   <div class="row">
                     <div class="col-sm-10 col-sm-offset-1">
                       <div class="col-sm-2">
@@ -526,7 +534,7 @@ block content %}
                 </div>
 
                 <div class="tab-pane" id="hobbies">
-                  <h4 class="info-text">What are your hobbies? (checkboxes)</h4>
+                  <h4 class="info-text">What are your hobbies? (choose exactly 3)</h4>
                   <div class="row">
                     <div class="col-sm-10 col-sm-offset-1">
                       <div class="col-sm-2">
@@ -661,13 +669,13 @@ block content %}
                       <div class="col-sm-7 col-sm-offset-1">
                         <div class="form-group">
                            <label>Your phone number</label>
-                           <input type="number" class="form-control" placeholder="5h Avenue" name="phoneNumber">
+                           <input type="number" class="form-control" placeholder="5h Avenue" name="phoneNumber" required>
                          </div>
                    </div>
                    <div class="col-sm-3">
                         <div class="form-group">
                            <label>your email</label>
-                           <input type="email" class="form-control" placeholder="242" name="email">
+                           <input type="email" class="form-control" placeholder="242" name="email" required>
                          </div>
                    </div>
                       <div class="col-sm-7 col-sm-offset-1">
@@ -706,13 +714,6 @@ block content %}
                        <input type="text" class="form-control" placeholder="242" name="sm2Link">
                      </div>
                </div>
-               <div class="col-sm-7 col-sm-offset-1">
-                  <div class="form-group">
-                     <label>Do you want to generate you CV in PDF ?</label>
-                     <label class="radio-inline"><input type="radio" name="generateChoice" value="Yes" checked>Yes</label>
-                     <label class="radio-inline"><input type="radio" name="generateChoice" value="No">No</label>  
-                  </div>
-             </div>
               </div>
               </div>
 
