@@ -1,4 +1,8 @@
 {% extends 'layout.html' %} {% block title %} Home {% endblock %} {% block
 content %} Home page {% if session['status'] %} Welcome {{ session["status"] }}
+<div>
+  Microblog:
+  <a href="{{ url_for('home') }}">Home</a>
+</div>
 
 {% else %} Not login {% endif %} {% endblock %}

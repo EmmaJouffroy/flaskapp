@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, make_response, send_file, url_for, session, redirect
+from flask import Flask, request, render_template, make_response, send_file, url_for, session, redirect, g
 import pymysql
 import io
 from io import StringIO, BytesIO
@@ -17,6 +17,8 @@ from numpy import array, argmax
 import pickle
 import pdfkit
 from keras import backend as K
+from flask_login import current_user
+from forms import SearchForm
 
 
 connection = pymysql.connect(host='localhost',
@@ -326,27 +328,81 @@ def candidatesAllCv():
 
 @app.route('/recruitersAllCv', methods=["GET", "POST"])
 def recruitersAllCv():
-    with connection.cursor() as cursor:
-        sql = "SELECT id, contentPdf FROM `pdfGenerated`"
-        cursor.execute(sql)
-        allPdfBlob = cursor.fetchall()
 
-    if Enquiry(allPdfBlob):
-        fileData = []
+    if not session.get('idCvDomain'):
+        with connection.cursor() as cursor:
+            sql = "SELECT id, contentPdf FROM `pdfGenerated`"
+            cursor.execute(sql)
+            allPdfBlob = cursor.fetchall()
+            cursor.close()
+
+        if Enquiry(allPdfBlob):
+            fileData = []
+            i = 0
+            tabImg = []
+            idPdf = []
+
+            while i < len(allPdfBlob):
+                idUnique = allPdfBlob[i]['id']
+                page = ShowImg(allPdfBlob, i)
+                tabImg.append(page)
+                idPdf.append(idUnique)
+                i += 1
+                os.remove("cv{{i}}.pdf")
+            return render_template('recruitersAllCv.html', len=len(tabImg), images=tabImg, idPdf=idPdf)
+        else:
+            return render_template('home.html')
+    else:
+
+        idCvs = session['idCvDomain']
         i = 0
+        allPdfBlob = []
+        fileData = []
         tabImg = []
         idPdf = []
 
-        while i < len(allPdfBlob):
-            idUnique = allPdfBlob[i]['id']
-            page = ShowImg(allPdfBlob, i)
+        while i < len(idCvs):
+            idCv = idCvs[i]
+            idCv = idCv['IDcv']
+
+            with connection.cursor() as cursor:
+                sqlContentPdf = "SELECT id, contentPdf FROM `pdfGenerated` WHERE `idCv`=%s"
+                cursor.execute(sqlContentPdf, idCv)
+                Blob = cursor.fetchone()
+                allPdfBlob.append(Blob)
+                cursor.close()
+                i += 1
+        j = 0
+        while j < len(allPdfBlob):
+            idUnique = allPdfBlob[j]['id']
+            page = ShowImg(allPdfBlob, j)
             tabImg.append(page)
             idPdf.append(idUnique)
-            i += 1
+            j += 1
             os.remove("cv{{i}}.pdf")
         return render_template('recruitersAllCv.html', len=len(tabImg), images=tabImg, idPdf=idPdf)
+
+
+@app.route('/search', methods=['POST'])
+def search():
+    if not g.search_form.validate_on_submit():
+        return redirect(url_for('home'))
     else:
-        return render_template('home.html')
+        search = g.search_form.search.data
+        print(search)
+        with connection.cursor() as cursor:
+            sql = "SELECT IDcv FROM `cv` where `domain`=%s  "
+            cursor.execute(sql, search)
+            idcv = cursor.fetchall()
+            session['idCvDomain'] = idcv
+            cursor.close()
+    return redirect(url_for('recruitersAllCv'))
+
+
+@app.before_request
+def before_request():
+    g.user = current_user
+    g.search_form = SearchForm()
 
 
 if __name__ == '__main__':

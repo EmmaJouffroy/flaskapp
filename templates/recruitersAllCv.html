@@ -1,5 +1,22 @@
 {% extends 'layout.html' %} {% block title %} Register {% endblock %} {% block
-content %} {%for i in range(0, len)%}
+content %}
+<form
+  style="display: inline;"
+  action="{{ url_for('search') }}"
+  method="post"
+  name="search"
+>
+  {{ g.search_form.hidden_tag()
+  }}{{ g.search_form.search(size=20)
+
+
+
+
+
+
+  }}<input type="submit" value="Search" />
+  {%for i in range(0, len)%}
+</form>
 <a href="/myAction?idPdf={{ idPdf[i] }}">
   <img
     src="data:image/jpeg;base64,{{ images[i] | safe }}"

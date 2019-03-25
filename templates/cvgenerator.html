@@ -8,7 +8,6 @@ block content %}
       var hobbies = $("input[name='hobbies[]']").serializeArray();
       if (skills.length != 4 || hobbies.length != 3) {
         alert("Vous devez choisir exactement quatre compétences et exactement trois hobbies .");
-        // cancel submit
         return false;
       } else {
         alert("Votre CV est entrain d'être généré");
@@ -114,6 +113,35 @@ block content %}
                         />
                       </div>
                     </div>
+                    <div class="col-sm-10 col-sm-offset-1">
+                        <div class="form-group">
+                            <label>Your application domain</label>
+                            <div class="radio">
+                                <label>
+                                  <input type="radio" name="optionsRadios">
+                                  Radio is off
+                                </label>
+                              </div>
+                              <div class="radio">
+                                <label>
+                                  <input type="radio" name="optionsRadios" checked="true">
+                                  Radio is on
+                                </label>
+                              </div>
+                              <div class="radio">
+                                  <label>
+                                    <input type="radio" name="optionsRadios" checked="true">
+                                    Radio is on
+                                  </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                      <input type="radio" name="optionsRadios" checked="true">
+                                      Radio is on
+                                    </label>
+                                  </div>
+                        </div>
+                      </div>
                   </div>
                 </div>
 
