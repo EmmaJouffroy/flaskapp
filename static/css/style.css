@@ -99,9 +99,18 @@ nav.navbar ul .subgroup {
   background-size: cover;
   height: 100%;
 }
+
+#welcomeWordsText hr {
+  border-top: 3px solid #414141;
+}
 /* Footer */
 footer {
   height: 50px;
   background-color: #414141;
   color: #ffffff;
+}
+
+#imglogin,
+#imgsignin {
+  text-align: center;
 }
