@@ -1,8 +1,66 @@
 {% extends 'layout.html' %} {% block title %} Home {% endblock %} {% block
-content %} Home page {% if session['status'] %} Welcome {{ session["status"] }}
-<div>
-  Microblog:
-  <a href="{{ url_for('home') }}">Home</a>
+content %}
+
+<div class="headHome">
+  <div class="container">
+    <div id="h2TextHome">
+      <h2>CREATE YOUR CV IN A FEW MINUTES</h2>
+      <h2>AND SEND THEM TO RECRUITERS</h2>
+    </div>
+    <div id="lineImgHome">
+      <img src="" alt="" />
+    </div>
+    <div id="testHeadHome">
+      <p>Login to have more informations and to contact recruiters</p>
+    </div>
+    <div id="buttonLoginHomme">
+      <a href="{{ url_for('login') }}">
+        <button type="button" class="btn btn-info">Login</button></a
+      >
+    </div>
+  </div>
+</div>
+<div class="welcomeWords">
+  <div id="welcomeWordsText" class="col-md-6">
+    <h4>Welcome in our website</h4>
+    <p>lorem ipsum</p>
+  </div>
+  <div id="welcomeWordsIcons" class="col-md-6">
+    <ul>
+      <li><img src="" alt="" /></li>
+      <li><img src="" alt="" /></li>
+      <li><img src="" alt="" /></li>
+    </ul>
+  </div>
 </div>
 
-{% else %} Not login {% endif %} {% endblock %}
+<div class="shortStory">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-offset-2 col-md-5" style="background-color:red">
+        <H3>WELCOME IN OUR WEBSITE</H3>
+        <h4>Welcome in our oubsite</h4>
+        <img src="" alt="" />
+        <p>Login to have more informations and contact recruiters</p>
+      </div>
+      <div class="col-md-5">
+        <h3>Shortly about us</h3>
+        <p>Lorem Ipsum</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="homeQuote">
+  <div class="container">
+    <div class="col-md-offset-3 col-md-6">
+      <img src="" alt="" />
+      <p>
+        "Engagement has to be human, because people trust people more than
+        brands"
+      </p>
+      <p>Ana Allonso</p>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

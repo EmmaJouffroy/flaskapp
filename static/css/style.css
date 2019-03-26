@@ -5,6 +5,11 @@
   src: url("../static/fonts/AvenirLTStd-Roman.otf");
 }
 
+@font-face {
+  font-family: "AvenirBook";
+  src: url("../static/fonts/AvenirLTStd-Book.otf");
+}
+
 * {
   font-family: "Avenir";
 }
@@ -42,6 +47,7 @@ nav.navbar ul .subgroup {
 .navbar {
   background-color: #ffffff;
   height: 80px;
+  margin-bottom: 0 !important;
 }
 
 .navbar-brand {
@@ -56,3 +62,30 @@ nav.navbar ul .subgroup {
 }
 
 /* Home */
+
+.headHome {
+  height: 300px;
+  background-image: url("../img/HeadHome.png");
+  background-size: cover;
+  text-align: center;
+  color: #ffffff;
+}
+
+#welcomeWordsText h4 {
+  font-family: "AvenirBook";
+}
+
+#welcomeWordsIcons {
+  background-color: #57bbc6;
+  height: 100%;
+}
+
+.welcomeWords {
+  height: 150px;
+}
+
+.shortStory {
+  background-color: #414141;
+  height: 200px;
+  color: #ffffff;
+}
