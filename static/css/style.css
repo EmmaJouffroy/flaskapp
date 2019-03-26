@@ -1,11 +1,19 @@
-nav.navbar a {
-  text-decoration: none;
-  color: blue;
-  font-weight: normal;
+/* Fonts */
+
+@font-face {
+  font-family: "Avenir";
+  src: url("../static/fonts/AvenirLTStd-Roman.otf");
 }
 
-nav.navbar .active {
-  font-weight: bold;
+* {
+  font-family: "Avenir";
+}
+
+/* Navbar */
+
+nav.navbar a {
+  text-decoration: none;
+  font-weight: normal;
 }
 
 nav.navbar > ul {
@@ -14,19 +22,37 @@ nav.navbar > ul {
 
 nav.navbar ul li {
   display: block;
-  width: 150px;
+  width: 70px;
   margin-right: 20px;
   float: left;
+  color: #000000;
+}
+.navbar-default .navbar-nav > li > a {
+  color: #000000 !important;
 }
 
-nav.navbar ul > li > a:hover {
-  background-color: #eeeecc;
+.navbar-default .navbar-nav > li > a:hover {
+  text-decoration-line: underline;
 }
 
 nav.navbar ul .subgroup {
   padding-left: 0px;
 }
 
-h1 {
-  clear: both;
+.navbar {
+  background-color: #ffffff;
+  height: 80px;
 }
+
+.navbar-brand {
+  padding: 0;
+}
+.container-navigation {
+  margin-top: 10px;
+}
+
+#logo {
+  height: 60px;
+}
+
+/* Home */
