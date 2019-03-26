@@ -175,6 +175,7 @@ def move_forward():
     hobby1 = choiceshobbies[0]
     hobby2 = choiceshobbies[1]
     hobby3 = choiceshobbies[2]
+    domain = datas['domain']
     emailUser = session['email']
 
     rendered = render_template('pdf_template.html', donneesForm=datas)
@@ -193,9 +194,9 @@ def move_forward():
         SessionID = str(idUser['IDusers'])
         session['idUser'] = SessionID
 
-        sqlCv = 'INSERT INTO cv(IDusers, firstname, lastname, img, resume, title) VALUES (%s,%s,%s,%s,%s,%s)'
+        sqlCv = 'INSERT INTO cv(IDusers, firstname, lastname, img, resume, title, domain) VALUES (%s,%s,%s,%s,%s,%s,%s)'
         cursor.execute(sqlCv, (SessionID, firstname,
-                               lastname, img, resume, title))
+                               lastname, img, resume, title, domain))
         connection.commit()
 
         sqlLastId = 'SELECT `IDcv` FROM cv INNER JOIN users ON cv.IDusers=users.IDusers WHERE IDcv = LAST_INSERT_ID()  '
@@ -328,8 +329,7 @@ def candidatesAllCv():
 
 @app.route('/recruitersAllCv', methods=["GET", "POST"])
 def recruitersAllCv():
-
-    if not session.get('idCvDomain'):
+    if not session.get('idCvDomain') or session['idCvDomain'] == "Tous":
         with connection.cursor() as cursor:
             sql = "SELECT id, contentPdf FROM `pdfGenerated`"
             cursor.execute(sql)
@@ -348,7 +348,6 @@ def recruitersAllCv():
                 tabImg.append(page)
                 idPdf.append(idUnique)
                 i += 1
-                os.remove("cv{{i}}.pdf")
             return render_template('recruitersAllCv.html', len=len(tabImg), images=tabImg, idPdf=idPdf)
         else:
             return render_template('home.html')
@@ -379,7 +378,6 @@ def recruitersAllCv():
             tabImg.append(page)
             idPdf.append(idUnique)
             j += 1
-            os.remove("cv{{i}}.pdf")
         return render_template('recruitersAllCv.html', len=len(tabImg), images=tabImg, idPdf=idPdf)
 
 
@@ -389,7 +387,6 @@ def search():
         return redirect(url_for('home'))
     else:
         search = g.search_form.search.data
-        print(search)
         with connection.cursor() as cursor:
             sql = "SELECT IDcv FROM `cv` where `domain`=%s  "
             cursor.execute(sql, search)

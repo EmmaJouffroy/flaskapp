@@ -1,22 +1,27 @@
 {% extends 'layout.html' %} {% block title %} Register {% endblock %} {% block
 content %}
-<form
-  style="display: inline;"
-  action="{{ url_for('search') }}"
-  method="post"
-  name="search"
->
-  {{ g.search_form.hidden_tag()
-  }}{{ g.search_form.search(size=20)
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+              <form
+              style="display: inline;"
+              action="{{ url_for('search') }}"
+              method="post"
+              name="search"
+              class="form form-horizontal"
+            >
+                <div class="form-group">
+                  {{ g.search_form.hidden_tag()
+                  }}{{ g.search_form.search(class_="form-control")}}
+                </div>
+              </div>
+            
+              <input type="submit" value="Search" />
+              {%for i in range(0, len)%}
+            </form>  
+          </div>
+          </div>
 
-
-
-
-
-
-  }}<input type="submit" value="Search" />
-  {%for i in range(0, len)%}
-</form>
 <a href="/myAction?idPdf={{ idPdf[i] }}">
   <img
     src="data:image/jpeg;base64,{{ images[i] | safe }}"
