@@ -252,7 +252,7 @@ def move_forward():
         cursor.close()
 
     os.remove("test.pdf")
-    return render_template("home.html")
+    return redirect(url_for('candidatesAllCv'))
 
 
 @app.route('/myAction/', methods=["GET", "POST"])
