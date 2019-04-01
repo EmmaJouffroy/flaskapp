@@ -297,10 +297,15 @@ def candidatePrediction():
         cursor.execute(sqlPredictions, idCv)
         results = cursor.fetchall()
         cursor.close()
-
+    predictions = []
+    predictions.append(float(results[0]["pers1"])*100),
+    predictions.append(float(results[0]["pers2"])*100),
+    predictions.append(float(results[0]["pers3"])*100),
+    predictions.append(float(results[0]["pers4"])*100),
+    print("Voici mes predictions")
+    print(predictions)
     os.remove("cv.pdf")
-
-    return render_template("candidatePrediction.html", page=page.decode('ascii'), predictions=results)
+    return render_template("candidatePrediction.html", page=page.decode('ascii'), values=predictions)
 
 
 @app.route('/candidatesAllCv', methods=["GET", "POST"])

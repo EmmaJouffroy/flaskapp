@@ -1,10 +1,75 @@
 {% extends 'layout.html' %} {% block title %} Register {% endblock %} {% block
 content %}
-<img
-  src="data:image/jpeg;base64,{{ page | safe }}"
-  alt="Smiley face"
-  height="42"
-  width="42"
-  style="border:1px solid black; height:500px; width:250px"
-/>
+<script
+  type="text/javascript"
+  src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.2/Chart.min.js"
+></script>
+<div class="container" id="candidatesPredictions">
+  <div class="row">
+    <div class="col-md-6">
+      <img
+        src="data:image/jpeg;base64,{{ page | safe }}"
+        alt="Smiley face"
+        height="42"
+        width="42"
+        style="border:1px solid black; height:500px; width:250px"
+      />
+    </div>
+    <div class="col-md-6">
+      <canvas id="myChart" width="400" height="400"></canvas>
+    </div>
+  </div>
+</div>
+<script>
+  var ctx = document.getElementById("myChart").getContext("2d");
+  var myChartOfficeTools = new Chart(ctx, {
+    type: "radar",
+    data: {
+      labels: [
+        ["Dévoué", "Amical", "Honnête"],
+        ["Ambitieux", "Determiné", "Responsable"],
+        ["Aventureux", "Imaginatif", "Intuitif"],
+        ["Calme", "Coopératif", "Charismatique"]
+      ],
+      datasets: [
+        {
+          label: "Pourcentage pour chaque personnalité :",
+          lineTension: 0.1,
+          backgroundColor: "rgba(204, 204, 204, 0.2)",
+          borderColor: "rgba(204, 204, 204, 1)",
+          pointBackgroundColor: "rgba(204, 204, 204, 1)",
+          pointBorderColor: "#fff",
+          pointHoverRadius: 5,
+          pointHoverBackgroundColor: "#fff",
+          pointHoverBorderColor: "rgba(204, 204, 204, 1)",
+          data : [{% for item in values %}
+                      {{item}},
+                    {% endfor %}]
+        }
+      ]
+    },
+    options: {
+      scale: {
+        angleLines: {
+          display: true,
+          lineWidth: 0.5,
+          color: "rgba(128, 128, 128, 0.2)"
+        },
+        pointLabels: {
+          fontSize: 14,
+          fontStyle: "300",
+          fontColor: "rgba(204, 204, 204, 1)",
+          fontFamily: "'Lato', sans-serif"
+        },
+        ticks: {
+          beginAtZero: true,
+          maxTicksLimit: 50,
+          min: 0,
+          max: 50,
+          display: false
+        }
+      }
+    }
+  });
+</script>
 {% endblock %}

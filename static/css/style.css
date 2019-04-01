@@ -153,7 +153,8 @@ footer {
 /* candidates cv */
 
 #candidatesCV,
-#recruitersCV {
+#recruitersCV,
+#candidatesPredictions {
   margin-top: 50px;
   padding-bottom: 70px;
 }
