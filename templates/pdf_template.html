@@ -31,14 +31,14 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body>
+  <body style="background-color: blueviolet">
     <section class="section">
       <div class="container">
         <div class="row bor-bottom bot-mar">
-          <div class="col-xs-5 ">
+          <div class="col-xs-5" id="colLeft">
                   <div id="name">
-                    <p>{{ donneesForm["firstname"] }}</p>
-                    <p>{{ donneesForm["lastname"] }}</p>
+                    <p class="toUppercase firstname">{{ donneesForm["firstname"] }}</p>
+                    <p class="toUppercase lastname">{{ donneesForm["lastname"] }}</p>
                     <div id="title">
                       <p>{{ donneesForm["title"] }}</p>
                     </div>
@@ -47,11 +47,11 @@
                     <p>{{ donneesForm["domain"] }}</p>
                   </div>
                   <div id="resume">
-                    <h3>Career objective</h3>
+                    <div class="borderTitle"><h3>Career objective</h3></div>
                     <p>{{ donneesForm["resume"] }}</p>
                   </div>
                   <div id="skills">
-                    <h3>Skills</h3>
+                      <div class="borderTitle"><h3>Skills</h3></div>
                     <ul>
                       <li>
                         <p>{{ donneesForm["skills[0]"] }}</p>
@@ -68,7 +68,7 @@
                     </ul>
                   </div>
                   <div id="hobbies">
-                    <h3>Hobbies</h3>
+                      <div class="borderTitle"><h3>Hobbies</h3></div>
                     <ul>
                       <li>
                         <p>{{ donneesForm["hobbies[0]"] }}</p>
@@ -82,7 +82,7 @@
                     </ul>
                   </div>
                   <div id="">
-                    <h3>Contact</h3>
+                      <div class="borderTitle"><h3>Contact</h3></div>
                     <ul>
                       <li>
                         <p>{{ donneesForm["email"] }}</p>
@@ -108,7 +108,7 @@
           <div class="col-xs-7">
             <div class="right-align neg-mar">
                 <div id="workExperience">
-                    <h3>Work Experience</h3>
+                    <div class="borderTitle"><h3>Work experience</h3></div>
                     <div id="we1">
                       <p>{{ donneesForm["exp1Title"] }}</p>
                       <p>
@@ -132,7 +132,7 @@
                     </div>
                   </div>
                   <div id="formations">
-                    <h3>Schools attended</h3>
+                      <div class="borderTitle"><h3>Schools attended</h3></div>
                     <div id="form1">
                       <p>{{ donneesForm["form1Title"] }}</p>
                       <p>
