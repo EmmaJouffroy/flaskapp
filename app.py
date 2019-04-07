@@ -177,8 +177,15 @@ def move_forward():
     hobby3 = choiceshobbies[2]
     domain = datas['domain']
     emailUser = session['email']
+    print(datas)
 
-    rendered = render_template('pdf_template.html', donneesForm=datas)
+    options = {
+        'page-size': 'A4',
+        'dpi': 400
+    }
+
+    rendered = render_template(
+        'pdf_template.html', donneesForm=datas, options=options)
     css = ['main.css']
     pdf = pdfkit.from_string(rendered, 'test.pdf', css=css)
 

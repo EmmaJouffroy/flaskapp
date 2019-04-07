@@ -1,9 +1,171 @@
+<!DOCTYPE html>
 <html>
   <head>
-    <title>PDF</title>
+    <meta charset="utf-8" />
+    <meta name="pdfkit-orientation" content="Portrait" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Dribble</title>
+
+    <!-- Bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+    />
+    <!-- Google Font -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800"
+      rel="stylesheet"
+    />
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
   </head>
   <body>
-    <h1>Your name is Emma</h1>
-    <h3>Your location is Bordeaux</h3>
+    <section class="section">
+      <div class="container">
+        <div class="row bor-bottom bot-mar">
+          <div class="col-xs-5 ">
+                  <div id="name">
+                    <p>{{ donneesForm["firstname"] }}</p>
+                    <p>{{ donneesForm["lastname"] }}</p>
+                    <div id="title">
+                      <p>{{ donneesForm["title"] }}</p>
+                    </div>
+                  </div>
+                  <div id="domain">
+                    <p>{{ donneesForm["domain"] }}</p>
+                  </div>
+                  <div id="resume">
+                    <h3>Career objective</h3>
+                    <p>{{ donneesForm["resume"] }}</p>
+                  </div>
+                  <div id="skills">
+                    <h3>Skills</h3>
+                    <ul>
+                      <li>
+                        <p>{{ donneesForm["skills[0]"] }}</p>
+                      </li>
+                      <li>
+                        <p>{{ donneesForm["skills[1]"] }}</p>
+                      </li>
+                      <li>
+                        <p>{{ donneesForm["skills[2]"] }}</p>
+                      </li>
+                      <li>
+                        <p>{{ donneesForm["skills[3]"] }}</p>
+                      </li>
+                    </ul>
+                  </div>
+                  <div id="hobbies">
+                    <h3>Hobbies</h3>
+                    <ul>
+                      <li>
+                        <p>{{ donneesForm["hobbies[0]"] }}</p>
+                      </li>
+                      <li>
+                        <p>{{ donneesForm["hobbies[1]"] }}</p>
+                      </li>
+                      <li>
+                        <p>{{ donneesForm["hobbies[2]"] }}</p>
+                      </li>
+                    </ul>
+                  </div>
+                  <div id="">
+                    <h3>Contact</h3>
+                    <ul>
+                      <li>
+                        <p>{{ donneesForm["email"] }}</p>
+                      </li>
+                      <li>
+                        <p>{{ donneesForm["phoneNumber"] }}</p>
+                      </li>
+                      <li>
+                        <p>{{ donneesForm["websiteTitle"] }}</p>
+                        <p>{{ donneesForm["websiteLink"] }}</p>
+                      </li>
+                      <li>
+                        <p>{{ donneesForm["sm1Title"] }}</p>
+                        <p>{{ donneesForm["sm1Link"] }}</p>
+                      </li>
+                      <li>
+                        <p>{{ donneesForm["sm2Title"] }}</p>
+                        <p>{{ donneesForm["sm2Link"] }}</p>
+                      </li>
+                    </ul>
+                  </div>
+          </div>
+          <div class="col-xs-7">
+            <div class="right-align neg-mar">
+                <div id="workExperience">
+                    <h3>Work Experience</h3>
+                    <div id="we1">
+                      <p>{{ donneesForm["exp1Title"] }}</p>
+                      <p>
+                        {{ donneesForm["exp1Debut"] }}, {{ donneesForm["exp1Fin"] }}
+                      </p>
+                      <p>{{ donneesForm["exp1Resume"] }}</p>
+                    </div>
+                    <div id="we2">
+                      <p>{{ donneesForm["exp2Title"] }}</p>
+                      <p>
+                        {{ donneesForm["exp2Debut"] }}, {{ donneesForm["exp2Fin"] }}
+                      </p>
+                      <p>{{ donneesForm["exp2Resume"] }}</p>
+                    </div>
+                    <div id="we3">
+                      <p>{{ donneesForm["exp3Title"] }}</p>
+                      <p>
+                        {{ donneesForm["exp3Debut"] }}, {{ donneesForm["exp3Fin"] }}
+                      </p>
+                      <p>{{ donneesForm["exp3Resume"] }}</p>
+                    </div>
+                  </div>
+                  <div id="formations">
+                    <h3>Schools attended</h3>
+                    <div id="form1">
+                      <p>{{ donneesForm["form1Title"] }}</p>
+                      <p>
+                        {{ donneesForm["form1Debut"] }}, {{ donneesForm["form1Fin"] }}
+                      </p>
+                      <p>{{ donneesForm["form1Text"] }}</p>
+                    </div>
+                    <div id="form2">
+                      <p>{{ donneesForm["form2Title"] }}</p>
+                      <p>
+                        {{ donneesForm["form2Debut"] }}, {{ donneesForm["form2Fin"] }}
+                      </p>
+                      <p>{{ donneesForm["form2Text"] }}</p>
+                    </div>
+                    <div id="form3">
+                      <p>{{ donneesForm["form3Title"] }}</p>
+                      <p>
+                        {{ donneesForm["form3Debut"] }}, {{ donneesForm["form3Fin"] }}
+                      </p>
+                      <p>{{ donneesForm["form3Text"] }}</p>
+                    </div>
+           
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Container -->
+    </section>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </body>
 </html>
+

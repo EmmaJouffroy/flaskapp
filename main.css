@@ -1,0 +1,88 @@
+#pdfGenerated {
+  font-family: "Avenir";
+  color: brown;
+  width: 100%;
+}
+
+#left-col {
+  background-color: blue;
+}
+
+#pdfGenerated h3 {
+  background-color: brown;
+  padding: 5px;
+  color: aliceblue !important;
+}
+
+.row {
+  display: -webkit-box;
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+body {
+  font-family: "Open Sans", sans-serif;
+}
+
+p,
+a {
+  color: #002f54;
+}
+
+.bor-bottom {
+  border-bottom: 2px solid #ccc;
+}
+
+.no-pad {
+  padding-left: 0;
+}
+
+.section {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.bold {
+  font-weight: 700;
+  color: #002f54;
+}
+
+.small {
+  font-size: 14px;
+}
+
+.bolder {
+  color: #002f54;
+  font-weight: 800;
+  font-size: 22px;
+}
+
+.normal {
+  color: #002f54;
+  font-weight: 700;
+}
+
+.smaller {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+h3 .bold {
+  margin-top: 0;
+}
+
+.pad-mar-bottom.mob {
+  margin-left: 0px !important;
+  padding-bottom: 10px;
+}
+
+.pad-mar-footer.mob {
+  margin-left: 0px !important;
+  text-align: center;
+  padding-top: 10px;
+}
+
+.container {
+  max-width: 800px;
+}
