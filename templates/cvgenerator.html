@@ -13,11 +13,15 @@ block content %}
         alert("Votre CV est entrain d'être généré");
       }
     }
+    function topScroll(){
+      document.body.scrollTop = 30; // For Safari
+      document.documentElement.scrollTop = 30; // For Chrome, Firefox, IE and Opera
+    }
   </script>
 <div
   class="image-container set-full-height"
   style="background-image: url('static/img/bg.jpg')"
->  <div class="container">
+>  <div class="container" id="topPage">
     <div class="row">
       <div class="col-sm-8 col-sm-offset-2">
         <div class="wizard-container">
@@ -776,6 +780,8 @@ block content %}
                     class="btn btn-next btn-fill btn-warning btn-wd btn-sm"
                     name="next"
                     value="Next"
+                    onclick="return topScroll()"
+
                   />
                   <input
                     type="submit"
@@ -793,6 +799,7 @@ block content %}
                     class="btn btn-previous btn-fill btn-default btn-wd btn-sm"
                     name="previous"
                     value="Previous"
+                    onclick="return topScroll()"
                   />
                 </div>
                 <div class="clearfix"></div>
