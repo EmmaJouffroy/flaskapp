@@ -1,37 +1,25 @@
-#pdfGenerated {
-  font-family: "Avenir";
-  color: brown;
-  width: 100%;
-}
-
-#left-col {
-  background-color: blue;
-}
-
-#pdfGenerated h3 {
-  background-color: brown;
-  padding: 5px;
-  color: aliceblue !important;
-}
-
 .row {
   display: -webkit-box;
   display: flex;
   flex-wrap: wrap;
-  margin-right: -15px;
-  margin-left: -15px;
+  margin-right: -50px;
+  margin-left: -50px;
 }
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: "Open Sans", "sans-serif";
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+}
+.page {
+  page-break-after: always;
+  width: 210mm;
+  height: 297mm;
 }
 
 p,
 a {
-  color: #002f54;
-}
-
-.bor-bottom {
-  border-bottom: 2px solid #ccc;
+  color: #444440;
 }
 
 .no-pad {
@@ -39,8 +27,10 @@ a {
 }
 
 .section {
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: -15px !important;
+  margin-bottom: -15px !important;
+  height: 40cm;
+  overflow: hidden;
 }
 
 .bold {
@@ -49,13 +39,13 @@ a {
 }
 
 .small {
-  font-size: 14px;
+  font-size: 50px;
 }
 
 .bolder {
   color: #002f54;
   font-weight: 800;
-  font-size: 22px;
+  font-size: 35px;
 }
 
 .normal {
@@ -64,12 +54,27 @@ a {
 }
 
 .smaller {
-  font-size: 14px;
+  font-size: 35px;
   font-weight: 700;
 }
 
-h3 .bold {
-  margin-top: 0;
+h3 {
+  color: #ffffff;
+  padding: 10px;
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+#formations .borderTitle {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.borderTitle {
+  width: 100%;
+  background-color: #444440;
 }
 
 .pad-mar-bottom.mob {
@@ -84,5 +89,72 @@ h3 .bold {
 }
 
 .container {
-  max-width: 800px;
+  max-width: 1000px;
+}
+
+#colLeft {
+  background-color: #d1d7ca;
+  padding: 0.5cm;
+  height: 40cm;
+  overflow: hidden;
+}
+
+.toUppercase {
+  text-transform: uppercase;
+}
+
+.firstname {
+  margin-top: 5cm;
+  font-size: 30px;
+}
+
+.lastname {
+  font-size: 40px;
+}
+
+#name {
+  text-align: center;
+}
+#colRight {
+  padding: 0.5cm;
+  padding-right: 2cm;
+}
+
+#resume,
+#skills,
+#language,
+#hobbies {
+  padding: 1cm;
+}
+
+#formations {
+  border: 1px solid #444440;
+}
+
+#contact ul,
+#language ul {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+#contact li,
+#language li {
+  margin-bottom: 15px; /* à adapter */
+}
+
+#workExperience {
+  margin-top: 7cm;
+}
+
+.picture {
+  width: 156px;
+  height: 156px;
+  background-color: #999999;
+  border: 4px solid #cccccc;
+  color: #ffffff;
+  border-radius: 50%;
+  margin: 5px auto;
+  overflow: hidden;
+  transition: all 0.2s;
+  -webkit-transition: all 0.2s;
 }

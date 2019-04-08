@@ -177,7 +177,7 @@ h1,
 
 h2,
 .h2 {
-  font-size: 36px;
+  font-size: 31px;
 }
 
 h3,
@@ -297,7 +297,7 @@ h1 .subtitle {
   width: 100%;
 }
 .wizard-card .picture-src {
-  width: 175%;
+  width: 130%;
 }
 .wizard-card .tab-content {
   min-height: 340px;

@@ -19,6 +19,7 @@ import pdfkit
 from keras import backend as K
 from flask_login import current_user
 from forms import SearchForm
+from werkzeug import secure_filename
 
 
 connection = pymysql.connect(host='localhost',
@@ -29,7 +30,11 @@ connection = pymysql.connect(host='localhost',
                              charset='utf8mb4',
                              cursorclass=pymysql.cursors.DictCursor)
 
+UPLOAD_FOLDER = 'templates'
+
+
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
 def write_file(data, filename):
@@ -163,7 +168,9 @@ def move_forward():
     datas = request.form
     firstname = datas['firstname']
     lastname = datas['lastname']
-    img = datas['img']
+    img = request.files['img'].read()
+    img = base64.b64encode(img)
+    img = img.decode('ascii')
     resume = datas['resume']
     title = datas['title']
     choicesskills = request.values.getlist('skills[]')
@@ -177,17 +184,22 @@ def move_forward():
     hobby3 = choiceshobbies[2]
     domain = datas['domain']
     emailUser = session['email']
-    print(datas)
 
     options = {
         'page-size': 'A4',
-        'dpi': 400
+        'margin-top': '0in',
+        'margin-right': '0in',
+        'margin-bottom': '0in',
+        'margin-left': '0in',
+        'encoding': "UTF-8",
+        'no-outline': None,
+        'dpi': 500
     }
 
     rendered = render_template(
-        'pdf_template.html', donneesForm=datas, options=options)
+        'pdf_template.html', donneesForm=datas, choicesskills=choicesskills, choiceshobbies=choiceshobbies, img=img)
     css = ['main.css']
-    pdf = pdfkit.from_string(rendered, 'test.pdf', css=css)
+    pdf = pdfkit.from_string(rendered, 'test.pdf', css=css, options=options)
 
     with open('test.pdf', 'rb') as file:
         binaryData = file.read()
@@ -201,9 +213,9 @@ def move_forward():
         SessionID = str(idUser['IDusers'])
         session['idUser'] = SessionID
 
-        sqlCv = 'INSERT INTO cv(IDusers, firstname, lastname, img, resume, title, domain) VALUES (%s,%s,%s,%s,%s,%s,%s)'
+        sqlCv = 'INSERT INTO cv(IDusers, firstname, lastname, resume, title, domain) VALUES (%s,%s,%s,%s,%s,%s)'
         cursor.execute(sqlCv, (SessionID, firstname,
-                               lastname, img, resume, title, domain))
+                               lastname, resume, title, domain))
         connection.commit()
 
         sqlLastId = 'SELECT `IDcv` FROM cv INNER JOIN users ON cv.IDusers=users.IDusers WHERE IDcv = LAST_INSERT_ID()  '
@@ -258,6 +270,7 @@ def move_forward():
         connection.commit()
         cursor.close()
 
+    # os.remove(secure_filename(img.filename))
     os.remove("test.pdf")
     return redirect(url_for('candidatesAllCv'))
 
@@ -309,8 +322,7 @@ def candidatePrediction():
     predictions.append(float(results[0]["pers2"])*100),
     predictions.append(float(results[0]["pers3"])*100),
     predictions.append(float(results[0]["pers4"])*100),
-    print("Voici mes predictions")
-    print(predictions)
+
     os.remove("cv.pdf")
     return render_template("candidatePrediction.html", page=page.decode('ascii'), values=predictions)
 
