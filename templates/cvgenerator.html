@@ -17,6 +17,7 @@ block content %}
       document.body.scrollTop = 150; // For Safari
       document.documentElement.scrollTop = 150; // For Chrome, Firefox, IE and Opera
     }
+
   </script>
 <div
   class="image-container set-full-height"
@@ -26,7 +27,7 @@ block content %}
       <div class="col-sm-8 col-sm-offset-2">
         <div class="wizard-container">
           <div class="card wizard-card" data-color="orange" id="wizardProfile">
-            <form action="/forward/" method="post" id="formwizzard">
+            <form action="/forward/" method="post" id="formwizzard" enctype="multipart/form-data">
               <div class="wizard-header">
                 <h3>
                   <b>GENERATE</b> YOUR CV <br />
@@ -65,7 +66,7 @@ block content %}
                             id="wizardPicturePreview"
                             title=""
                           />
-                          <input type="file" id="wizard-picture" name="img"/>
+                          <input type="file" id="wizard-picture" name="img" class="imguser"/>
                         </div>
                         <h6>Choose Picture</h6>
                       </div>
@@ -812,6 +813,7 @@ block content %}
     </div>
   </div>
 </div>
+
 
 
 {% endblock %}

@@ -5,6 +5,7 @@
     <meta name="pdfkit-orientation" content="Portrait" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Dribble</title>
 
@@ -41,14 +42,10 @@
         <div class="row bor-bottom bot-mar">
           <div class="col-xs-5" id="colLeft">
                   <div id="name">
-                    <p class="toUppercase firstname">{{ donneesForm["firstname"] }}</p>
-                    <p class="toUppercase lastname">{{ donneesForm["lastname"] }}</p>
+                    <p class="toUppercase firstname">{{ donneesForm["firstname"] }} {{ donneesForm["lastname"] }}</p>
                     <div id="title">
                       <p>{{ donneesForm["title"] }}</p>
                     </div>
-                  </div>
-                  <div id="domain">
-                    <p>{{ donneesForm["domain"] }}</p>
                   </div>
                   <div id="resume">
                     <div class="borderTitle"><h3>Career objective</h3></div>
@@ -85,32 +82,33 @@
                       </li>
                     </ul>
                   </div>
-                  <div id="contact">
-                      <div class="borderTitle"><h3>Contact</h3></div>
+                  <div id="language">
+                      <div class="borderTitle"><h3>language</h3></div>
                     <ul>
                       <li>
-                        <p>{{ donneesForm["email"] }}</p>
+                        <p>{{ donneesForm["language1"] }}</p>
                       </li>
                       <li>
-                        <p>{{ donneesForm["phoneNumber"] }}</p>
+                        <p>{{ donneesForm["language2"] }}</p>
                       </li>
                       <li>
-                        <p>{{ donneesForm["websiteTitle"] }}</p>
-                        <p>{{ donneesForm["websiteLink"] }}</p>
-                      </li>
-                      <li>
-                        <p>{{ donneesForm["sm1Title"] }}</p>
-                        <p>{{ donneesForm["sm1Link"] }}</p>
-                      </li>
-                      <li>
-                        <p>{{ donneesForm["sm2Title"] }}</p>
-                        <p>{{ donneesForm["sm2Link"] }}</p>
+                        <p>{{ donneesForm["language3"] }}</p>
                       </li>
                     </ul>
                   </div>
           </div>
           <div class="col-xs-7" id="colRight">
             <div class="right-align neg-mar">
+              <div>
+                  <img
+                  src="data:image/jpeg;base64,{{ img | safe }}"
+                  alt="Smiley face"
+                  height="200"
+                  width="200"
+                  style="border:1px solid black; height:270; width:250px"
+                  
+                />
+              </div>
                 <div id="workExperience">
                     <div class="borderTitle"><h3>Work experience</h3></div>
                     <div id="we1">
@@ -135,8 +133,9 @@
                       <p>{{ donneesForm["exp3Resume"] }}</p>
                     </div>
                   </div>
-                  <div id="formations">
+                  <div id="formation">
                       <div class="borderTitle"><h3>Schools attended</h3></div>
+                      <div id="formations">
                     <div id="form1">
                       <p>{{ donneesForm["form1Title"] }}</p>
                       <p>
@@ -158,7 +157,30 @@
                       </p>
                       <p>{{ donneesForm["form3Text"] }}</p>
                     </div>
-           
+                    </div>
+            </div>
+            <div id="contact">
+                <div class="borderTitle"><h3>Contact</h3></div>
+              <ul>
+                <li>
+                  <p>{{ donneesForm["email"] }}</p>
+                </li>
+                <li>
+                  <p>{{ donneesForm["phoneNumber"] }}</p>
+                </li>
+                <li>
+                  <p>{{ donneesForm["websiteTitle"] }}</p>
+                  <p>{{ donneesForm["websiteLink"] }}</p>
+                </li>
+                <li>
+                  <p>{{ donneesForm["sm1Title"] }}</p>
+                  <p>{{ donneesForm["sm1Link"] }}</p>
+                </li>
+                <li>
+                  <p>{{ donneesForm["sm2Title"] }}</p>
+                  <p>{{ donneesForm["sm2Link"] }}</p>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
