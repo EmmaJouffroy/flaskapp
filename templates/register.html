@@ -7,67 +7,80 @@ content %}
       <div id="imgsignin">
         <h3>DON'T HAVE AN ACCOUNT?</h3>
         <h4>Welcome in our website</h4>
-        <img src="" alt="" />
+        <div class="row">
+          <div class="col-md-offset-1 col-md-4"><hr /></div>
+          <div id="lineImgHome" class="col-md-2">
+            <img src="../static/img/point.png" alt="" />
+          </div>
+          <div class="col-md-4"><hr /></div>
+        </div>
         <p>Login to have more informations and contact recruiters</p>
       </div>
     </div>
     <div class="col-md-6">
-      <form action="/register" method="POST">
-        <h3>Sign in</h3>
-        <hr />
-        <div class="form-group">
-          <label>Email:</label>
 
-          <input
-            type="email"
-            class="form-control"
-            name="email"
-            aria-required="true"
-            aria-invalid="true"
-          />
+        <div class="row">
+            <form action="/register" method="POST" class="col-md-10 col-md-offset-2">
+              <h3>Login</h3>
+              <hr class="col-md-1" />
         </div>
+          <div class="col-md-offset-2 col-md-8">
+            <div class="form-group">
+              <label>Email:</label>
+              <input
+                type="email"
+                class="form-control"
+                name="email"
+                aria-required="true"
+                aria-invalid="true"
+              />
+            </div>
 
-        <div class="form-group">
-          <label>Password:</label>
+            <div class="form-group">
+              <label>Password:</label>
 
-          <input
-            type="password"
-            class="form-control"
-            name="password"
-            aria-required="true"
-            aria-invalid="true"
-          />
-        </div>
+              <input
+                type="password"
+                class="form-control"
+                name="password"
+                aria-required="true"
+                aria-invalid="true"
+              />
+            </div>
 
-        <div class="form-group">
-          <label>Repeat password:</label>
+            <div class="form-group">
+              <label>Repeat password:</label>
 
-          <input
-            type="password"
-            class="form-control"
-            name="password"
-            aria-required="true"
-            aria-invalid="true"
-          />
-        </div>
-        <div class="form-group">
-          <label>Your status:</label>
-          <label class="radio-inline"
-            ><input
-              type="radio"
-              name="status"
-              value="1"
-              checked
-            />Candidate</label
-          >
-          <label class="radio-inline"
-            ><input type="radio" name="status" value="0" />Recruiter</label
-          >
-        </div>
-        <div class="form-group">
-          <button class="btn btn-primary">Register</button>
-        </div>
-      </form>
+              <input
+                type="password"
+                class="form-control"
+                name="password"
+                aria-required="true"
+                aria-invalid="true"
+              />
+            </div>
+            <div class="form-group">
+              <label>Your status:</label>
+              <label class="radio-inline"
+                ><input
+                  type="radio"
+                  name="status"
+                  value="1"
+                  checked
+                />Candidate</label
+              >
+              <label class="radio-inline"
+                ><input type="radio" name="status" value="0" />Recruiter</label
+              >
+            </div>
+            <div class="form-group">
+              <button class="btn btn-primary" id="btnLoginSignin">
+                Register
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </div>
