@@ -78,7 +78,7 @@ block content %}
                           name="firstname"
                           type="text"
                           class="form-control"
-                          placeholder="Andrew..."
+                          placeholder="Firstname"
                           required
                         />
                       </div>
@@ -88,7 +88,7 @@ block content %}
                           name="lastname"
                           type="text"
                           class="form-control"
-                          placeholder="Smith..."
+                          placeholder="Lastname"
                           required
                         />
                       </div>
@@ -100,7 +100,7 @@ block content %}
                           name="title"
                           type="text"
                           class="form-control"
-                          placeholder="Title of your cv"
+                          placeholder="Title"
                           required
                         />
                       </div>
@@ -111,8 +111,8 @@ block content %}
                         <input
                           name="resume"
                           type="text"
-                          class="form-control"
-                          placeholder="Resume of your cv"
+                          class="form-control longText"
+                          placeholder="Resume"
                           aria-required="true"
                           required
                         />
@@ -192,17 +192,17 @@ block content %}
                               name="form1Title"
                               type="text"
                               class="form-control"
-                              placeholder="Andrew..."
+                              placeholder="Title"
                               required
                             />
                           </div>
                           <div class="form-group col-sm-6" id="dateFormsLeft"> <!-- Date input -->
                             <label class="control-label" for="date">Date</label>
-                            <input class="form-control" id="date" name="exp1Debut" placeholder="MM/DD/YYY" type="text" required/>
+                            <input class="form-control" id="date" name="form1Debut" placeholder="MM/DD/YYY" type="text" required/>
                           </div>
                           <div class="form-group col-sm-6" id="dateFormsRight"> <!-- Date input -->
                             <label class="control-label" for="date">Date</label>
-                            <input class="form-control" id="date" name="exp1Fin" placeholder="MM/DD/YYY" type="text" required/>
+                            <input class="form-control" id="date" name="form1Fin" placeholder="MM/DD/YYY" type="text" required/>
                           </div>
                           <div class="form-group formation_resume">
                             <label
@@ -212,8 +212,8 @@ block content %}
                             <input
                               name="form1Text"
                               type="text"
-                              class="form-control"
-                              placeholder="Smith..."
+                              class="form-control longText"
+                              placeholder="Resume"
                               required
                             />
                           </div>
@@ -231,16 +231,16 @@ block content %}
                               name="form2Title"
                               type="text"
                               class="form-control"
-                              placeholder="Andrew..."
+                              placeholder="Title"
                             />
                           </div>
                           <div class="form-group col-sm-6" id="dateFormsLeft"> <!-- Date input -->
                             <label class="control-label" for="date">Date</label>
-                            <input class="form-control" id="date" name="exp2Debut" placeholder="MM/DD/YYY" type="text"/>
+                            <input class="form-control" id="date" name="form2Debut" placeholder="MM/DD/YYY" type="text"/>
                           </div>
                           <div class="form-group col-sm-6" id="dateFormsRight"> <!-- Date input -->
                             <label class="control-label" for="date">Date</label>
-                            <input class="form-control" id="date" name="exp2Fin" placeholder="MM/DD/YYY" type="text"/>
+                            <input class="form-control" id="date" name="form2Fin" placeholder="MM/DD/YYY" type="text"/>
                           </div>
                           <div class="form-group formation_resume">
                             <label
@@ -250,8 +250,8 @@ block content %}
                             <input
                               name="form2Text"
                               type="text"
-                              class="form-control"
-                              placeholder="Smith..."
+                              class="form-control longText"
+                              placeholder="Resume"
                             />
                           </div>
                         </div>
@@ -270,16 +270,16 @@ block content %}
                           name="form3Title"
                           type="text"
                           class="form-control"
-                          placeholder="Andrew..."
+                          placeholder="Title"
                         />
                       </div>
                       <div class="form-group col-sm-6" id="dateFormsLeft"> <!-- Date input -->
                         <label class="control-label" for="date">Date</label>
-                        <input class="form-control" id="date" name="exp3Debut" placeholder="MM/DD/YYY" type="text"/>
+                        <input class="form-control" id="date" name="form3Debut" placeholder="MM/DD/YYY" type="text"/>
                       </div>
                       <div class="form-group col-sm-6" id="dateFormsRight"> <!-- Date input -->
                         <label class="control-label" for="date">Date</label>
-                        <input class="form-control" id="date" name="exp3Fin" placeholder="MM/DD/YYY" type="text"/>
+                        <input class="form-control" id="date" name="form3Fin" placeholder="MM/DD/YYY" type="text"/>
                       </div>
                       <div class="form-group formation_resume">
                         <label
@@ -289,8 +289,8 @@ block content %}
                         <input
                           name="form3Text"
                           type="text"
-                          class="form-control"
-                          placeholder="Smith..."
+                          class="form-control longText"
+                          placeholder="Resume"
                         />
                       </div>
                     </div>
@@ -298,124 +298,127 @@ block content %}
                 </div>
 
                 <div class="tab-pane" id="experience">
-                  <h4 class="info-text">
-                    What are your main experiences ?
-                  </h4>
-                  <div class="row">
-                    <div class="col-sm-12">
-                      <div class="row">
-                        <div class="col-sm-5">
-                          <div class="form-group">
-                            <label
-                              >Title of your first experience
-                              <small>(required)</small></label
-                            >
-                            <input
-                              name="exp1Title"
-                              type="text"
-                              class="form-control"
-                              placeholder="Andrew..."
-                              required
-                            />
-                          </div>
-                          <div class="form-group col-sm-6" id="dateFormsLeft"> <!-- Date input -->
-                            <label class="control-label" for="date">Date</label>
-                            <input class="form-control" id="date" name="form1Debut" placeholder="MM/DD/YYY" type="text" required/>
-                          </div>
-                          <div class="form-group"> <!-- Date input -->
-                            <label class="control-label" for="date">Date</label>
-                            <input class="form-control" id="date" name="form1Fin" placeholder="MM/DD/YYY" type="text" required/>
+                    <h4 class="info-text">
+                        What are your main experiences ?
+                    </h4>
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <div class="row">
+                          <div class="col-sm-6 col-sm-offset-3">
+                            <div class="form-group">
+                                <h5 class="info-text">First experience</h5>
+                              <label
+                                >Title of your first experience
+                                <small>(required)</small></label
+                              >
+                              <input
+                                name="exp1Title"
+                                type="text"
+                                class="form-control"
+                                placeholder="Title"
+                                required
+                              />
+                            </div>
+                            <div class="form-group col-sm-6" id="dateFormsLeft"> <!-- Date input -->
+                              <label class="control-label" for="date">Date</label>
+                              <input class="form-control" id="date" name="exp1Debut" placeholder="MM/DD/YYY" type="text" required/>
+                            </div>
+                            <div class="form-group col-sm-6" id="dateFormsRight"> <!-- Date input -->
+                              <label class="control-label" for="date">Date</label>
+                              <input class="form-control" id="date" name="exp1Fin" placeholder="MM/DD/YYY" type="text" required/>
+                            </div>
+                            <div class="form-group formation_resume">
+                              <label
+                                >Resume of your first experience
+                                <small>(required)</small></label
+                              >
+                              <input
+                                name="exp1Text"
+                                type="text"
+                                class="form-control longText"
+                                placeholder="Resume"
+                                required
+                              />
+                            </div>
                           </div>
                         </div>
-                          <div class="form-group">
-                            <label
-                              >Resume of your first experience
-                              <small>(required)</small></label
-                            >
-                            <input
-                              name="exp1Resume"
-                              type="text"
-                              class="form-control"
-                              placeholder="Smith..."
-                              required
-                            />
-                          </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-sm-5">
-                          <div class="form-group">
-                            <label
-                              >Title of your second experience
-                              </label
-                            >
-                            <input
-                              name="exp2Title"
-                              type="text"
-                              class="form-control"
-                              placeholder="Andrew..."
-                            />
-                          </div>
-                          <div class="form-group">
-                            <label
-                              >Resume of your second experience
-                              </label
-                            >
-                            <input
-                              name="exp2Resume"
-                              type="text"
-                              class="form-control"
-                              placeholder="Smith..."
-                            />
-                          </div>
-                          <div class="form-group"> <!-- Date input -->
-                            <label class="control-label" for="date">Date</label>
-                            <input class="form-control" id="date" name="form2Debut" placeholder="MM/DD/YYY" type="text"/>
-                          </div>
-                          <div class="form-group"> <!-- Date input -->
-                            <label class="control-label" for="date">Date</label>
-                            <input class="form-control" id="date" name="form2Fin" placeholder="MM/DD/YYY" type="text"/>
+                        <div class="row">
+                          <div class="col-sm-6 col-sm-offset-3">
+                            <div class="form-group">
+                                <h5 class="info-text">Second experience</h5>
+                              <label
+                                >Title of your second experience
+                                </label
+                              >
+                              <input
+                                name="exp2Title"
+                                type="text"
+                                class="form-control"
+                                placeholder="Title"
+                              />
+                            </div>
+                            <div class="form-group col-sm-6" id="dateFormsLeft"> <!-- Date input -->
+                              <label class="control-label" for="date">Date</label>
+                              <input class="form-control" id="date" name="exp2Debut" placeholder="MM/DD/YYY" type="text"/>
+                            </div>
+                            <div class="form-group col-sm-6" id="dateFormsRight"> <!-- Date input -->
+                              <label class="control-label" for="date">Date</label>
+                              <input class="form-control" id="date" name="exp2Fin" placeholder="MM/DD/YYY" type="text"/>
+                            </div>
+                            <div class="form-group formation_resume">
+                              <label
+                                >Resume of your second formation
+                                </label
+                              >
+                              <input
+                                name="exp2Text"
+                                type="text"
+                                class="form-control longText"
+                                placeholder="Resume"
+                              />
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-sm-5">
-                      <div class="form-group">
-                        <label
-                          >Title of your third experience
-                          </label
-                        >
-                        <input
-                          name="exp3Title"
-                          type="text"
-                          class="form-control"
-                          placeholder="Andrew..."
-                        />
-                      </div>
-                      <div class="form-group">
-                        <label
-                          >Resume of your third experience
-                          </label
-                        >
-                        <input
-                          name="exp3Resume"
-                          type="text"
-                          class="form-control"
-                          placeholder="Smith..."
-                        />
-                      </div>
-                      <div class="form-group"> <!-- Date input -->
-                        <label class="control-label" for="date">Date</label>
-                        <input class="form-control" id="date" name="form3Debut" placeholder="MM/DD/YYY" type="text"/>
-                      </div>
-                      <div class="form-group"> <!-- Date input -->
-                        <label class="control-label" for="date">Date</label>
-                        <input class="form-control" id="date" name="form3Fin" placeholder="MM/DD/YYY" type="text"/>
+                    <div class="row">
+                      <div class="col-sm-6 col-sm-offset-3">
+                        <div class="form-group">
+                            <h5 class="info-text">Third formation</h5>
+                          <label
+                            >Title of your third formation
+                            </label
+                          >
+                          <input
+                            name="exp3Title"
+                            type="text"
+                            class="form-control"
+                            placeholder="Title"
+                          />
+                        </div>
+                        <div class="form-group col-sm-6" id="dateFormsLeft"> <!-- Date input -->
+                          <label class="control-label" for="date">Date</label>
+                          <input class="form-control" id="date" name="exp3Debut" placeholder="MM/DD/YYY" type="text"/>
+                        </div>
+                        <div class="form-group col-sm-6" id="dateFormsRight"> <!-- Date input -->
+                          <label class="control-label" for="date">Date</label>
+                          <input class="form-control" id="date" name="exp3Fin" placeholder="MM/DD/YYY" type="text"/>
+                        </div>
+                        <div class="form-group formation_resume">
+                          <label
+                            >Resume of your third experience
+                            </label
+                          >
+                          <input
+                            name="exp3Text"
+                            type="text"
+                            class="form-control longText"
+                            placeholder="Resume"
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
 
                 <div class="tab-pane" id="language">
                   <div class="row">
@@ -471,7 +474,7 @@ block content %}
                         <div class="choice" data-toggle="wizard-checkbox">
                           <input type="checkbox" name="skills[]" value="informatique" />
                           <div class="icon">
-                            <i class="fa fa-pencil"></i>
+                            <i class="fa fa-laptop"></i>
                           </div>
                           <h6>Informatique</h6>
                         </div>
@@ -480,7 +483,7 @@ block content %}
                         <div class="choice" data-toggle="wizard-checkbox">
                           <input type="checkbox" name="skills[]" value="cognitique" />
                           <div class="icon">
-                            <i class="fa fa-terminal"></i>
+                            <i class="fa fa-universal-access"></i>
                           </div>
                           <h6>Cognitique</h6>
                         </div>
@@ -489,110 +492,105 @@ block content %}
                         <div class="choice" data-toggle="wizard-checkbox">
                           <input type="checkbox" name="skills[]" value="programmation" />
                           <div class="icon">
-                            <i class="fa fa-laptop"></i>
+                            <i class="fa fa-code"></i>
                           </div>
                           <h6>Programmation</h6>
                         </div>
                       </div>
+                      <div class="col-sm-2">
+                          <div class="choice" data-toggle="wizard-checkbox">
+                            <input type="checkbox" name="skills[]" value="facteur humain" />
+                            <div class="icon">
+                              <i class="fa fa-users"></i>
+                            </div>
+                            <h6>Facteur Humain
+                            </h6>
+                          </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="choice" data-toggle="wizard-checkbox">
+                              <input type="checkbox" name="skills[]" value="ccu" />
+                              <div class="icon">
+                                <i class="fa fa-deaf"></i>
+                              </div>
+                              <h6>CCU</h6>
+                            </div>
+                          </div>
+                          <div class="col-sm-2">
+                              <div class="choice" data-toggle="wizard-checkbox">
+                                <input type="checkbox" name="skills[]" value="développement web" />
+                                <div class="icon">
+                                  <i class="fa fa-keyboard-o"></i>
+                                </div>
+                                <h6>Développement Web
+                                </h6>
+                              </div>
+                            </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-sm-10 col-sm-offset-1">
-                      <div class="col-sm-2">
-                        <div class="choice" data-toggle="wizard-checkbox">
-                          <input type="checkbox" name="skills[]" value="facteur humain" />
-                          <div class="icon">
-                            <i class="fa fa-laptop"></i>
-                          </div>
-                          <h6>Facteur Humain
-                          </h6>
-                        </div>
-                      </div>
-                      <div class="col-sm-2">
-                        <div class="choice" data-toggle="wizard-checkbox">
-                          <input type="checkbox" name="skills[]" value="ccu" />
-                          <div class="icon">
-                            <i class="fa fa-pencil"></i>
-                          </div>
-                          <h6>CCU</h6>
-                        </div>
-                      </div>
-                      <div class="col-sm-2">
-                        <div class="choice" data-toggle="wizard-checkbox">
-                          <input type="checkbox" name="skills[]" value="développement web" />
-                          <div class="icon">
-                            <i class="fa fa-terminal"></i>
-                          </div>
-                          <h6>Développement Web
-                          </h6>
-                        </div>
-                      </div>
                       <div class="col-sm-2">
                         <div class="choice" data-toggle="wizard-checkbox">
                           <input type="checkbox" name="skills[]" value="communication" />
                           <div class="icon">
-                            <i class="fa fa-laptop"></i>
+                            <i class="fa fa-comment-o"></i>
                           </div>
                           <h6>Communication</h6>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-sm-10 col-sm-offset-1">
                       <div class="col-sm-2">
-                        <div class="choice" data-toggle="wizard-checkbox">
-                          <input type="checkbox" name="skills[]" value="ia" />
-                          <div class="icon">
-                            <i class="fa fa-terminal"></i>
+                          <div class="choice" data-toggle="wizard-checkbox">
+                            <input type="checkbox" name="skills[]" value="ia" />
+                            <div class="icon">
+                              <i class="fa fa-cogs"></i>
+                            </div>
+                            <h6>IA</h6>
                           </div>
-                          <h6>IA</h6>
                         </div>
-                      </div>
-                      <div class="col-sm-2">
-                        <div class="choice" data-toggle="wizard-checkbox">
-                          <input type="checkbox" name="skills[]" value="bureautique" />
-                          <div class="icon">
-                            <i class="fa fa-pencil"></i>
+                        <div class="col-sm-2">
+                          <div class="choice" data-toggle="wizard-checkbox">
+                            <input type="checkbox" name="skills[]" value="bureautique" />
+                            <div class="icon">
+                              <i class="fa fa-pencil"></i>
+                            </div>
+                            <h6>Bureautique
+                            </h6>
                           </div>
-                          <h6>Bureautique
-                          </h6>
                         </div>
-                      </div>
-                      <div class="col-sm-2">
-                        <div class="choice" data-toggle="wizard-checkbox">
-                          <input type="checkbox" name="skills[]" value="tests utilisateurs" />
-                          <div class="icon">
-                            <i class="fa fa-laptop"></i>
+                        <div class="col-sm-2">
+                          <div class="choice" data-toggle="wizard-checkbox">
+                            <input type="checkbox" name="skills[]" value="tests utilisateurs" />
+                            <div class="icon">
+                              <i class="fa fa-user-circle"></i>
+                            </div>
+                            <h6>Tests utilisateurs
+                            </h6>
                           </div>
-                          <h6>Tests utilisateurs
-                          </h6>
                         </div>
-                      </div>
-                      <div class="col-sm-2">
-                        <div class="choice" data-toggle="wizard-checkbox">
-                          <input type="checkbox" name="skills[]" value="gestion de base de données" />
-                          <div class="icon">
-                            <i class="fa fa-laptop"></i>
+                        <div class="col-sm-2">
+                          <div class="choice" data-toggle="wizard-checkbox">
+                            <input type="checkbox" name="skills[]" value="gestion de base de données" />
+                            <div class="icon">
+                              <i class="fa fa-database"></i>
+                            </div>
+                            <h6>Gestion de base de données
+                            </h6>
                           </div>
-                          <h6>Gestion de base de données
-                          </h6>
                         </div>
-                      </div>
-                      <div class="col-sm-2">
-                        <div class="choice" data-toggle="wizard-checkbox">
-                          <input type="checkbox" name="skills[]" value="imagerie numérique" />
-                          <div class="icon">
-                            <i class="fa fa-laptop"></i>
+                        <div class="col-sm-2">
+                          <div class="choice" data-toggle="wizard-checkbox">
+                            <input type="checkbox" name="skills[]" value="imagerie numérique" />
+                            <div class="icon">
+                              <i class="fa fa-camera"></i>
+                            </div>
+                            <h6>Imagerie numérique
+                            </h6>
                           </div>
-                          <h6>Imagerie numérique
-                          </h6>
                         </div>
-                      </div>
                     </div>
                   </div>
                 </div>
-
                 <div class="tab-pane" id="hobbies">
                   <h4 class="info-text">What are your hobbies? (choose exactly 3)</h4>
                   <div class="row">
@@ -601,7 +599,7 @@ block content %}
                         <div class="choice" data-toggle="wizard-checkbox">
                           <input type="checkbox" name="hobbies[]" value="sports extrêmes" />
                           <div class="icon">
-                            <i class="fa fa-pencil"></i>
+                            <i class="fa fa-bicycle"></i>
                           </div>
                           <h6>sports extrêmes</h6>
                         </div>
@@ -610,7 +608,7 @@ block content %}
                         <div class="choice" data-toggle="wizard-checkbox">
                           <input type="checkbox" name="hobbies[]" value="art" />
                           <div class="icon">
-                            <i class="fa fa-terminal"></i>
+                            <i class="fa fa-paint-brush"></i>
                           </div>
                           <h6>art</h6>
                         </div>
@@ -619,47 +617,47 @@ block content %}
                         <div class="choice" data-toggle="wizard-checkbox">
                           <input type="checkbox" name="hobbies[]" value="jeux-vidéo" />
                           <div class="icon">
-                            <i class="fa fa-laptop"></i>
+                            <i class="fa fa-terminal"></i>
                           </div>
                           <h6>jeux vidéo</h6>
                         </div>
                       </div>
+                      <div class="col-sm-2">
+                          <div class="choice" data-toggle="wizard-checkbox">
+                            <input type="checkbox" name="hobbies[]" value="philosophie" />
+                            <div class="icon">
+                              <i class="fa fa-book"></i>
+                            </div>
+                            <h6>Philosophie</h6>
+                          </div>
+                        </div>
+                        <div class="col-sm-2">
+                          <div class="choice" data-toggle="wizard-checkbox">
+                            <input type="checkbox" name="hobbies[]" value="théâtre" />
+                            <div class="icon">
+                              <i class="fa fa-university"></i>
+                            </div>
+                            <h6>Théâtre</h6>
+                          </div>
+                        </div>
+                        <div class="col-sm-2">
+                          <div class="choice" data-toggle="wizard-checkbox">
+                            <input type="checkbox" name="hobbies[]" value="volontariat" />
+                            <div class="icon">
+                              <i class="fa fa-life-ring"></i>
+                            </div>
+                            <h6>Volontariat</h6>
+                          </div>
+                        </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-sm-10 col-sm-offset-1">
                       <div class="col-sm-2">
                         <div class="choice" data-toggle="wizard-checkbox">
-                          <input type="checkbox" name="hobbies[]" value="philosophie" />
-                          <div class="icon">
-                            <i class="fa fa-terminal"></i>
-                          </div>
-                          <h6>Philosophie</h6>
-                        </div>
-                      </div>
-                      <div class="col-sm-2">
-                        <div class="choice" data-toggle="wizard-checkbox">
-                          <input type="checkbox" name="hobbies[]" value="théâtre" />
-                          <div class="icon">
-                            <i class="fa fa-laptop"></i>
-                          </div>
-                          <h6>Théâtre</h6>
-                        </div>
-                      </div>
-                      <div class="col-sm-2">
-                        <div class="choice" data-toggle="wizard-checkbox">
-                          <input type="checkbox" name="hobbies[]" value="volontariat" />
-                          <div class="icon">
-                            <i class="fa fa-terminal"></i>
-                          </div>
-                          <h6>Volontariat</h6>
-                        </div>
-                      </div>
-                      <div class="col-sm-2">
-                        <div class="choice" data-toggle="wizard-checkbox">
                           <input type="checkbox" name="hobbies[]" value="photographie" />
                           <div class="icon">
-                            <i class="fa fa-laptop"></i>
+                            <i class="fa fa-camera-retro"></i>
                           </div>
                           <h6>Photographie</h6>
                         </div>
@@ -668,55 +666,47 @@ block content %}
                         <div class="choice" data-toggle="wizard-checkbox">
                           <input type="checkbox" name="hobbies[]" value="audiovisuel" />
                           <div class="icon">
-                            <i class="fa fa-laptop"></i>
+                            <i class="fa fa-file-image-o"></i>
                           </div>
                           <h6>Audiovisuel</h6>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-sm-10 col-sm-offset-1">
                       <div class="col-sm-2">
-                        <div class="choice" data-toggle="wizard-checkbox">
-                          <input type="checkbox" name="hobbies[]" value="lecture" />
-                          <div class="icon">
-                            <i class="fa fa-terminal"></i>
+                          <div class="choice" data-toggle="wizard-checkbox">
+                            <input type="checkbox" name="hobbies[]" value="lecture" />
+                            <div class="icon">
+                              <i class="fa fa-terminal"></i>
+                            </div>
+                            <h6>Lecture</h6>
                           </div>
-                          <h6>Lecture</h6>
                         </div>
-                      </div>
-                      <div class="col-sm-2">
-                        <div class="choice" data-toggle="wizard-checkbox">
-                          <input type="checkbox" name="hobbies[]" value="voyages" />
-                          <div class="icon">
-                            <i class="fa fa-laptop"></i>
+                        <div class="col-sm-2">
+                          <div class="choice" data-toggle="wizard-checkbox">
+                            <input type="checkbox" name="hobbies[]" value="voyages" />
+                            <div class="icon">
+                              <i class="fa fa-tree"></i>
+                            </div>
+                            <h6>Voyage</h6>
                           </div>
-                          <h6>Voyage</h6>
                         </div>
-                      </div>
-                      <div class="col-sm-2">
-                        <div class="choice" data-toggle="wizard-checkbox">
-                          <input type="checkbox" name="hobbies[]" value="musique" />
-                          <div class="icon">
-                            <i class="fa fa-pencil"></i>
+                        <div class="col-sm-2">
+                          <div class="choice" data-toggle="wizard-checkbox">
+                            <input type="checkbox" name="hobbies[]" value="musique" />
+                            <div class="icon">
+                              <i class="fa fa-music"></i>
+                            </div>
+                            <h6>Musique</h6>
                           </div>
-                          <h6>Musique</h6>
                         </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-sm-10 col-sm-offset-1">
-                      <div class="col-sm-2">
-                        <div class="choice" data-toggle="wizard-checkbox">
-                          <input type="checkbox" name="hobbies[]" value="danse" />
-                          <div class="icon">
-                            <i class="fa fa-terminal"></i>
+                        <div class="col-sm-2">
+                            <div class="choice" data-toggle="wizard-checkbox">
+                              <input type="checkbox" name="hobbies[]" value="danse" />
+                              <div class="icon">
+                                <i class="fa fa-street-view"></i>
+                              </div>
+                              <h6>Danse</h6>
+                            </div>
                           </div>
-                          <h6>Danse</h6>
-                        </div>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -726,52 +716,52 @@ block content %}
                       <div class="col-sm-12">
                           <h4 class="info-text"> Informations about your contact </h4>
                       </div>
-                      <div class="col-sm-7 col-sm-offset-1">
+                      <div class="col-sm-5 col-sm-offset-1">
                         <div class="form-group">
                            <label>Your phone number</label>
-                           <input type="number" class="form-control" placeholder="5h Avenue" name="phoneNumber" required>
+                           <input type="number" class="form-control" placeholder="Phone number" name="phoneNumber" required>
                          </div>
                    </div>
-                   <div class="col-sm-3">
+                   <div class="col-sm-5">
                         <div class="form-group">
-                           <label>your email</label>
-                           <input type="email" class="form-control" placeholder="242" name="email" required>
+                           <label>Your email</label>
+                           <input type="email" class="form-control" placeholder="Email" name="email" required>
                          </div>
                    </div>
-                      <div class="col-sm-7 col-sm-offset-1">
+                      <div class="col-sm-5 col-sm-offset-1">
                            <div class="form-group">
                               <label>Title of your website</label>
-                              <input type="text" class="form-control" placeholder="5h Avenue" name="websiteTitle">
+                              <input type="text" class="form-control" placeholder="Website title" name="websiteTitle">
                             </div>
                       </div>
-                      <div class="col-sm-3">
+                      <div class="col-sm-5">
                            <div class="form-group">
                               <label>Link of your website</label>
-                              <input type="text" class="form-control" placeholder="242" name="websiteLink">
+                              <input type="text" class="form-control" placeholder="Website link" name="websiteLink">
                             </div>
                       </div>
-                      <div class="col-sm-7 col-sm-offset-1">
+                      <div class="col-sm-5 col-sm-offset-1">
                         <div class="form-group">
                            <label>Title of your 1st social media</label>
-                           <input type="text" class="form-control" placeholder="5h Avenue" name="sm1Title">
+                           <input type="text" class="form-control" placeholder="First Social Media Title" name="sm1Title">
                          </div>
                    </div>
-                   <div class="col-sm-3">
+                   <div class="col-sm-5">
                         <div class="form-group">
                            <label>Link of your first social media</label>
-                           <input type="text" class="form-control" placeholder="242" name="sm1Link">
+                           <input type="text" class="form-control" placeholder="First Social Media Link" name="sm1Link">
                          </div>
                    </div>
-                   <div class="col-sm-7 col-sm-offset-1">
+                   <div class="col-sm-5 col-sm-offset-1">
                     <div class="form-group">
                        <label>Title of your 2nd social media</label>
-                       <input type="text" class="form-control" placeholder="5h Avenue" name="sm2Title">
+                       <input type="text" class="form-control" placeholder="Second Social Media Title" name="sm2Title">
                      </div>
                </div>
-               <div class="col-sm-3">
+               <div class="col-sm-5">
                     <div class="form-group">
                        <label>Link of your 2nd social media</label>
-                       <input type="text" class="form-control" placeholder="242" name="sm2Link">
+                       <input type="text" class="form-control" placeholder="Second Social Media Link" name="sm2Link">
                      </div>
                </div>
               </div>
