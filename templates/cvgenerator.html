@@ -32,7 +32,7 @@ block content %}
                 <h3>
                   <b>GENERATE</b> YOUR CV <br />
                   <small
-                    >TWe need informations to give to potential recruiters and to generate your cv in pdf</small
+                    >We need informations to give to potential recruiters and to generate your cv in pdf</small
                   >
                 </h3>
               </div>
@@ -181,8 +181,9 @@ block content %}
                   <div class="row">
                     <div class="col-sm-12">
                       <div class="row">
-                        <div class="col-sm-5">
+                        <div class="col-sm-6 col-sm-offset-3">
                           <div class="form-group">
+                              <h5 class="info-text">First formation</h5>
                             <label
                               >Title of your first formation
                               <small>(required)</small></label
@@ -195,7 +196,15 @@ block content %}
                               required
                             />
                           </div>
-                          <div class="form-group">
+                          <div class="form-group col-sm-6" id="dateFormsLeft"> <!-- Date input -->
+                            <label class="control-label" for="date">Date</label>
+                            <input class="form-control" id="date" name="exp1Debut" placeholder="MM/DD/YYY" type="text" required/>
+                          </div>
+                          <div class="form-group col-sm-6" id="dateFormsRight"> <!-- Date input -->
+                            <label class="control-label" for="date">Date</label>
+                            <input class="form-control" id="date" name="exp1Fin" placeholder="MM/DD/YYY" type="text" required/>
+                          </div>
+                          <div class="form-group formation_resume">
                             <label
                               >Resume of your first formation
                               <small>(required)</small></label
@@ -208,19 +217,12 @@ block content %}
                               required
                             />
                           </div>
-                          <div class="form-group"> <!-- Date input -->
-                            <label class="control-label" for="date">Date</label>
-                            <input class="form-control" id="date" name="exp1Debut" placeholder="MM/DD/YYY" type="text" required/>
-                          </div>
-                          <div class="form-group"> <!-- Date input -->
-                            <label class="control-label" for="date">Date</label>
-                            <input class="form-control" id="date" name="exp1Fin" placeholder="MM/DD/YYY" type="text" required/>
-                          </div>
                         </div>
                       </div>
                       <div class="row">
-                        <div class="col-sm-5">
+                        <div class="col-sm-6 col-sm-offset-3">
                           <div class="form-group">
+                              <h5 class="info-text">Second formation</h5>
                             <label
                               >Title of your second formation
                               </label
@@ -232,7 +234,15 @@ block content %}
                               placeholder="Andrew..."
                             />
                           </div>
-                          <div class="form-group">
+                          <div class="form-group col-sm-6" id="dateFormsLeft"> <!-- Date input -->
+                            <label class="control-label" for="date">Date</label>
+                            <input class="form-control" id="date" name="exp2Debut" placeholder="MM/DD/YYY" type="text"/>
+                          </div>
+                          <div class="form-group col-sm-6" id="dateFormsRight"> <!-- Date input -->
+                            <label class="control-label" for="date">Date</label>
+                            <input class="form-control" id="date" name="exp2Fin" placeholder="MM/DD/YYY" type="text"/>
+                          </div>
+                          <div class="form-group formation_resume">
                             <label
                               >Resume of your second formation
                               </label
@@ -244,21 +254,14 @@ block content %}
                               placeholder="Smith..."
                             />
                           </div>
-                          <div class="form-group"> <!-- Date input -->
-                            <label class="control-label" for="date">Date</label>
-                            <input class="form-control" id="date" name="exp2Debut" placeholder="MM/DD/YYY" type="text"/>
-                          </div>
-                          <div class="form-group"> <!-- Date input -->
-                            <label class="control-label" for="date">Date</label>
-                            <input class="form-control" id="date" name="exp2Fin" placeholder="MM/DD/YYY" type="text"/>
-                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-sm-5">
+                    <div class="col-sm-6 col-sm-offset-3">
                       <div class="form-group">
+                          <h5 class="info-text">Third formation</h5>
                         <label
                           >Title of your third formation
                           </label
@@ -270,7 +273,15 @@ block content %}
                           placeholder="Andrew..."
                         />
                       </div>
-                      <div class="form-group">
+                      <div class="form-group col-sm-6" id="dateFormsLeft"> <!-- Date input -->
+                        <label class="control-label" for="date">Date</label>
+                        <input class="form-control" id="date" name="exp3Debut" placeholder="MM/DD/YYY" type="text"/>
+                      </div>
+                      <div class="form-group col-sm-6" id="dateFormsRight"> <!-- Date input -->
+                        <label class="control-label" for="date">Date</label>
+                        <input class="form-control" id="date" name="exp3Fin" placeholder="MM/DD/YYY" type="text"/>
+                      </div>
+                      <div class="form-group formation_resume">
                         <label
                           >Resume of your third formation
                           </label
@@ -281,14 +292,6 @@ block content %}
                           class="form-control"
                           placeholder="Smith..."
                         />
-                      </div>
-                      <div class="form-group"> <!-- Date input -->
-                        <label class="control-label" for="date">Date</label>
-                        <input class="form-control" id="date" name="exp3Debut" placeholder="MM/DD/YYY" type="text"/>
-                      </div>
-                      <div class="form-group"> <!-- Date input -->
-                        <label class="control-label" for="date">Date</label>
-                        <input class="form-control" id="date" name="exp3Fin" placeholder="MM/DD/YYY" type="text"/>
                       </div>
                     </div>
                   </div>
@@ -315,6 +318,15 @@ block content %}
                               required
                             />
                           </div>
+                          <div class="form-group col-sm-6" id="dateFormsLeft"> <!-- Date input -->
+                            <label class="control-label" for="date">Date</label>
+                            <input class="form-control" id="date" name="form1Debut" placeholder="MM/DD/YYY" type="text" required/>
+                          </div>
+                          <div class="form-group"> <!-- Date input -->
+                            <label class="control-label" for="date">Date</label>
+                            <input class="form-control" id="date" name="form1Fin" placeholder="MM/DD/YYY" type="text" required/>
+                          </div>
+                        </div>
                           <div class="form-group">
                             <label
                               >Resume of your first experience
@@ -328,15 +340,6 @@ block content %}
                               required
                             />
                           </div>
-                          <div class="form-group"> <!-- Date input -->
-                            <label class="control-label" for="date">Date</label>
-                            <input class="form-control" id="date" name="form1Debut" placeholder="MM/DD/YYY" type="text" required/>
-                          </div>
-                          <div class="form-group"> <!-- Date input -->
-                            <label class="control-label" for="date">Date</label>
-                            <input class="form-control" id="date" name="form1Fin" placeholder="MM/DD/YYY" type="text" required/>
-                          </div>
-                        </div>
                       </div>
                       <div class="row">
                         <div class="col-sm-5">
