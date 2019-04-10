@@ -182,8 +182,8 @@ h2,
 
 h3,
 .h3 {
-  font-size: 28px;
-  margin: 20px 0 10px;
+  font-size: 15px;
+  margin: px 0 0px;
 }
 
 h4,
@@ -198,7 +198,7 @@ h5,
 
 h6,
 .h6 {
-  font-size: 14px;
+  font-size: 10px;
   font-weight: bold;
   text-transform: uppercase;
 }
@@ -297,7 +297,7 @@ h1 .subtitle {
   width: 100%;
 }
 .wizard-card .picture-src {
-  width: 130%;
+  width: 100%;
 }
 .wizard-card .tab-content {
   min-height: 340px;
@@ -379,10 +379,10 @@ h1 .subtitle {
 }
 .wizard-card[data-color="orange"] .choice:hover .icon,
 .wizard-card[data-color="orange"] .choice.active .icon {
-  border-color: #ff9500;
+  border-color: #5cbcc5;
 }
 .wizard-card[data-color="orange"] .picture:hover {
-  border-color: #ff9500;
+  border-color: #5cbcc5;
 }
 .wizard-card[data-color="orange"] .moving-tab {
   position: absolute;
@@ -391,7 +391,7 @@ h1 .subtitle {
   font-size: 12px;
   text-transform: uppercase;
   -webkit-font-smoothing: subpixel-antialiased;
-  background-color: #ff9500;
+  background-color: #5cbcc5;
   top: 0px;
   left: 0px;
   color: #ffffff;
@@ -446,8 +446,8 @@ h1 .subtitle {
   -webkit-transition: all 0.2s;
 }
 .wizard-card .choice i {
-  font-size: 30px;
-  line-height: 111px;
+  font-size: 20px;
+  line-height: 70px;
 }
 .wizard-card .choice:hover .icon,
 .wizard-card .choice.active .icon {
@@ -635,8 +635,8 @@ fieldset[disabled] .btn {
 }
 
 .btn-warning {
-  color: #ff9500;
-  border-color: #ff9500;
+  color: #5cbcc5;
+  border-color: #5cbcc5;
 }
 
 .btn-danger {
@@ -684,8 +684,8 @@ fieldset[disabled] .btn {
 .btn-warning:active,
 .btn-warning.active,
 .open .dropdown-toggle .btn-warning {
-  color: #ed8d00;
-  border-color: #ed8d00;
+  color: #d1d7ca;
+  border-color: #d1d7ca;
   background-color: transparent;
 }
 
@@ -800,7 +800,7 @@ fieldset[disabled] .btn-warning:active,
 .btn-warning.active[disabled],
 fieldset[disabled] .btn-warning.active {
   background-color: transparent;
-  border-color: #ff9500;
+  border-color: #5cbcc5;
 }
 
 /*           Buttons fill .btn-fill           */
@@ -854,16 +854,16 @@ fieldset[disabled] .btn-warning.active {
   border-color: #05ae0e;
 }
 .btn-fill.btn-warning {
-  background-color: #ff9500;
-  border-color: #ff9500;
+  background-color: #5cbcc5;
+  border-color: #5cbcc5;
 }
 .btn-fill.btn-warning:hover,
 .btn-fill.btn-warning:focus,
 .btn-fill.btn-warning:active,
 .btn-fill.btn-warning.active,
 .open .dropdown-toggle .btn-fill.btn-warning {
-  background-color: #ed8d00;
-  border-color: #ed8d00;
+  background-color: #d1d7ca;
+  border-color: #d1d7ca;
 }
 .btn-fill.btn-danger {
   background-color: #ff3b30;
@@ -950,7 +950,7 @@ fieldset[disabled] .btn-warning.active {
 
 .text-warning,
 .text-warning:hover {
-  color: #ff9500;
+  color: #5cbcc5;
 }
 
 .text-danger,
@@ -989,8 +989,8 @@ fieldset[disabled] .btn-warning.active {
 }
 
 .label-warning {
-  border-color: #ff9500;
-  color: #ff9500;
+  border-color: #5cbcc5;
+  color: #5cbcc5;
 }
 
 .label-danger {
@@ -1000,6 +1000,7 @@ fieldset[disabled] .btn-warning.active {
 
 label {
   font-weight: 400;
+  /* color: #0000; */
 }
 
 label.error {
@@ -1030,7 +1031,7 @@ label small {
 
 .label-warning.label-fill,
 .progress-bar-warning {
-  background-color: #ff9500;
+  background-color: #5cbcc5;
 }
 
 .label-danger.label-fill,

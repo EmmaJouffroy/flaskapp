@@ -107,27 +107,30 @@ def register():
     else:
         email = request.form['email']
         password = request.form['password'].encode('utf-8')
+        repeatepswd = request.form['repeatpassword'].encode('utf-8')
         status = request.form['status']
-        hash_password = bcrypt.hashpw(password, bcrypt.gensalt())
+        if(password == repeatepswd):
+            hash_password = bcrypt.hashpw(password, bcrypt.gensalt())
 
-        with connection.cursor() as cursor:
-            sqlUsers = "INSERT INTO users (email, password, status) VALUES (%s,%s,%s)"
-            cursor.execute(sqlUsers,  (email, hash_password, status))
-            connection.commit()
-            session['email'] = request.form['email']
-            email = session['email']
-            session['status'] = request.form['status']
-            cursor.close()
+            with connection.cursor() as cursor:
+                sqlUsers = "INSERT INTO users (email, password, status) VALUES (%s,%s,%s)"
+                cursor.execute(sqlUsers,  (email, hash_password, status))
+                connection.commit()
+                session['email'] = request.form['email']
+                email = session['email']
+                session['status'] = request.form['status']
+                cursor.close()
 
-        with connection.cursor() as cursor:
-            sqlUsers = "SELECT `IDusers` FROM `users` WHERE `email`=%s"
-            cursor.execute(sqlUsers, email)
-            idUser = cursor.fetchone()
-            cursor.close()
+            with connection.cursor() as cursor:
+                sqlUsers = "SELECT `IDusers` FROM `users` WHERE `email`=%s"
+                cursor.execute(sqlUsers, email)
+                idUser = cursor.fetchone()
+                cursor.close()
 
-            session['idUser'] = idUser['IDusers']
-
-            return redirect(url_for('home'))
+                session['idUser'] = idUser['IDusers']
+                return redirect(url_for('home'))
+        else:
+            return redirect(url_for('register') + '#falsePassword')
 
 
 @app.route('/login', methods=["GET", "POST"])
@@ -135,7 +138,8 @@ def login():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password'].encode('utf-8')
-        hashed = bcrypt.hashpw(password, bcrypt.gensalt())
+        #hashed = bcrypt.generate_password_hash(password)
+
         with connection.cursor() as cursor:
             sqlUsers = "SELECT `IDusers`, `password` FROM `users` WHERE `email`=%s"
             cursor.execute(sqlUsers, email)
@@ -143,7 +147,10 @@ def login():
             cursor.close()
 
         if len(users) > 0:
-            if bcrypt.checkpw(password, hashed):
+            pswUser = users[0]['password'].encode('utf-8')
+            # print(pswUser)
+            # print(hashed)
+            if bcrypt.hashpw(password, pswUser) == pswUser:
                 with connection.cursor() as cursor:
                     sqlCheckUser = "SELECT * FROM `users` WHERE `email`=%s"
                     cursor.execute(sqlCheckUser, email)
@@ -154,9 +161,9 @@ def login():
                     cursor.close()
                     return render_template("home.html")
             else:
-                return "Error password and email not match"
+                return redirect(url_for('login') + '#falseAdressAndPassword')
         else:
-            return "Error user not found"
+            return redirect(url_for('login') + '#userNotFound')
     else:
         return render_template("login.html")
 
@@ -270,7 +277,6 @@ def move_forward():
         connection.commit()
         cursor.close()
 
-    # os.remove(secure_filename(img.filename))
     os.remove("test.pdf")
     return redirect(url_for('candidatesAllCv'))
 
@@ -324,7 +330,7 @@ def candidatePrediction():
     predictions.append(float(results[0]["pers4"])*100),
 
     os.remove("cv.pdf")
-    return render_template("candidatePrediction.html", page=page.decode('ascii'), values=predictions)
+    return render_template("candidatePrediction.html", page=page.decode('ascii'), values=predictions, idPdf=idPdf)
 
 
 @app.route('/candidatesAllCv', methods=["GET", "POST"])
@@ -334,19 +340,34 @@ def candidatesAllCv():
         sqlContentPdf = "SELECT contentPdf FROM `pdfGenerated` WHERE `IdUser`=%s"
         cursor.execute(sqlContentPdf, session['idUser'])
         allPdfBlob = cursor.fetchall()
+
+        sqlIdPdf = "SELECT id FROM `pdfGenerated` WHERE `IdUser`=%s"
+        cursor.execute(sqlIdPdf, session['idUser'])
+        allIds = cursor.fetchall()
+
+        sqlTitleCv = "SELECT title FROM `cv` WHERE `IDUsers`=%s"
+        cursor.execute(sqlTitleCv, session['idUser'])
+        allTitles = cursor.fetchall()
+
         cursor.close()
 
         if Enquiry(allPdfBlob):
             tabImg = []
             fileData = []
+            tabTitles = []
+            tabIds = []
             i = 0
 
             while i < len(allPdfBlob):
                 page = ShowImg(allPdfBlob, i)
                 tabImg.append(page)
+                title = allTitles[i]
+                tabTitles.append(title["title"])
+                idPdf = allIds[i]
+                tabIds.append(idPdf["id"])
                 i += 1
             os.remove("cv{{i}}.pdf")
-            return render_template('candidatesAllCv.html', len=len(tabImg), images=tabImg)
+            return render_template('candidatesAllCv.html', len=len(tabImg), images=tabImg, title=tabTitles, idPdf=tabIds)
         else:
             return render_template('home.html')
 
@@ -358,6 +379,11 @@ def recruitersAllCv():
             sql = "SELECT id, contentPdf FROM `pdfGenerated`"
             cursor.execute(sql)
             allPdfBlob = cursor.fetchall()
+
+            sqlTitleCv = "SELECT title FROM `cv`"
+            cursor.execute(sqlTitleCv)
+            allTitles = cursor.fetchall()
+
             cursor.close()
 
         if Enquiry(allPdfBlob):
@@ -365,14 +391,17 @@ def recruitersAllCv():
             i = 0
             tabImg = []
             idPdf = []
+            tabTitles = []
 
             while i < len(allPdfBlob):
                 idUnique = allPdfBlob[i]['id']
                 page = ShowImg(allPdfBlob, i)
                 tabImg.append(page)
                 idPdf.append(idUnique)
+                title = allTitles[i]
+                tabTitles.append(title["title"])
                 i += 1
-            return render_template('recruitersAllCv.html', len=len(tabImg), images=tabImg, idPdf=idPdf)
+            return render_template('recruitersAllCv.html', len=len(tabImg), images=tabImg, idPdf=idPdf, title=tabTitles)
         else:
             return render_template('home.html')
     else:
@@ -393,6 +422,10 @@ def recruitersAllCv():
                 cursor.execute(sqlContentPdf, idCv)
                 Blob = cursor.fetchone()
                 allPdfBlob.append(Blob)
+                sqlTitleCv = "SELECT title FROM `cv`  WHERE `idCv`=%s"
+                cursor.execute(sqlTitleCv, idCv)
+                allTitles = cursor.fetchall()
+
                 cursor.close()
                 i += 1
         j = 0
@@ -401,8 +434,11 @@ def recruitersAllCv():
             page = ShowImg(allPdfBlob, j)
             tabImg.append(page)
             idPdf.append(idUnique)
+            tabTitles = []
+            title = allTitles[j]
+            tabTitles.append(title["title"])
             j += 1
-        return render_template('recruitersAllCv.html', len=len(tabImg), images=tabImg, idPdf=idPdf)
+        return render_template('recruitersAllCv.html', len=len(tabImg), images=tabImg, idPdf=idPdf, title=tabTitles)
 
 
 @app.route('/search', methods=['POST'])
@@ -418,6 +454,77 @@ def search():
             session['idCvDomain'] = idcv
             cursor.close()
     return redirect(url_for('recruitersAllCv'))
+
+
+@app.route('/downloadCv', methods=["GET", "POST"])
+def downloadCv():
+    idPdf = request.args.get('idPdf')
+
+    with connection.cursor() as cursor:
+        sql = "SELECT contentPdf FROM `pdfGenerated` WHERE `id`=%s"
+        cursor.execute(sql, idPdf)
+        contentPdf = cursor.fetchone()
+        cursor.close()
+        fileData = contentPdf['contentPdf']
+    return send_file(BytesIO(fileData), attachment_filename="test.pdf", as_attachment=True)
+
+
+@app.route('/deleteCv', methods=["GET", "POST"])
+def deleteCv():
+    idPdf = request.args.get('idPdf')
+
+    with connection.cursor() as cursor:
+        sql = "SELECT `idCv` FROM `pdfGenerated` WHERE `id`=%s"
+        cursor.execute(sql, idPdf)
+        idCvSql = cursor.fetchone()
+        cursor.close()
+
+        idCv = idCvSql['idCv']
+
+    with connection.cursor() as cursor:
+        sqlSkills = 'DELETE FROM `skills` WHERE `IDcv`=%s '
+        cursor.execute(sqlSkills, idCv)
+        connection.commit()
+        cursor.close()
+
+    with connection.cursor() as cursor:
+        sqlPredictions = 'DELETE FROM `predictions` WHERE `idCv`=%s '
+        cursor.execute(sqlPredictions, idCv)
+        connection.commit()
+        cursor.close()
+
+    with connection.cursor() as cursor:
+        sqlHobbies = 'DELETE FROM `hobbies` WHERE `IDcv`=%s '
+        cursor.execute(sqlHobbies, idCv)
+        connection.commit()
+        cursor.close()
+
+    with connection.cursor() as cursor:
+        sqlGenerated = 'DELETE FROM `pdfGenerated` WHERE `idCv`=%s '
+        cursor.execute(sqlGenerated, idCv)
+        connection.commit()
+        cursor.close()
+
+    with connection.cursor() as cursor:
+        sqlCv = 'DELETE FROM `cv` WHERE `IDcv`=%s '
+        cursor.execute(sqlCv, idCv)
+        connection.commit()
+        cursor.close()
+
+    return redirect(url_for('candidatesAllCv'))
+
+
+@app.route('/recruiterPredictionSaveCv', methods=["GET", "POST"])
+def recruitersSaveCv():
+    idPdf = request.args.get('idPdf')
+
+    with connection.cursor() as cursor:
+        sql = "SELECT contentPdf FROM `pdfGenerated` WHERE `id`=%s"
+        cursor.execute(sql, idPdf)
+        contentPdf = cursor.fetchone()
+        cursor.close()
+        fileData = contentPdf['contentPdf']
+    return send_file(BytesIO(fileData), attachment_filename="test.pdf", as_attachment=True)
 
 
 @app.before_request

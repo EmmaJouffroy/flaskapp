@@ -89,12 +89,11 @@ nav.navbar ul .subgroup {
 
 #welcomeWordsIcons {
   background-color: #57bbc6;
-  height: 100%;
-  width:;
+  height: 100;
 }
 
 .welcomeWords {
-  height: 150px;
+  height: 100%;
 }
 
 .shortStory {
@@ -110,7 +109,18 @@ nav.navbar ul .subgroup {
 #storyImg {
   background-image: url("../img/storybg.png");
   background-size: cover;
-  height: 268px;
+  height: 265px;
+  padding-top: 20px;
+}
+
+#storyImg p,
+#storyImg h3,
+#storyImg h4 {
+  text-align: center !important;
+}
+
+#storyText p {
+  text-align: justify !important;
 }
 
 #welcomeWordsText hr {
@@ -118,14 +128,13 @@ nav.navbar ul .subgroup {
 }
 /* Footer */
 footer {
-  height: 50px;
+  height: 100%;
   background-color: #414141;
   color: #ffffff;
-  position: absolute;
   bottom: 0;
   left: 0;
-  margin-top: 230px;
   right: 0;
+  margin-top: 60px;
 }
 
 /* Login */
@@ -137,6 +146,7 @@ footer {
   background-size: cover;
   color: #ffffff;
   height: 100%;
+  padding-top: 150px;
 }
 
 #loginImg,
@@ -177,4 +187,80 @@ footer {
 
 #h2SendText {
   margin-top: 0px;
+}
+
+#welcomeWordsText {
+  padding-left: 160px;
+}
+#welcomeWordsText p,
+#shortStoryContainer p {
+  text-align: justify;
+  font-size: 13px;
+  font-family: "Avenir";
+}
+#rowIcones {
+  padding: 30px;
+}
+
+hr {
+  height: 2px;
+}
+
+#annaAllonso {
+  text-align: right;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+#quote {
+  text-align: center;
+  font-size: 14px;
+}
+
+#fprFooter {
+  height: 50px;
+}
+
+.login,
+.signin {
+  margin-top: 70px;
+}
+
+#btnLoginSignin {
+  width: 100%;
+  background-color: #5cbcc5;
+  border: none;
+  color: white;
+  margin-top: 20px;
+}
+
+.login a,
+.signin a {
+  color: #000000;
+  font-weight: 900;
+}
+
+#dateFormsLeft {
+  padding-left: 0;
+}
+
+#dateFormsRight {
+  padding-right: 0;
+}
+
+.longText {
+  height: 130px;
+}
+
+#titleAllCandidates {
+  font-size: 15px;
+  text-align: center;
+}
+
+#candidatesPredictions .thumbnail {
+  border-color: #ffffff !important;
+}
+
+#blueRowHome {
+  margin-right: 0px !important;
 }
