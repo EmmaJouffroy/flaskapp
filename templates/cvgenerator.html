@@ -10,7 +10,8 @@ block content %}
         alert("Vous devez choisir exactement quatre compétences et exactement trois hobbies .");
         return false;
       } else {
-        alert("Votre CV est entrain d'être généré");
+        $("#cvgenerator").modal("show");
+        //alert("Votre CV est entrain d'être généré");
       }
     }
     function topScroll(){
@@ -20,7 +21,7 @@ block content %}
 
   </script>
 <div
-  class="image-container set-full-height"
+  class="image-container set-full-height" 
   style="background-image: url('static/img/bg.jpg')"
 >  <div class="container" id="topPage">
     <div class="row">
@@ -108,14 +109,14 @@ block content %}
                     <div class="col-sm-10 col-sm-offset-1">
                       <div class="form-group">
                         <label>CV Resume <small>(required)</small></label>
-                        <input
+                        <textarea
                           name="resume"
                           type="text"
                           class="form-control longText"
                           placeholder="Resume"
                           aria-required="true"
                           required
-                        />
+                        ></textarea>
                       </div>
                     </div>
                     <div class="col-sm-10 col-sm-offset-1">
@@ -209,13 +210,13 @@ block content %}
                               >Resume of your first formation
                               <small>(required)</small></label
                             >
-                            <input
+                            <textarea
                               name="form1Text"
                               type="text"
                               class="form-control longText"
                               placeholder="Resume"
                               required
-                            />
+                            ></textarea>
                           </div>
                         </div>
                       </div>
@@ -247,12 +248,12 @@ block content %}
                               >Resume of your second formation
                               </label
                             >
-                            <input
+                            <textarea
                               name="form2Text"
                               type="text"
                               class="form-control longText"
                               placeholder="Resume"
-                            />
+                            ></textarea>
                           </div>
                         </div>
                       </div>
@@ -286,12 +287,12 @@ block content %}
                           >Resume of your third formation
                           </label
                         >
-                        <input
+                        <textarea
                           name="form3Text"
                           type="text"
                           class="form-control longText"
                           placeholder="Resume"
-                        />
+                        ></textarea>
                       </div>
                     </div>
                   </div>
@@ -332,13 +333,13 @@ block content %}
                                 >Resume of your first experience
                                 <small>(required)</small></label
                               >
-                              <input
+                              <textarea
                                 name="exp1Text"
                                 type="text"
                                 class="form-control longText"
                                 placeholder="Resume"
                                 required
-                              />
+                              ></textarea>
                             </div>
                           </div>
                         </div>
@@ -370,12 +371,12 @@ block content %}
                                 >Resume of your second formation
                                 </label
                               >
-                              <input
+                              <textarea
                                 name="exp2Text"
                                 type="text"
                                 class="form-control longText"
                                 placeholder="Resume"
-                              />
+                              ></textarea>
                             </div>
                           </div>
                         </div>
@@ -409,12 +410,12 @@ block content %}
                             >Resume of your third experience
                             </label
                           >
-                          <input
+                          <textarea
                             name="exp3Text"
                             type="text"
                             class="form-control longText"
                             placeholder="Resume"
-                          />
+                          ></textarea>
                         </div>
                       </div>
                     </div>
@@ -805,6 +806,27 @@ block content %}
       </div>
     </div>
   </div>
+  <div class="modal fade" id="cvgenerator" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+          </div>
+          <div class="modal-body">
+            <div class="container">
+              <div class="row">
+                  <p>Votre cv est en train d'être généré</p> 
+              </div>
+              <div class="row">
+                <div class="col-md-offset-5 col-md-2">
+                    <img src="../static/img/loader.gif" alt="loader gif" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 </div>
 
 
