@@ -2,7 +2,7 @@
 content %}
 <div class="container" id="recruitersCV">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-3 col-md-offset-4">
               <form
               style="display: inline;"
               action="{{ url_for('search') }}"
@@ -15,8 +15,9 @@ content %}
                   }}{{ g.search_form.search(class_="form-control")}}
                 </div>
               </div>
-            
-              <input type="submit" value="Search" />
+              <button type="submit" id="searchCvRecruiters"><i class="fa fa-search"></i></button>
+
+
             </form>  
           </div>
           

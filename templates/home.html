@@ -18,11 +18,25 @@ content %}
       <p>Login to have more informations and to contact recruiters</p>
     </div>
     <div>
+      {% if (session['status']=="1") %}
+      <a href="/cvgenerator">
+        <button type="button" class="btn btn-info" id="buttonLoginHome">
+          Génerez votre CV !
+        </button>
+      </a>
+      {% elif (session['status']=="0") %}
+      <a href="/recruitersAllCv">
+        <button type="button" class="btn btn-info" id="buttonLoginHome">
+          Trouvez le candidat parfait !
+        </button>
+      </a>
+      {% else %}
       <a href="{{ url_for('login') }}">
         <button type="button" class="btn btn-info" id="buttonLoginHome">
           Login
-        </button></a
-      >
+        </button>
+      </a>
+      {% endif %}
     </div>
   </div>
 </div>
