@@ -7,13 +7,17 @@ content %}
 <div class="container" id="candidatesPredictions">
   <div class="row">
     <div class="col-md-6">
-      <img
-        src="data:image/jpeg;base64,{{ page | safe }}"
-        alt="Smiley face"
-        height="42"
-        width="42"
-        style="border:1px solid black; height:500px; width:250px"
-      />
+      <a href="/recruiterPredictionSaveCv?idPdf={{ idPdf }}">
+        <div class="thumbnail">
+          <img
+            src="data:image/jpeg;base64,{{ page | safe }}"
+            alt="Smiley face"
+            height="42"
+            width="42"
+            style="border:1px solid black; height:540; width:500px"
+          />
+        </div>
+      </a>
     </div>
     <div class="col-md-6">
       <canvas id="myChart" width="400" height="400"></canvas>
@@ -33,9 +37,9 @@ content %}
       ],
       datasets: [
         {
-          label: "Pourcentage pour chaque personnalité :",
+          label: "Pourcentage pour chaque personnalité ",
           lineTension: 0.1,
-          backgroundColor: "rgba(204, 204, 204, 0.2)",
+          backgroundColor: "rgba(204, 204, 204, 0.8)",
           borderColor: "rgba(204, 204, 204, 1)",
           pointBackgroundColor: "rgba(204, 204, 204, 1)",
           pointBorderColor: "#fff",
@@ -58,7 +62,7 @@ content %}
         pointLabels: {
           fontSize: 14,
           fontStyle: "300",
-          fontColor: "rgba(204, 204, 204, 1)",
+          fontColor: "#000",
           fontFamily: "'Lato', sans-serif"
         },
         ticks: {
