@@ -16,7 +16,10 @@ content %}
         <div class="caption">
           <p id="titleAllCandidates">{{ title[i] }}</p>
           <p>
-            <a href="/downloadCv" class="btn btn-primary" role="button"
+            <a
+              href="/downloadCv?idPdf={{ idPdf[i] }}"
+              class="btn btn-primary"
+              role="button"
               >Télécharger</a
             >
             <a href="/deleteCv" class="btn btn-default" role="button"
