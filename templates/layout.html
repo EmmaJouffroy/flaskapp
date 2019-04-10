@@ -39,6 +39,22 @@
       type="text/javascript"
       src="http://www.chartjs.org/assets/Chart.js"
     ></script>
+    <script>
+      $(document).ready(function() {
+        if (window.location.href.indexOf("#falsePassword") != -1) {
+          $("#falsePassword").modal("show");
+        }
+        if (window.location.href.indexOf("#userAlreadyExist") != -1) {
+          $("#userAlreadyExist").modal("show");
+        }
+        if (window.location.href.indexOf("#userNotFound") != -1) {
+          $("#userNotFound").modal("show");
+        }
+        if (window.location.href.indexOf("#falseAdressAndPassword") != -1) {
+          $("#falseAdressAndPassword").modal("show");
+        }
+      });
+    </script>
   </head>
 
   <body>
