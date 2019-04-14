@@ -6,8 +6,8 @@ block content %}
     function onSubmit() {
       var skills = $("input[name='skills[]']").serializeArray();
       var hobbies = $("input[name='hobbies[]']").serializeArray();
-      if (skills.length != 4 || hobbies.length != 3) {
-        alert("Vous devez choisir exactement quatre compétences et exactement trois hobbies .");
+      if (skills.length != 4 || hobbies.length != 3 || img.length != 1) {
+        alert("Vous devez importer une image et choisir exactement quatre compétences et exactement trois hobbies .");
         return false;
       } else {
         $("#cvgenerator").modal("show");
@@ -66,8 +66,9 @@ block content %}
                             class="picture-src"
                             id="wizardPicturePreview"
                             title=""
+                            
                           />
-                          <input type="file" id="wizard-picture" name="img" class="imguser"/>
+                          <input type="file" id="wizard-picture" name="img" class="imguser"  />
                         </div>
                         <h6>Choose Picture</h6>
                       </div>
@@ -111,6 +112,7 @@ block content %}
                         <label>CV Resume <small>(required)</small></label>
                         <textarea
                           name="resume"
+                          maxlength="387"
                           type="text"
                           class="form-control longText"
                           placeholder="Resume"
@@ -216,6 +218,7 @@ block content %}
                               class="form-control longText"
                               placeholder="Resume"
                               required
+                              maxlength="387"
                             ></textarea>
                           </div>
                         </div>
@@ -253,6 +256,7 @@ block content %}
                               type="text"
                               class="form-control longText"
                               placeholder="Resume"
+                              maxlength="387"
                             ></textarea>
                           </div>
                         </div>
@@ -292,6 +296,7 @@ block content %}
                           type="text"
                           class="form-control longText"
                           placeholder="Resume"
+                          maxlength="387"
                         ></textarea>
                       </div>
                     </div>
@@ -339,6 +344,7 @@ block content %}
                                 class="form-control longText"
                                 placeholder="Resume"
                                 required
+                                maxlength="387"
                               ></textarea>
                             </div>
                           </div>
@@ -376,6 +382,7 @@ block content %}
                                 type="text"
                                 class="form-control longText"
                                 placeholder="Resume"
+                                maxlength="387"
                               ></textarea>
                             </div>
                           </div>
@@ -415,6 +422,7 @@ block content %}
                             type="text"
                             class="form-control longText"
                             placeholder="Resume"
+                            maxlength="387"
                           ></textarea>
                         </div>
                       </div>

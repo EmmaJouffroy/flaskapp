@@ -6,10 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Dribble</title>
+    <title>Pdf Generation</title>
 
-    <!-- Bootstrap -->
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -18,19 +16,10 @@
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
     />
-    <!-- Google Font -->
     <link
       href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800"
       rel="stylesheet"
     />
-
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
   </head>
   <body style="
   margin: 0;
@@ -113,75 +102,42 @@
                 <div id="workExperience">
                     <div class="borderTitle"><h3>Work experience</h3></div>
                     <div id="we1">
-                      <p>{{ donneesForm["exp1Title"] }}</p>
-                      <p>
-                        {{ donneesForm["exp1Debut"] }}, {{ donneesForm["exp1Fin"] }}
-                      </p>
-                      <p>{{ donneesForm["exp1Resume"] }}</p>
+                      <p class="bold">{{ donneesForm["exp1Title"] }} {{ donneesForm["exp1Debut"] }}, {{ donneesForm["exp1Fin"] }}</p>
+                      <p class="textResume">{{ donneesForm["exp1Text"] }}</p>
                     </div>
                     <div id="we2">
-                      <p>{{ donneesForm["exp2Title"] }}</p>
-                      <p>
-                        {{ donneesForm["exp2Debut"] }}, {{ donneesForm["exp2Fin"] }}
-                      </p>
-                      <p>{{ donneesForm["exp2Resume"] }}</p>
+                      <p class="bold">{{ donneesForm["exp2Title"] }} {{ donneesForm["exp2Debut"] }}, {{ donneesForm["exp2Fin"] }}</p>
+                      <p class="textResume">{{ donneesForm["exp2Text"] }}</p>
                     </div>
                     <div id="we3">
-                      <p>{{ donneesForm["exp3Title"] }}</p>
-                      <p>
-                        {{ donneesForm["exp3Debut"] }}, {{ donneesForm["exp3Fin"] }}
-                      </p>
-                      <p>{{ donneesForm["exp3Resume"] }}</p>
+                      <p class="bold">{{ donneesForm["exp3Title"] }}  {{ donneesForm["exp3Debut"] }}, {{ donneesForm["exp3Fin"] }}</p>
+                      <p class="textResume">{{ donneesForm["exp3Text"] }}</p>
                     </div>
                   </div>
                   <div id="formation">
                       <div class="borderTitle"><h3>Schools attended</h3></div>
                       <div id="formations">
                     <div id="form1">
-                      <p>{{ donneesForm["form1Title"] }}</p>
-                      <p>
-                        {{ donneesForm["form1Debut"] }}, {{ donneesForm["form1Fin"] }}
-                      </p>
-                      <p>{{ donneesForm["form1Text"] }}</p>
+                      <p class="bold">{{ donneesForm["form1Title"] }} {{ donneesForm["form1Debut"] }}, {{ donneesForm["form1Fin"] }}</p>
+                      <p class="textResume">{{ donneesForm["form1Text"] }}</p>
                     </div>
                     <div id="form2">
-                      <p>{{ donneesForm["form2Title"] }}</p>
-                      <p>
-                        {{ donneesForm["form2Debut"] }}, {{ donneesForm["form2Fin"] }}
-                      </p>
-                      <p>{{ donneesForm["form2Text"] }}</p>
+                      <p class="bold">{{ donneesForm["form2Title"] }} {{ donneesForm["form2Debut"] }}, {{ donneesForm["form2Fin"] }}</p>
+                      <p class="textResume">{{ donneesForm["form2Text"] }}</p>
                     </div>
                     <div id="form3">
-                      <p>{{ donneesForm["form3Title"] }}</p>
-                      <p>
-                        {{ donneesForm["form3Debut"] }}, {{ donneesForm["form3Fin"] }}
-                      </p>
-                      <p>{{ donneesForm["form3Text"] }}</p>
+                      <p class="bold">{{ donneesForm["form3Title"] }} {{ donneesForm["form3Debut"] }}, {{ donneesForm["form3Fin"] }}</p>
+                      <p class="textResume">{{ donneesForm["form3Text"] }}</p>
                     </div>
                     </div>
             </div>
             <div id="contact">
                 <div class="borderTitle"><h3>Contact</h3></div>
-              <ul>
-                <li>
                   <p>{{ donneesForm["email"] }}</p>
-                </li>
-                <li>
                   <p>{{ donneesForm["phoneNumber"] }}</p>
-                </li>
-                <li>
-                  <p>{{ donneesForm["websiteTitle"] }}</p>
-                  <p>{{ donneesForm["websiteLink"] }}</p>
-                </li>
-                <li>
-                  <p>{{ donneesForm["sm1Title"] }}</p>
-                  <p>{{ donneesForm["sm1Link"] }}</p>
-                </li>
-                <li>
-                  <p>{{ donneesForm["sm2Title"] }}</p>
-                  <p>{{ donneesForm["sm2Link"] }}</p>
-                </li>
-              </ul>
+                  <p>{{ donneesForm["websiteTitle"] }} {{ donneesForm["websiteLink"] }}</p>
+                  <p>{{ donneesForm["sm1Title"] }} {{ donneesForm["sm1Link"] }}</p>
+                  <p>{{ donneesForm["sm2Title"] }} {{ donneesForm["sm2Link"] }}</p>
             </div>
           </div>
         </div>

@@ -264,3 +264,9 @@ hr {
 #blueRowHome {
   margin-right: 0px !important;
 }
+
+#searchCvRecruiters {
+  background-color: #5cbcc5;
+  height: 36px;
+  width: 50px;
+}

@@ -138,7 +138,6 @@ def login():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password'].encode('utf-8')
-        #hashed = bcrypt.generate_password_hash(password)
 
         with connection.cursor() as cursor:
             sqlUsers = "SELECT `IDusers`, `password` FROM `users` WHERE `email`=%s"
@@ -148,8 +147,7 @@ def login():
 
         if len(users) > 0:
             pswUser = users[0]['password'].encode('utf-8')
-            # print(pswUser)
-            # print(hashed)
+
             if bcrypt.hashpw(password, pswUser) == pswUser:
                 with connection.cursor() as cursor:
                     sqlCheckUser = "SELECT * FROM `users` WHERE `email`=%s"
@@ -264,6 +262,7 @@ def move_forward():
             query[col] = 0
 
     K.clear_session()
+
     result = ValuePredictor(query)
 
     pred1 = float(result[0])
@@ -412,6 +411,7 @@ def recruitersAllCv():
         fileData = []
         tabImg = []
         idPdf = []
+        tabTitles = []
 
         while i < len(idCvs):
             idCv = idCvs[i]
@@ -434,7 +434,6 @@ def recruitersAllCv():
             page = ShowImg(allPdfBlob, j)
             tabImg.append(page)
             idPdf.append(idUnique)
-            tabTitles = []
             title = allTitles[j]
             tabTitles.append(title["title"])
             j += 1
@@ -466,7 +465,7 @@ def downloadCv():
         contentPdf = cursor.fetchone()
         cursor.close()
         fileData = contentPdf['contentPdf']
-    return send_file(BytesIO(fileData), attachment_filename="test.pdf", as_attachment=True)
+    return send_file(BytesIO(fileData), attachment_filename="cv.pdf", as_attachment=True)
 
 
 @app.route('/deleteCv', methods=["GET", "POST"])
@@ -524,7 +523,7 @@ def recruitersSaveCv():
         contentPdf = cursor.fetchone()
         cursor.close()
         fileData = contentPdf['contentPdf']
-    return send_file(BytesIO(fileData), attachment_filename="test.pdf", as_attachment=True)
+    return send_file(BytesIO(fileData), attachment_filename="cv.pdf", as_attachment=True)
 
 
 @app.before_request
