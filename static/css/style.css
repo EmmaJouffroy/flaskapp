@@ -270,3 +270,43 @@ hr {
   height: 36px;
   width: 50px;
 }
+
+.containerImagePredictions {
+  position: relative;
+}
+
+.containerImagePredictions img {
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: 0.5s ease;
+  backface-visibility: hidden;
+}
+
+.middleTextPredictions {
+  transition: 0.5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.containerImagePredictions:hover img {
+  opacity: 0.3;
+}
+
+.containerImagePredictions:hover .middleTextPredictions {
+  opacity: 1 !important;
+  z-index: 1000000;
+}
+
+.textPredictionImage {
+  background-color: #60bcc4;
+  color: white;
+  font-size: 16px;
+  padding: 16px 32px;
+}

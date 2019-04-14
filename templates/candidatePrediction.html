@@ -9,13 +9,18 @@ content %}
     <div class="col-md-6">
       <a href="/recruiterPredictionSaveCv?idPdf={{ idPdf }}">
         <div class="thumbnail">
-          <img
-            src="data:image/jpeg;base64,{{ page | safe }}"
-            alt="Smiley face"
-            height="42"
-            width="42"
-            style="border:1px solid black; height:540; width:500px"
-          />
+          <div class="containerImagePredictions">
+            <div class="middleTextPredictions">
+              <div class="textPredictionImage">Save in PDF</div>
+            </div>
+            <img
+              src="data:image/jpeg;base64,{{ page | safe }}"
+              alt="Smiley face"
+              height="42"
+              width="42"
+              style="border:1px solid black; height:540; width:500px"
+            />
+          </div>
         </div>
       </a>
     </div>
