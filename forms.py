@@ -5,13 +5,14 @@ from wtforms.validators import DataRequired
 
 
 class SearchForm(Form):
-    search = SelectField(choices=[('Tous', 'Tous'),
-                                  ('Agriculture et agroalimentaire',
-                                   'Agriculture et agroalimentaire'),
-                                  ('Énergie', 'Énergie'),
-                                  ('Commerce et artisanat',
-                                   'Commerce et artisanat'),
-                                  ('Tourisme', 'Tourisme'),
-                                  ('Finance et assurance', 'Finance et assurance'),
-                                  ('Télécoms et Internet', 'Télécoms et Internet'),
-                                  ('Recherche', 'Recherche')])
+    search = SelectField(choices=[('All', 'All'),
+                                  ('Agriculture and agri-food',
+                                   'Agriculture and agri-food'),
+                                  ('Industry', 'Industry'),
+                                  ('Energetics',
+                                   'Energetics'),
+                                  ('Trade and crafts', 'Trade and crafts'),
+                                  ('Tourism', 'Tourism'),
+                                  ('Telecom and Internet', 'Telecom and Internet'),
+                                  ('Research', 'Research'),
+                                  ('Finance and insurance', 'Finance and insurance'), ])

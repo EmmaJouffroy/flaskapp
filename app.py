@@ -371,7 +371,7 @@ def candidatesAllCv():
 
 @app.route('/recruitersAllCv', methods=["GET", "POST"])
 def recruitersAllCv():
-    if not session.get('idCvDomain') or session['idCvDomain'] == "Tous":
+    if not session.get('idCvDomain') or session['idCvDomain'] == "All":
         with connection.cursor() as cursor:
             sql = "SELECT id, contentPdf FROM `pdfGenerated`"
             cursor.execute(sql)

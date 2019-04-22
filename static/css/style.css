@@ -321,8 +321,13 @@ hr {
   border-color: #d1d7cd !important;
 }
 
-#candidatesCV .thumbnail .caption .btn-primary {
+#candidatesCV .thumbnail .caption .btn-primary,
+#recruitersCV .thumbnail .caption .btn-primary {
   background-color: #5cbcc5;
   border-color: #5cbcc5;
   color: #ffffff;
+}
+
+#recruitersCV .thumbnail .caption .btn-primary {
+  width: 100%;
 }
