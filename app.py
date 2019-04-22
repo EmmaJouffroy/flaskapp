@@ -169,14 +169,12 @@ def login():
 @app.route("/forward/", methods=['POST'])
 def move_forward():
 
-    # On récupère toutes les données envoyées
     datas = request.form
     firstname = datas['firstname']
     lastname = datas['lastname']
     img = request.files['img'].read()
     img = base64.b64encode(img)
     img = img.decode('ascii')
-    resume = datas['resume']
     title = datas['title']
     choicesskills = request.values.getlist('skills[]')
     skill1 = choicesskills[0]
@@ -218,9 +216,9 @@ def move_forward():
         SessionID = str(idUser['IDusers'])
         session['idUser'] = SessionID
 
-        sqlCv = 'INSERT INTO cv(IDusers, firstname, lastname, resume, title, domain) VALUES (%s,%s,%s,%s,%s,%s)'
+        sqlCv = 'INSERT INTO cv(IDusers, firstname, lastname, title, domain) VALUES (%s,%s,%s,%s,%s)'
         cursor.execute(sqlCv, (SessionID, firstname,
-                               lastname, resume, title, domain))
+                               lastname, title, domain))
         connection.commit()
 
         sqlLastId = 'SELECT `IDcv` FROM cv INNER JOIN users ON cv.IDusers=users.IDusers WHERE IDcv = LAST_INSERT_ID()  '

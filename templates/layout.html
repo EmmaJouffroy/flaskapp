@@ -86,37 +86,69 @@
         <div id="navbar" class="collapse navbar-collapse" style="float:right">
           <ul class="nav navbar-nav">
             <li>
-              <a href="/">Home</a>
+              <a
+                href="/"
+                class="{{ 'active' if active_page == 'home' else '' }}"
+                >Home</a
+              >
             </li>
 
             {% if (session['status']=="1") %}
 
             <li>
-              <a href="/cvgenerator">Generate CV</a>
+              <a
+                href="/cvgenerator"
+                class="{{ 'active' if active_page == 'cvgenerator' else '' }}"
+                >Generate CV</a
+              >
             </li>
             <li>
-              <a href="/candidatesAllCv">All CVs</a>
+              <a
+                href="/candidatesAllCv"
+                class="{{ 'active' if active_page == 'candidatesAllCv' else '' }}"
+                >All CVs</a
+              >
             </li>
             <li>
-              <a href="/logout">Logout</a>
+              <a
+                href="/logout"
+                class="{{ 'active' if active_page == 'logout' else '' }}"
+                >Logout</a
+              >
             </li>
 
             {% elif (session['status']=="0") %}
             <li>
-              <a href="/recruitersAllCv">All CVs</a>
+              <a
+                href="/recruitersAllCv"
+                class="{{ 'active' if active_page == 'recruitersAllCv' else '' }}"
+                >All CVs</a
+              >
             </li>
 
             <li>
-              <a href="/logout">Logout</a>
+              <a
+                href="/logout"
+                class="{{ 'active' if active_page == 'logout' else '' }}"
+                >Logout</a
+              >
             </li>
 
             {% else %}
 
             <li>
-              <a href="/login">Login</a>
+              <a
+                href="/login"
+                class="{{ 'active' if active_page == 'login' else '' }}"
+                >Login</a
+              >
             </li>
             <li>
-              <a href="/register">Register</a>
+              <a
+                href="/register"
+                class="{{ 'active' if active_page == 'register' else '' }}"
+                >Register</a
+              >
               {% endif %}
             </li>
           </ul>

@@ -1,5 +1,5 @@
-{% extends 'layout.html' %} {% block title %} Register {% endblock %} {% block
-content %}
+{% extends 'layout.html' %} {% set active_page = "candidatesAllCv" %}{% block
+title %} Register {% endblock %} {% block content %}
 
 <div class="container" id="candidatesCV">
   <div class="row">
@@ -20,13 +20,13 @@ content %}
               href="/downloadCv?idPdf={{ idPdf[i] }}"
               class="btn btn-primary"
               role="button"
-              >Télécharger</a
+              >Download</a
             >
             <a
               href="/deleteCv?idPdf={{ idPdf[i] }}"
               class="btn btn-default"
               role="button"
-              >Supprimer</a
+              >Delete</a
             >
           </p>
         </div>

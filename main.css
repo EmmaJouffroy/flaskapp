@@ -164,3 +164,6 @@ h3 {
   font-style: italic;
   font-weight: lighter;
 }
+.active {
+  font-weight: 900;
+}

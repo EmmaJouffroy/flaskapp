@@ -1,4 +1,5 @@
-{% extends 'layout.html' %} {% block title %} cvgenerator {% endblock %} {%
+{% extends 'layout.html' %}
+{% set active_page = "cvgenerator" %} {% block title %} cvgenerator {% endblock %} {%
 block content %}
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 
@@ -6,12 +7,11 @@ block content %}
     function onSubmit() {
       var skills = $("input[name='skills[]']").serializeArray();
       var hobbies = $("input[name='hobbies[]']").serializeArray();
-      if (skills.length != 4 || hobbies.length != 3 || img.length != 1) {
+      if (skills.length != 4 || hobbies.length != 3) {
         alert("Vous devez importer une image et choisir exactement quatre compétences et exactement trois hobbies .");
         return false;
       } else {
         $("#cvgenerator").modal("show");
-        //alert("Votre CV est entrain d'être généré");
       }
     }
     function topScroll(){
@@ -815,26 +815,26 @@ block content %}
     </div>
   </div>
   <div class="modal fade" id="cvgenerator" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-          </div>
-          <div class="modal-body">
-            <div class="container">
-              <div class="row">
-                  <p>Votre cv est en train d'être généré</p> 
-              </div>
-              <div class="row">
-                <div class="col-md-offset-5 col-md-2">
-                    <img src="../static/img/loader.gif" alt="loader gif" />
-                </div>
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <div class="row">
+                <p>Votre cv est en train d'être généré</p> 
+            </div>
+            <div class="row">
+              <div class="col-md-offset-5 col-md-2">
+                  <img src="../static/img/loader.gif" alt="loader gif" />
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
 </div>
 
 

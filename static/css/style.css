@@ -310,3 +310,8 @@ hr {
   font-size: 16px;
   padding: 16px 32px;
 }
+
+.active {
+  font-weight: 900 !important;
+  text-decoration: underline !important;
+}

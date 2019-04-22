@@ -1,4 +1,4 @@
-{% extends 'layout.html' %} {% block title %} Register {% endblock %} {% block
+{% extends 'layout.html' %} {% set active_page = "recruitersAllCv" %}{% block title %} Register {% endblock %} {% block
 content %}
 <div class="container" id="recruitersCV">
     <div class="row">
@@ -33,7 +33,7 @@ content %}
       />
               <div class="caption">
                   <p id="titleAllCandidates">{{ title[i] }}</p>
-                  <a href="/myAction?idPdf={{ idPdf[i] }}" class="btn btn-primary" role="button">Voir le CV</a>
+                  <a href="/myAction?idPdf={{ idPdf[i] }}" class="btn btn-primary" role="button">See the resume</a>
                 </p>
               </div>
             </div>
