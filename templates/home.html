@@ -21,13 +21,13 @@ Home {% endblock %} {% block content %}
       {% if (session['status']=="1") %}
       <a href="/cvgenerator">
         <button type="button" class="btn btn-info" id="buttonLoginHome">
-          Génerez votre CV !
+          Generate your resume !
         </button>
       </a>
       {% elif (session['status']=="0") %}
       <a href="/recruitersAllCv">
         <button type="button" class="btn btn-info" id="buttonLoginHome">
-          Trouvez le candidat parfait !
+          Find the best candidate !
         </button>
       </a>
       {% else %}
@@ -44,16 +44,18 @@ Home {% endblock %} {% block content %}
   <div class="fluid-container">
     <div class="row" id="blueRowHome">
       <div id="welcomeWordsText" class="col-md-6">
-        <h4>Welcome in our website</h4>
+        <h4>"Finding the job that fits you the most"</h4>
         <div class="col-md-2"><hr /></div>
         <div class="col-md-10">
           <p>
-            Batnae municipium in Anthemusia conditum Macedonum manu priscorum ab
-            Euphrate flumine brevi spatio disparatur, refertum mercatoribus
-            opulentis, ubi annua sollemnitate prope Septembris initium mensis ad
-            nundinas magna promiscuae fortunae convenit multitudo ad commercanda
-            quae Indi mittunt et Seres aliaque plurima vehi terra marique
-            consueta.
+            FPR is the reference tool for creating creative and professional
+            online CVs. Fill all the informations needed and generate your CV in
+            PDF ready to apply. It's simple, Fast and totally Free! We do not
+            share your data with anyone (unless explicitly agreed to by you). We
+            offer privacy options for your resume that ensure the security of
+            your data. Totally new in the market, FPR is easy to use and
+            efficient. It gives everyone his chance to find the perfect
+            candidate or the perfect job.
           </p>
         </div>
       </div>
@@ -62,25 +64,43 @@ Home {% endblock %} {% block content %}
         <div class="fluid-container">
           <div class="row" id="rowIcones">
             <div class="col-md-4">
-              <img
-                src="../static/img/heart.png"
-                alt=""
-                style="width:150px; height:150px; float: left;"
-              />
+              <div class="row">
+                <img
+                  class="center-block"
+                  src="../static/img/heart.png"
+                  alt=""
+                  style="width:150px; height:150px;"
+                />
+              </div>
+              <div class="row">
+                <p class="logoCaption">Helpfull</p>
+              </div>
             </div>
             <div class="col-md-4">
-              <img
-                src="../static/img/cv.png"
-                alt=""
-                style="width:150px; height:150px;float: left;"
-              />
+              <div class="row">
+                <img
+                  class="center-block"
+                  src="../static/img/cv.png"
+                  alt=""
+                  style="width:150px; height:150px;"
+                />
+              </div>
+              <div class="row">
+                <p class="logoCaption">Credible</p>
+              </div>
             </div>
             <div class="col-md-4">
-              <img
-                src="../static/img/protect.png"
-                alt=""
-                style="width:150px; height:150px;float: left;"
-              />
+              <div class="row">
+                <img
+                  class="center-block"
+                  src="../static/img/protect.png"
+                  alt=""
+                  style="width:150px; height:150px;"
+                />
+              </div>
+              <div class="row">
+                <p class="logoCaption">Reliable</p>
+              </div>
             </div>
           </div>
         </div>
@@ -93,8 +113,8 @@ Home {% endblock %} {% block content %}
   <div class="container" id="shortStoryContainer">
     <div class="row">
       <div class="col-md-offset-2 col-md-5" id="storyImg">
-        <H3>WELCOME IN OUR WEBSITE</H3>
-        <h4>Welcome in our website</h4>
+        <H3>FPR</H3>
+        <h4>Facilitating People Recruitment</h4>
         <div class="row">
           <div class="col-md-offset-1 col-md-4"><hr /></div>
           <div id="lineImgHome" class="col-md-2">
@@ -102,20 +122,21 @@ Home {% endblock %} {% block content %}
           </div>
           <div class="col-md-4"><hr /></div>
         </div>
-        <p>Login to have more informations and contact recruiters</p>
+        <p>
+          A helpfull, credible and reliable tool to find the perfect job
+        </p>
       </div>
       <div class="col-md-5" id="storyText">
         <div class="row">
-          <h4>WELCOME IN OUR WEBSITE</h4>
+          <h4>"Finding the perfect candidate for your job’s offer "</h4>
           <div class="col-md-2"><hr /></div>
           <div class="col-md-10">
             <p>
-              Batnae municipium in Anthemusia conditum Macedonum manu priscorum
-              ab Euphrate flumine brevi spatio disparatur, refertum mercatoribus
-              opulentis, ubi annua sollemnitate prope Septembris initium mensis
-              ad nundinas magna promiscuae fortunae convenit multitudo ad
-              commercanda quae Indi mittunt et Seres aliaque plurima vehi terra
-              marique consueta.
+              Recruitment is a decisive element for the future of the company,
+              and must be the most powerful possible. The purpose of this
+              website is to offer a technology to enhance existing data on the
+              CVs send by candidates. This technology makes it possible to find
+              correlations that human can’t find alone or so easily.
             </p>
           </div>
         </div>

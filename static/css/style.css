@@ -5,11 +5,6 @@
   src: url("../static/fonts/AvenirLTStd-Roman.otf");
 }
 
-@font-face {
-  font-family: "AvenirBook";
-  src: url("../static/fonts/AvenirLTStd-Book.otf");
-}
-
 * {
   font-family: "Avenir";
 }
@@ -81,10 +76,6 @@ nav.navbar ul .subgroup {
   background-size: cover;
   text-align: center;
   color: #ffffff;
-}
-
-#welcomeWordsText h4 {
-  font-family: "AvenirBook";
 }
 
 #welcomeWordsIcons {
@@ -330,4 +321,10 @@ hr {
 
 #recruitersCV .thumbnail .caption .btn-primary {
   width: 100%;
+}
+
+.logoCaption {
+  color: #ffffff;
+  font-size: 12px;
+  text-align: center;
 }
