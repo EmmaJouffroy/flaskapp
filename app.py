@@ -37,15 +37,20 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
+# Fonction permettant d'écrire un fichier binaire localement
 def write_file(data, filename):
     with open(filename, 'wb') as file:
         file.write(data)
+
+# Fonction permettant d'ouvrir le modèle généré par l'algorithme de machine learning et de retourner les résultats prédits
 
 
 def ValuePredictor(to_predict_list):
     loaded_model = pickle.load(open("model.pkl", "rb"))
     result = loaded_model.predict(to_predict_list)
     return result[0]
+
+# Fonction permettant de convertir les pdf enregistrés sous format "Blob" dans la base de données en jpg.
 
 
 def ShowImg(allPdfBlob, i):
@@ -70,6 +75,8 @@ def ShowImg(allPdfBlob, i):
         page = page.decode('ascii')
     return page
 
+# fonction permettant de tester la taille d'un objet
+
 
 def Enquiry(lis1):
     if len(lis1) == 0:
@@ -77,26 +84,30 @@ def Enquiry(lis1):
     else:
         return 1
 
-
+# Le lien "/" execute la fonction home() qui retourne vers le template de la page home
 @app.route('/')
 def home():
     return render_template("home.html")
 
-
+# Le lien "/logout" execute la fonction logout() qui retourne vers le template de la page logout
 @app.route('/logout', methods=["GET", "POST"])
 def logout():
     session.clear()
     return render_template("home.html")
 
-
+# Le lien "/cvgenerator" execute la fonction generateCV() qui retourne vers le template de la page cvgenerator
 @app.route('/cvgenerator', methods=["GET", "POST"])
 def generateCV():
     return render_template("cvgenerator.html")
 
-
+# Lorsqu'une page n'est pas trouvée, on renvoie le template 404
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template("404.html"), 404
+
+# Le lien "/register" execute la fonction register() qui permet de récupérer les valeurs rentrées dans le formulaire et de les tester. Si les tests sont positifs,
+# les données sont enregistrées dans la base de données, et une session est ouverte, puis l'utilisateur est redirigé vers la page
+# principale. Sinon, les erreurs sont affichées dans la page.
 
 
 @app.route('/register', methods=["GET", "POST"])
@@ -133,6 +144,11 @@ def register():
             return redirect(url_for('register') + '#falsePassword')
 
 
+# Le lien "/login" execute la fonction login() qui permet de récupérer les valeurs rentrées dans le formulaire et de les tester. Si les tests sont positifs,
+# et une session est ouverte, puis l'utilisateur est redirigé vers la page
+# principale. Sinon, les erreurs sont affichées dans la page.
+
+
 @app.route('/login', methods=["GET", "POST"])
 def login():
     if request.method == 'POST':
@@ -164,6 +180,12 @@ def login():
             return redirect(url_for('login') + '#userNotFound')
     else:
         return render_template("login.html")
+
+# Le lien "/forward/" execute la fonction move_forward() qui permet de récupérer les valeurs rentrées dans le formulaire de génération de cv
+# et de générer le PDF à partir de ces informations. Ces informations sont ensuite enregistrées dans la base de données, si il n'y a ni erreurs,
+# ni informations manquantes. Les compétences et hobbies sont enregistrées dans un tableau, puis on onehotencode ce vecteur en rajoutant
+# des 0 aux endroits necessaires. On effectue ensuite nos predictions sur ce vecteur, puis on enregistre les prédicitons générées
+# par notre modèle dans notre base de données. On est ensuite dirigé vers le lien candidatesAllCv.
 
 
 @app.route("/forward/", methods=['POST'])
@@ -278,6 +300,11 @@ def move_forward():
     return redirect(url_for('candidatesAllCv'))
 
 
+# Le lien "/myAction/" execute la fonction candidatePrediction() qui permet de récupérer les prédictions et le jpeg d'un CV
+# en particulier lorsque l'on clique dessus. Pour cela on récupère l'ID du CV à travers les arguments, on créé le CV en jpeg
+# pour pouvoir l'afficher correctement puis on récupère les prédictions associées. L'utilisateur est ensuite dirigé vers le template
+# candidatePrediction.html
+
 @app.route('/myAction/', methods=["GET", "POST"])
 def candidatePrediction():
     idPdf = request.args.get('idPdf')
@@ -329,6 +356,10 @@ def candidatePrediction():
     os.remove("cv.pdf")
     return render_template("candidatePrediction.html", page=page.decode('ascii'), values=predictions, idPdf=idPdf)
 
+# Le lien "/candidatesAllCv" execute la fonction candidatesAllCv() qui permet de récupérer l'ensemble des CV générés par
+# l'utilisateur qui est connecté. Si il n'en existe aucun, alors l'utilisateur est redirigé vers la page home.html. Sinon
+# tous les CV sont récupérés avec leur ID et le "title" qui leur est associé.
+
 
 @app.route('/candidatesAllCv', methods=["GET", "POST"])
 def candidatesAllCv():
@@ -367,6 +398,12 @@ def candidatesAllCv():
             return render_template('candidatesAllCv.html', len=len(tabImg), images=tabImg, title=tabTitles, idPdf=tabIds)
         else:
             return render_template('home.html')
+
+# Le lien "/recruitersAllCv" execute la fonction recruitersAllCv() qui permet de récupérer l'ensemble des CV générés par
+# tous les utilisateurs qui ont générés des CV. Si il n'en existe aucun, alors l'utilisateur est redirigé vers la page home.html. Sinon
+# tous les CV sont récupérés avec leur ID et le "title" qui leur est associé. L'affichage des CV dépend de
+#  la variable session "Domain" : les CV affichés seront seulement ceux dont le domaine correspondent. L'utilisateur est ensuite redirgié
+# vers le template recruitersAllCv.html
 
 
 @app.route('/recruitersAllCv', methods=["GET", "POST"])
@@ -437,6 +474,11 @@ def recruitersAllCv():
             j += 1
         return render_template('recruitersAllCv.html', len=len(tabImg), images=tabImg, idPdf=idPdf, title=tabTitles)
 
+# Le lien "/search" execute la fonction search() qui permet de récupérer les CV dont le domaine d'application correspont à la
+# recherche effectuée par le recruteur dans la barre de recherche. Elle permet également de créer et mettre à jour la variable
+# session "Domain".
+# L'utilisateur est ensuite redirgié vers le lien recruitersAllCv
+
 
 @app.route('/search', methods=['POST'])
 def search():
@@ -452,6 +494,9 @@ def search():
             cursor.close()
     return redirect(url_for('recruitersAllCv'))
 
+# Le lien "/downloadCv" execute la fonction downloadCv() qui permet de récupérer l'id d'un pdf souhaité lorsque l'on clique dessus
+# Ce pdf est ensuite récupéré depuis la base de données, et téléchargé automatiquement sur l'ordinateur de l'utilisateur.
+
 
 @app.route('/downloadCv', methods=["GET", "POST"])
 def downloadCv():
@@ -464,6 +509,10 @@ def downloadCv():
         cursor.close()
         fileData = contentPdf['contentPdf']
     return send_file(BytesIO(fileData), attachment_filename="cv.pdf", as_attachment=True)
+
+# Le lien "/deleteCv" execute la fonction deleteCv() qui permet l'id d'un CV lorsqu'un clique dessus, et de supprimer l'ensemble
+# des informations relative à ce CV dans la base de données.
+# L'utilisateur est ensuite redirgié vers le lien candidatesAllCv, et le CV supprimé n'existe donc plus.
 
 
 @app.route('/deleteCv', methods=["GET", "POST"])
@@ -509,6 +558,9 @@ def deleteCv():
         cursor.close()
 
     return redirect(url_for('candidatesAllCv'))
+
+# Le lien "/recruiterPredictionSaveCv" execute la fonction recruitersSaveCv() qui permet de récupérer l'id d'un pdf souhaité lorsque l'on clique dessus
+# Ce pdf est ensuite récupéré depuis la base de données, et téléchargé automatiquement sur l'ordinateur de l'utilisateur.
 
 
 @app.route('/recruiterPredictionSaveCv', methods=["GET", "POST"])
