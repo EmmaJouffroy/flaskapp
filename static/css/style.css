@@ -311,7 +311,7 @@ hr {
   padding: 16px 32px;
 }
 
-.active {
+.activePage {
   font-weight: 900 !important;
   text-decoration: underline !important;
 }

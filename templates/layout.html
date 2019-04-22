@@ -88,7 +88,7 @@
             <li>
               <a
                 href="/"
-                class="{{ 'active' if active_page == 'home' else '' }}"
+                class="{{ 'activePage' if active_page == 'home' else '' }}"
                 >Home</a
               >
             </li>
@@ -98,21 +98,21 @@
             <li>
               <a
                 href="/cvgenerator"
-                class="{{ 'active' if active_page == 'cvgenerator' else '' }}"
+                class="{{ 'activePage' if active_page == 'cvgenerator' else '' }}"
                 >Generate CV</a
               >
             </li>
             <li>
               <a
                 href="/candidatesAllCv"
-                class="{{ 'active' if active_page == 'candidatesAllCv' else '' }}"
+                class="{{ 'activePage' if active_page == 'candidatesAllCv' else '' }}"
                 >All CVs</a
               >
             </li>
             <li>
               <a
                 href="/logout"
-                class="{{ 'active' if active_page == 'logout' else '' }}"
+                class="{{ 'activePage' if active_page == 'logout' else '' }}"
                 >Logout</a
               >
             </li>
@@ -121,7 +121,7 @@
             <li>
               <a
                 href="/recruitersAllCv"
-                class="{{ 'active' if active_page == 'recruitersAllCv' else '' }}"
+                class="{{ 'activePage' if active_page == 'recruitersAllCv' else '' }}"
                 >All CVs</a
               >
             </li>
@@ -129,7 +129,7 @@
             <li>
               <a
                 href="/logout"
-                class="{{ 'active' if active_page == 'logout' else '' }}"
+                class="{{ 'activePage' if active_page == 'logout' else '' }}"
                 >Logout</a
               >
             </li>
@@ -139,14 +139,14 @@
             <li>
               <a
                 href="/login"
-                class="{{ 'active' if active_page == 'login' else '' }}"
+                class="{{ 'activePage' if active_page == 'login' else '' }}"
                 >Login</a
               >
             </li>
             <li>
               <a
                 href="/register"
-                class="{{ 'active' if active_page == 'register' else '' }}"
+                class="{{ 'activePage' if active_page == 'register' else '' }}"
                 >Register</a
               >
               {% endif %}
