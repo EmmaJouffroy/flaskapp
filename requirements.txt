@@ -1,7 +1,6 @@
 absl-py==0.7.0
 alabaster==0.7.12
 appnope==0.1.0
-appscript==1.0.1
 asn1crypto==0.24.0
 astor==0.7.1
 astroid==2.1.0
