@@ -1,6 +1,10 @@
 absl-py==0.7.0
 alabaster==0.7.12
+anaconda-client==1.7.2
+anaconda-navigator==1.9.6
+anaconda-project==0.8.2
 appnope==0.1.0
+appscript==1.0.1
 asn1crypto==0.24.0
 astor==0.7.1
 astroid==2.1.0
@@ -15,6 +19,7 @@ bcrypt==3.1.6
 beautifulsoup4==4.6.3
 bitarray==0.8.3
 bkcharts==0.2
+blaze==0.11.3
 bleach==3.0.2
 bokeh==1.0.2
 boto==2.49.0
@@ -24,13 +29,18 @@ cffi==1.11.5
 chardet==3.0.4
 Click==7.0
 cloudpickle==0.6.1
+clyent==1.2.2
 colorama==0.4.1
+conda==4.6.14
+conda-build==3.17.6
+conda-verify==3.1.1
 contextlib2==0.5.5
 cryptography==2.4.2
 cycler==0.10.0
 Cython==0.29.2
 cytoolz==0.9.0.1
 dask==1.0.0
+datashape==0.5.4
 decorator==4.3.0
 defusedxml==0.5.0
 distributed==1.25.1
@@ -47,6 +57,7 @@ future==0.17.1
 gast==0.2.2
 gevent==1.3.7
 glob2==0.6
+gmpy2==2.0.8
 greenlet==0.4.15
 grpcio==1.19.0
 gunicorn==19.9.0
@@ -90,11 +101,14 @@ matplotlib==3.0.2
 mccabe==0.6.1
 mistune==0.8.4
 mkl-fft==1.0.6
+mkl-random==1.0.2
 mock==2.0.0
 more-itertools==4.3.0
 mpmath==1.1.0
 msgpack==0.5.6
 multipledispatch==0.6.0
+mysql-connector-python-rf==2.2.2
+navigator-updater==0.2.1
 nbconvert==5.4.0
 nbformat==4.4.0
 networkx==2.2
@@ -105,6 +119,7 @@ numba==0.41.0
 numexpr==2.6.8
 numpy==1.15.4
 numpydoc==0.8.0
+odo==0.5.1
 olefile==0.46
 openpyxl==2.5.12
 packaging==18.0
@@ -141,6 +156,7 @@ pyflakes==2.0.0
 Pygments==2.3.1
 pylint==2.2.2
 PyMySQL==0.9.3
+pyodbc==4.0.25
 pyOpenSSL==18.0.0
 pyparsing==2.3.0
 PyQt5==5.9.2
@@ -169,6 +185,7 @@ scikit-learn==0.20.1
 scipy==1.1.0
 seaborn==0.9.0
 Send2Trash==1.5.0
+Shapely==1.6.4.post1
 simplegeneric==0.8.1
 singledispatch==3.4.0.3
 sip==4.19.8
@@ -191,6 +208,7 @@ tensorflow-estimator==1.13.0
 termcolor==1.1.0
 terminado==0.8.1
 testpath==0.4.2
+Theano==1.0.4+4.gc72eafaff
 toolz==0.9.0
 tornado==5.1.1
 tqdm==4.28.1
@@ -206,5 +224,6 @@ WTForms==2.2.1
 wurlitzer==1.0.2
 xlrd==1.2.0
 XlsxWriter==1.1.2
+xlwings==0.15.1
 xlwt==1.3.0
 zict==0.1.3
