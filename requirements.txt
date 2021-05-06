@@ -50,7 +50,7 @@ et-xmlfile==1.0.1
 fastcache==1.0.2
 filelock==3.0.10
 Flask==1.0.2
-Flask-Cors==3.0.7
+Flask-Cors==3.0.9
 Flask-Login==0.4.1
 Flask-WTF==0.14.2
 future==0.17.1
